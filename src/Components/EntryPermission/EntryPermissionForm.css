@@ -1,0 +1,138 @@
+.entry-form-container {
+  display: flex;
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 100px;
+}
+
+.entry-form-image {
+  flex: 1;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.entry-form-image img {
+  width: 100%;
+  max-width: 400px;
+  object-fit: contain;
+}
+
+.entry-form-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex: 1;
+  max-width: calc(50% - 5px);
+}
+
+
+.allow-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.allow-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.deny-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.deny-btn:hover {
+  background-color: #da190b;
+  transform: translateY(-2px);
+}
+
+.decision-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .entry-form-container {
+    flex-direction: column;
+    margin: 20px;
+    margin-bottom: 100px;
+  }
+
+  .entry-form-image {
+    padding: 10px;
+  }
+
+  .entry-form-content {
+    padding: 20px;
+  }
+
+  .form-title {
+    text-align: center;
+  }
+
+  .form-subtitle {
+    text-align: center;
+  }
+
+  .decision-buttons {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .submit-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    max-width: 100%;
+    flex: none;
+  }
+
+
+}

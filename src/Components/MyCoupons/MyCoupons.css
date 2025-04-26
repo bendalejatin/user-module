@@ -1,0 +1,151 @@
+.coupons-container {
+  padding: 20px;
+}
+
+.coupons-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.coupons-subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.coupons-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.coupon-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.coupon-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+.qr-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qr-modal-content {
+  position: relative;
+  width: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.qr-modal-content::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+/* QRCodeSection Styles Applied to Modal */
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+
+.qr-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.qr-section {
+  text-align: center;
+  flex: 1;
+}
+
+.qr-section h2 {
+  margin-bottom: 10px;
+}
+
+.qr-section p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Event Details Styling */
+.event-details {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-details h3 {
+  color: #d32f2f;
+  margin-bottom: 8px;
+  margin-top: 6px;
+}
+
+.event-details p {
+  font-size: 14px;
+  color: #333;
+  margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .qr-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .qr-modal-content {
+    width: 90%;
+  }
+
+  .qr-image img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  height: 30px;
+  width: 30px;
+  color: #fff;
+  border: none;
+  background: crimson;
+  cursor: pointer;
+  border-radius: 50%;
+}

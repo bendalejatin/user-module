@@ -1,0 +1,41 @@
+.broadcast-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.broadcast-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.broadcast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.broadcast-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.broadcast-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.broadcast-card p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.broadcast-card p strong {
+  color: #000;
+}

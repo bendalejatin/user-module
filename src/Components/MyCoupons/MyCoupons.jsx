@@ -1,0 +1,186 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "../Navbar/Navbar";
+import TabBar from "../TabBar/TabBar";
+import "./MyCoupons.css";
+
+//const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+
+const MyCoupons = () => {
+  const [coupons, setCoupons] = useState([]);
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      try {
+        const email = localStorage.getItem("ownerEmail");
+        if (!email) {
+          setError("Please log in to view your coupons.");
+          setLoading(false);
+          return;
+        }
+        const response = await axios.get(
+          `${BASE_URL}/api/coupons/user`,
+          {
+            params: { email },
+          }
+        );
+        setCoupons(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching coupons:", err.response || err);
+        setError(
+          err.response?.data?.message ||
+            "Failed to fetch coupons. Please try again."
+        );
+        setLoading(false);
+      }
+    };
+
+    fetchCoupons();
+  }, []);
+
+  const handleCouponClick = (coupon) => {
+    setSelectedCoupon(coupon);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const formatTime = (timeString) => {
+    if (!timeString) return "N/A";
+    const [hour, minute] = timeString.split(":");
+    const hourNum = parseInt(hour, 10);
+    const ampm = hourNum >= 12 ? "PM" : "AM";
+    const hour12 = hourNum % 12 || 12;
+    return `${hour12}:${minute} ${ampm}`;
+  };
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <div className="coupons-container">
+          <h2 className="coupons-title">Loading Coupons...</h2>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Navbar />
+        <div className="coupons-container">
+          <h2 className="coupons-title">Error</h2>
+          <p className="coupons-subtitle">{error}</p>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Navbar />
+      <div className="coupons-container">
+        <h2 className="coupons-title">My Coupons</h2>
+        <p className="coupons-subtitle">Redeem Now!</p>
+
+        <div className="coupons-list">
+          {coupons.length === 0 ? (
+            <p>No coupons available.</p>
+          ) : (
+            coupons.map((coupon) => (
+              <div
+                key={coupon._id}
+                className="coupon-card animate-pop"
+                onClick={() => handleCouponClick(coupon)}
+              >
+                <h3>{coupon.event?.title || "Event Coupon"}</h3>
+                <p>
+                  For {coupon.userName} at {coupon.flatNo}
+                </p>
+                <p>Society: {coupon.society?.name || "N/A"}</p>
+                <p>Code: {coupon.code}</p>
+                <span className="expiry">
+                  Valid until {formatDate(coupon.expiryDate)}
+                </span>
+                <p>Status: {coupon.status}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+      {selectedCoupon && (
+        <div className="qr-modal">
+          <div className="qr-modal-content">
+            <div className="qr-container">
+              <button
+                className="close-btn"
+                onClick={() => setSelectedCoupon(null)}
+              >
+                ×
+              </button>
+              <div className="qr-image">
+                {selectedCoupon.event?.image ? (
+                  <img src={selectedCoupon.event.image} alt="Event" />
+                ) : (
+                  <p>No event image available</p>
+                )}
+              </div>
+              <div className="qr-section">
+                <h2>Scan QR Code for Event Details</h2>
+                {selectedCoupon.qrCode ? (
+                  <img
+                    src={selectedCoupon.qrCode}
+                    alt="Coupon QR Code"
+                    style={{
+                      maxWidth: "200px",
+                      height: "auto",
+                      margin: "10px 0",
+                    }}
+                  />
+                ) : (
+                  <p>No QR Code available</p>
+                )}
+                <p>Scan this QR code to get more details about the event.</p>
+                <div className="event-details">
+                  <h3>{selectedCoupon.event?.title || "N/A"}</h3>
+                  <p>
+                    <strong>Date:</strong>{" "}
+                    {formatDate(selectedCoupon.event?.date)}
+                  </p>
+                  <p>
+                    <strong>Time:</strong>{" "}
+                    {formatTime(selectedCoupon.event?.time)}
+                  </p>
+                  <p>
+                    <strong>Venue:</strong>{" "}
+                    {selectedCoupon.event?.location || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Description:</strong>{" "}
+                    {selectedCoupon.event?.description || "N/A"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <TabBar />
+    </>
+  );
+};
+
+export default MyCoupons;

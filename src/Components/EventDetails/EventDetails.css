@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+.event-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  margin-bottom: 80px;
+}
+
+.event-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.event-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: gray;
+}
+
+/* Event Info Section */
+.event-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  animation: pop 0.8s ease-in-out;
+}
+
+.event-data {
+  margin-top: -50px;
+}
+
+.info-box img {
+  width: 50px;
+  height: 50px;
+}
+
+.event-image {
+  flex: 1;
+}
+
+.event-image img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+/* Food Coupons Section */
+.event-title2 {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.upcoming-events {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-items: center;
+  padding: 0 10px;
+  margin-top: 50px;
+}
+
+
+.coupon-card {
+  max-width: 180px;
+  width: 100%;
+  background: #fff;
+  color: black;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.coupon-card:hover {
+  transform: scale(1.05);
+}
+
+.coupon-card img {
+  width: 100px;
+  height: 100px;
+}
+
+.coupon-card h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.coupon-card p {
+  font-size: 14px;
+  color: gray;
+}
+
+/* ✅ Responsive layout for mobile */
+@media (max-width: 768px) {
+  .event-content {
+    flex-direction: column-reverse;
+    /* Image first on mobile */
+    align-items: center;
+    text-align: center;
+  }
+
+  .event-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .info-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-box img {
+    margin-bottom: 10px;
+  }
+
+  .event-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .upcoming-events {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+}
+
+@media (min-width: 601px) {
+  .upcoming-events {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .upcoming-events {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 1s ease-in-out;
+}
+
+.animate-pop {
+  animation: pop 0.8s ease-in-out;
+}
