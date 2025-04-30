@@ -78,7 +78,7 @@ export default function IconLabelTabs() {
       />
       <Tab
         icon={<EntryIcon fontSize="small" />}
-        label="ENTRY"
+        label="VISITOR"
         onClick={() => navigate("/Entry-permission")}
       />
     </Tabs>
