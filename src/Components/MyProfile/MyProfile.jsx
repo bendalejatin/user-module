@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import "./MyProfile.css";
 import { useNavigate } from "react-router-dom";
 import TabBar from "../TabBar/TabBar";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
@@ -17,7 +18,7 @@ const MyProfile = () => {
     email: "",
     work: "",
     societyName: "",
-    image: "https://via.placeholder.com/300", // Initialize with default
+    image: null,
     members: [],
   });
   const [member, setMember] = useState({
@@ -50,12 +51,12 @@ const MyProfile = () => {
         );
         const data = response.data;
         console.log("Fetched societies:", data);
-        if (data.length === 0) {
+        setSocieties(data);
+        if (data.length === 0 && createMode && !profile.societyName) {
           setError(
-            "No societies found. Please enter a society name manually or contact an admin."
+            "No societies found. You can enter a society name manually below."
           );
         } else {
-          setSocieties(data);
           setError("");
         }
       } catch (err) {
@@ -63,10 +64,12 @@ const MyProfile = () => {
         if (societyFetchAttempts < maxFetchAttempts - 1) {
           setSocietyFetchAttempts((prev) => prev + 1);
           setTimeout(fetchSocieties, 2000);
-        } else {
+        } else if (createMode && !profile.societyName) {
           setError(
-            "Unable to load societies. Please enter a society name manually or contact an admin."
+            "Unable to load societies. You can enter a society name manually below."
           );
+        } else {
+          setError("");
         }
       }
     };
@@ -79,6 +82,11 @@ const MyProfile = () => {
         const owner = response.data;
         console.log("Fetched owner:", owner);
 
+        const fetchedImage =
+          owner.image && owner.image !== "https://via.placeholder.com/300"
+            ? owner.image
+            : null;
+
         setProfile({
           username: owner.ownerName || "",
           phone: owner.contact || "",
@@ -87,22 +95,18 @@ const MyProfile = () => {
           email: owner.email || "",
           work: owner.profession || "",
           societyName: owner.societyName || "",
-          image: owner.image || "https://via.placeholder.com/300", // Set image from response
+          image: fetchedImage,
           members: owner.familyMembers || [],
         });
         setCreateMode(owner._id === null);
         if (!owner.societyName && owner._id === null) {
-          setError(
-            "No profile found. Please create your profile with a valid society."
-          );
+          setError("No profile found. Please create your profile.");
         }
       } catch (err) {
         if (err.response && err.response.status === 404) {
           setCreateMode(true);
           setProfile((prev) => ({ ...prev, email }));
-          setError(
-            "No profile found. Please create your profile with a valid society."
-          );
+          setError("No profile found. Please create your profile.");
         } else {
           console.error("Error fetching profile:", err.message);
           setError("Failed to fetch profile. Please try again.");
@@ -112,11 +116,14 @@ const MyProfile = () => {
 
     fetchSocieties();
     fetchProfile();
-  }, [societyFetchAttempts]);
+  }, [societyFetchAttempts, createMode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
+    if (name === "societyName" && value.trim()) {
+      setError("");
+    }
   };
 
   const handleImageChange = (e) => {
@@ -124,9 +131,9 @@ const MyProfile = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfile({ ...profile, image: reader.result }); // Store base64 string
+        setProfile({ ...profile, image: reader.result });
       };
-      reader.readAsDataURL(file); // Convert image to base64
+      reader.readAsDataURL(file);
     }
   };
 
@@ -141,7 +148,7 @@ const MyProfile = () => {
       return "Valid 10-digit phone number is required.";
     if (!profile.flat) return "Flat number is required.";
     if (!profile.work) return "Profession is required.";
-    if (createMode && !profile.societyName) return "Society name is required.";
+    if (!profile.societyName) return "Society name is required.";
     return "";
   };
 
@@ -282,7 +289,7 @@ const MyProfile = () => {
           email: profile.email,
           gender: profile.gender,
           adminEmail: email,
-          image: profile.image, // Include image
+          image: profile.image || null,
         };
 
         console.log("Creating new owner with:", newOwner);
@@ -300,7 +307,7 @@ const MyProfile = () => {
           email: owner.email,
           work: owner.profession,
           societyName: owner.societyName,
-          image: owner.image, // Update with saved image
+          image: owner.image || null,
           members: owner.familyMembers || [],
         });
         setCreateMode(false);
@@ -326,7 +333,7 @@ const MyProfile = () => {
           societyName: owner.societyName.toLowerCase().trim(),
           flatNumber: profile.flat,
           gender: profile.gender,
-          image: profile.image, // Include image
+          image: profile.image || owner.image,
         };
 
         console.log("Updating owner with:", updated);
@@ -340,7 +347,7 @@ const MyProfile = () => {
         setError("");
       }
     } catch (err) {
-      setError("Error saving profile. Please ensure the society exists.");
+      setError("Error saving profile. Please try again.");
       console.error("Error saving profile:", err.message);
     }
   };
@@ -353,171 +360,303 @@ const MyProfile = () => {
     navigate("/");
   };
 
+  // const handleBack = () => {
+  //   navigate(-1);
+  // };
+
   return (
     <>
       <Navbar />
       <div className="profile-container">
-        <h2>{createMode ? "Create Your Profile" : "My Profile"}</h2>
+        <div className="header">
+          {/* <button className="back-button" onClick={handleBack}>
+            ←
+          </button> */}
+          <h2 className="profile-title">My Profile</h2>
+        </div>
         {error && <p className="error-message">{error}</p>}
         <div className="profile-section">
           <div className="profile-image">
-            <img src={profile.image} alt="Profile" />
-            {(editMode || createMode) && (
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-            )}
+            <div className="image-container">
+              {(editMode || createMode) && (
+                <>
+                  <label htmlFor="image-upload" className="placeholder-image">
+                    {profile.image ? (
+                      <img
+                        src={profile.image}
+                        alt="Profile"
+                        className="profile-img"
+                      />
+                    ) : (
+                      <>
+                        <span className="centered-camera-icon">
+                          <CameraAltIcon />
+                        </span>
+                        <span className="upload-text">Upload Photo</span>
+                      </>
+                    )}
+                  </label>
+                  <input
+                    id="image-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                  />
+                  {(editMode || createMode) && profile.image && (
+                    <label htmlFor="image-upload" className="camera-button">
+                      <span className="camera-icon">
+                        <CameraAltIcon />
+                      </span>
+                    </label>
+                  )}
+                </>
+              )}
+              {!(editMode || createMode) && (
+                <>
+                  {profile.image ? (
+                    <img
+                      src={profile.image}
+                      alt="Profile"
+                      className="profile-img"
+                    />
+                  ) : (
+                    <div className="placeholder-image">
+                      <span className="centered-camera-icon">
+                        <CameraAltIcon />
+                      </span>
+                      <span className="upload-text">Upload Photo</span>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
           <div className="profile-form">
-            <input
-              name="username"
-              value={profile.username}
-              onChange={handleChange}
-              placeholder="Full Name"
-              disabled={!createMode}
-              required
-            />
-            <input
-              name="phone"
-              value={profile.phone}
-              onChange={handleChange}
-              placeholder="Phone Number (10 digits)"
-              disabled={!editMode && !createMode}
-              required
-            />
-            <input
-              name="flat"
-              value={profile.flat}
-              onChange={handleChange}
-              placeholder="Flat Number"
-              disabled={!createMode}
-              required
-            />
-            <input
-              name="gender"
-              value={profile.gender}
-              onChange={handleChange}
-              placeholder="Gender"
-              disabled={!editMode && !createMode}
-            />
-            <input
-              name="email"
-              value={profile.email}
-              placeholder="Email"
-              disabled
-            />
-            <input
-              name="work"
-              value={profile.work}
-              onChange={handleChange}
-              placeholder="Profession"
-              disabled={!editMode && !createMode}
-              required
-            />
-            {createMode &&
-              (societies.length > 0 ? (
-                <select
-                  name="societyName"
-                  value={profile.societyName}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select Society</option>
-                  {societies.map((society) => (
-                    <option key={society._id} value={society.name}>
-                      {society.name}
-                    </option>
-                  ))}
-                </select>
-              ) : (
+            <div className="name-section">
+              <label className="name-label">Name</label>
+              <input
+                name="username"
+                value={profile.username}
+                onChange={handleChange}
+                placeholder="Enter your name"
+                disabled
+                required
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Mobile No.</label>
+              <input
+                name="phone"
+                value={profile.phone}
+                onChange={handleChange}
+                placeholder="Enter mobile number"
+                disabled={!editMode && !createMode}
+                required
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Flat No.</label>
+              <input
+                name="flat"
+                value={profile.flat}
+                onChange={handleChange}
+                placeholder="Flat Number"
+                disabled
+                required
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Gender</label>
+              <input
+                name="gender"
+                value={profile.gender}
+                onChange={handleChange}
+                placeholder="Select gender"
+                disabled={!editMode && !createMode}
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Email ID</label>
+              <input
+                name="email"
+                value={profile.email}
+                placeholder="Enter email"
+                disabled
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Profession</label>
+              <input
+                name="work"
+                value={profile.work}
+                onChange={handleChange}
+                placeholder="Enter profession"
+                disabled={!editMode && !createMode}
+                required
+                className="name-input"
+              />
+            </div>
+            <div className="name-section">
+              <label className="name-label">Society</label>
+              {createMode && (
                 <input
                   name="societyName"
                   value={profile.societyName}
                   onChange={handleChange}
-                  placeholder="Society Name"
+                  placeholder="Enter society name"
                   required
+                  disabled
+                  className="name-input"
                 />
-              ))}
+              )}
+              {!createMode && (
+                <input
+                  name="societyName"
+                  value={profile.societyName}
+                  placeholder="Society"
+                  disabled
+                  className="name-input"
+                />
+              )}
+            </div>
             {editMode || createMode ? (
-              <button onClick={saveProfile}>
+              <button className="profile-button" onClick={saveProfile}>
                 {createMode ? "Create Profile" : "Save Profile"}
               </button>
             ) : (
-              <>
-                <button onClick={() => setEditMode(true)}>Edit Profile</button>
-                <button onClick={handleLogout}>Logout</button>
-              </>
+              <div className="button-group">
+                <button
+                  className="profile-button"
+                  onClick={() => setEditMode(true)}
+                >
+                  Edit Profile
+                </button>
+                <button className="logout-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
             )}
           </div>
         </div>
 
         {!createMode && (
           <div className="member-section">
-            <h3>Family Members</h3>
+            <h3 className="member-title">Family Members</h3>
             <div className="member-form">
-              <input
-                name="name"
-                value={member.name}
-                onChange={handleMemberChange}
-                placeholder="Member Name"
-                required
-              />
-              <input
-                name="relation"
-                value={member.relation}
-                onChange={handleMemberChange}
-                placeholder="Relation"
-                required
-              />
-              <input
-                name="age"
-                type="number"
-                value={member.age}
-                onChange={handleMemberChange}
-                placeholder="Age"
-                required
-              />
-              <input
-                name="profession"
-                value={member.profession}
-                onChange={handleMemberChange}
-                placeholder="Profession (optional)"
-              />
-              <input
-                name="contact"
-                value={member.contact}
-                onChange={handleMemberChange}
-                placeholder="Contact (optional)"
-              />
-              <button onClick={addOrUpdateMember}>
-                {editingMemberIndex !== null ? "Update Member" : "Add Member"}
-              </button>
+              <div className="form-row">
+                <div className="member-field">
+                  <label className="name-label">Member Name</label>
+                  <input
+                    name="name"
+                    value={member.name}
+                    onChange={handleMemberChange}
+                    placeholder="Enter member name"
+                    required
+                  />
+                </div>
+                <div className="member-field">
+                  <label className="name-label">Relation</label>
+                  <input
+                    name="relation"
+                    value={member.relation}
+                    onChange={handleMemberChange}
+                    placeholder="Relation"
+                    required
+                  />
+                </div>
+                <div className="member-field">
+                  <label className="name-label">Age</label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={member.age}
+                    onChange={handleMemberChange}
+                    placeholder="Enter age"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="member-field">
+                  <label className="name-label">Profession (Optional)</label>
+                  <input
+                    name="profession"
+                    value={member.profession}
+                    onChange={handleMemberChange}
+                    placeholder="Enter profession"
+                  />
+                </div>
+                <div className="member-field">
+                  <label className="name-label">Contact (Optional)</label>
+                  <input
+                    name="contact"
+                    value={member.contact}
+                    onChange={handleMemberChange}
+                    placeholder="Enter contact number"
+                  />
+                </div>
+                <div className="member-field">
+                  <button
+                    className="add-member-button"
+                    onClick={addOrUpdateMember}
+                  >
+                    {editingMemberIndex !== null
+                      ? "Update Member"
+                      : "Add Member"}
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div className="members-list">
               {profile.members.length > 0 ? (
                 profile.members.map((mem, index) => (
                   <div key={index} className="member-card">
-                    <p>
-                      <strong>Member Name:</strong> {mem.name}
-                    </p>
-                    <p>
-                      <strong>Relation:</strong> {mem.relation}
-                    </p>
-                    <p>
-                      <strong>Age:</strong> {mem.age}
-                    </p>
-                    <p>
-                      <strong>Profession:</strong> {mem.profession || "N/A"}
-                    </p>
-                    <p>
-                      <strong>Contact:</strong> {mem.contact || "N/A"}
-                    </p>
+                    <div className="member-content">
+                      <div className="member-info">
+                        <p>
+                          <strong>Member Name:</strong>
+                        </p>
+                        <p>
+                          <strong>Relation:</strong>
+                        </p>
+                        <p>
+                          <strong>Age:</strong>
+                        </p>
+                        <p>
+                          <strong>Profession:</strong>
+                        </p>
+                        <p>
+                          <strong>Contact:</strong>
+                        </p>
+                      </div>
+                      <div className="member-data">
+                        <p>{mem.name}</p>
+                        <p>{mem.relation}</p>
+                        <p>{mem.age}</p>
+                        <p>{mem.profession || "N/A"}</p>
+                        <p>{mem.contact || "N/A"}</p>
+                      </div>
+                    </div>
                     <div className="button-container">
-                      <button onClick={() => editMember(index)}>Edit</button>
-                      <button onClick={() => deleteMember(index)}>Delete</button>
+                      <button
+                        className="edit-button"
+                        onClick={() => editMember(index)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete-button"
+                        onClick={() => deleteMember(index)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 ))

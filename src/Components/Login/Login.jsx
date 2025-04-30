@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import login from "../Assets/LoginScreen.png";
+import login from "../Assets/loginlogo.jpg";
 import "./Login.css";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
@@ -53,7 +53,8 @@ const Login = () => {
           <img src={login} alt="Login Illustration" />
         </div>
         <div className="login-form">
-          <h2>Login</h2>
+          <h2>Welcome</h2>
+          <h4>Sign in to continue</h4>
           <div className="input-group">
             <label>Email Address</label>
             <input

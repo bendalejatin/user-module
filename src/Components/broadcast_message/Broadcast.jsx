@@ -1,14 +1,21 @@
+//update as per ronak one
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
+import CampaignIcon from "@mui/icons-material/Campaign";
 import "./Broadcast.css";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
+const tabs = ["All", "Society"];
+
 const Broadcast = () => {
   const [broadcasts, setBroadcasts] = useState([]);
+  const [filteredBroadcasts, setFilteredBroadcasts] = useState([]);
+  const [activeTab, setActiveTab] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -24,13 +31,13 @@ const Broadcast = () => {
         const response = await axios.get(
           `${BASE_URL}/api/broadcast/user?email=${email}`
         );
-        // Filter to show only 'society' and 'all' type messages
         const broadcastMessages = response.data.filter(
           (broadcast) =>
             broadcast.broadcastType === "society" ||
             broadcast.broadcastType === "all"
         );
         setBroadcasts(broadcastMessages);
+        setFilteredBroadcasts(broadcastMessages);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch messages.");
@@ -40,6 +47,19 @@ const Broadcast = () => {
     };
     fetchBroadcasts();
   }, []);
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    if (tab === "All") {
+      setFilteredBroadcasts(broadcasts);
+    } else {
+      const lowerTab = tab.toLowerCase();
+      const filtered = broadcasts.filter(
+        (b) => b.broadcastType.toLowerCase() === lowerTab
+      );
+      setFilteredBroadcasts(filtered);
+    }
+  };
 
   if (loading) {
     return (
@@ -70,24 +90,37 @@ const Broadcast = () => {
     <>
       <Navbar />
       <div className="broadcast-page">
-        <h2>📢 Your Broadcast Messages</h2>
+        <h2>
+          <CampaignIcon fontSize="medium" className="campaignIcon" /> Your
+          Broadcast Messages
+        </h2>
+
+        <div className="broadcast-tabs">
+          {tabs.map((tab) => (
+            <div
+              key={tab}
+              className={`broadcast-tab ${activeTab === tab ? "active" : ""}`}
+              onClick={() => handleTabClick(tab)}
+            >
+              {tab}
+            </div>
+          ))}
+        </div>
+
         <div className="broadcast-list">
-          {broadcasts.length > 0 ? (
-            broadcasts.map((broadcast) => (
+          {filteredBroadcasts.length > 0 ? (
+            filteredBroadcasts.map((broadcast) => (
               <div key={broadcast._id} className="broadcast-card">
                 <h3>{broadcast.message}</h3>
                 <p>
                   <strong>Type:</strong> {broadcast.broadcastType}
                 </p>
-                {broadcast.broadcastType === "society" ? (
-                  <p>
-                    <strong>Society:</strong> {broadcast.society}
-                  </p>
-                ) : (
-                  <p>
-                    <strong>Society:</strong> All Societies
-                  </p>
-                )}
+                <p>
+                  <strong>Society:</strong>{" "}
+                  {broadcast.broadcastType === "society"
+                    ? broadcast.society
+                    : "All Societies"}
+                </p>
                 <p>
                   <strong>Date:</strong>{" "}
                   {new Date(broadcast.createdAt).toLocaleString()}

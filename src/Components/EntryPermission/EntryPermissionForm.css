@@ -1,45 +1,46 @@
+/* EntryPermissionForm.css */
+
 .entry-form-container {
   display: flex;
-  max-width: 1000px;
-  margin: 40px auto;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
   background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 100px;
+  padding-bottom: 60px;
 }
 
 .entry-form-image {
-  flex: 1;
-  background: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  width: 90%;
+  max-width: 550px;
+  height: auto;
+  /* Adjusted height to better match the screenshot's proportions */
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  object-fit: cover;
 }
 
 .entry-form-image img {
   width: 100%;
-  max-width: 400px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
 }
 
 .entry-form-content {
-  flex: 1;
-  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  /* Max width for the information section */
+  padding: 20px;
+  background-color: #fff;
 }
 
 .form-title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.form-subtitle {
-  font-size: 14px;
-  color: gray;
+  color: #1a1a1a;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .entry-form {
@@ -48,91 +49,83 @@
   gap: 15px;
 }
 
-.input-field {
+.entry-form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.entry-form .input-field {
+  width: 100%;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 16px;
+  color: #666;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+  /* Ensures dropdowns look consistent on mobile */
+  -moz-appearance: none;
+  appearance: none;
 }
 
-.submit-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  flex: 1;
-  max-width: calc(50% - 5px);
+/* Add custom dropdown arrow for select elements */
+.entry-form .input-field[type="text"],
+.entry-form .input-field[type="datetime-local"] {
+  background-color: #f9f9f9;
 }
 
-
-.allow-btn {
-  background-color: #4caf50;
-  color: white;
+.entry-form .input-field[readonly] {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
 }
 
-.allow-btn:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
-}
-
-.deny-btn {
-  background-color: #f44336;
-  color: white;
-}
-
-.deny-btn:hover {
-  background-color: #da190b;
-  transform: translateY(-2px);
+.entry-form select.input-field {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  /* Custom dropdown arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
 .decision-buttons {
   display: flex;
   gap: 10px;
-  justify-content: center;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
+.submit-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-/* Responsive */
-@media (max-width: 768px) {
-  .entry-form-container {
-    flex-direction: column;
-    margin: 20px;
-    margin-bottom: 100px;
-  }
+.allow-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
 
-  .entry-form-image {
-    padding: 10px;
-  }
+.allow-btn:hover {
+  background-color: #45a049;
+}
 
-  .entry-form-content {
-    padding: 20px;
-  }
+.deny-btn {
+  background-color: #f44336;
+  color: #fff;
+}
 
-  .form-title {
-    text-align: center;
-  }
+.deny-btn:hover {
+  background-color: #da190b;
+}
 
-  .form-subtitle {
-    text-align: center;
-  }
-
-  .decision-buttons {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-
-  .submit-btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    max-width: 100%;
-    flex: none;
-  }
-
-
+.entry-form-container p {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
 }

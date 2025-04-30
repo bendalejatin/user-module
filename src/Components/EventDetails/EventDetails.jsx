@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import "./EventDetails.css";
-import event_info from "../Assets/event_info.png";
-import calendar from "../Assets/calendar.png";
-import event_location from "../Assets/event_location.png";
-import event_description from "../Assets/event_description.png";
 import TabBar from "../TabBar/TabBar";
+import InfoIcon from "@mui/icons-material/Info";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
@@ -116,7 +116,13 @@ const EventDetails = () => {
           <div className="event-content">
             <div className="event-info">
               <div className="info-box animate-fade-in">
-                <img src={event_info} alt="Title Icon" />
+                <div className="event-icon">
+                  <InfoIcon
+                    fontSize="large"
+                    className="icon"
+                    alt="Title Icon"
+                  />
+                </div>
                 <div className="event-data">
                   <h3>Event Title</h3>
                   <p>{latestEvent.title}</p>
@@ -124,7 +130,13 @@ const EventDetails = () => {
               </div>
 
               <div className="info-box animate-fade-in">
-                <img src={calendar} alt="Date Icon" />
+                <div className="event-icon">
+                  <CalendarMonthOutlinedIcon
+                    fontSize="large"
+                    className="icon"
+                    alt="Date Icon"
+                  />
+                </div>
                 <div className="event-data">
                   <h3>Date</h3>
                   <p>{new Date(latestEvent.date).toLocaleDateString()}</p>
@@ -132,7 +144,13 @@ const EventDetails = () => {
               </div>
 
               <div className="info-box animate-fade-in">
-                <img src={event_location} alt="Location Icon" />
+                <div className="event-icon">
+                  <LocationOnOutlinedIcon
+                    fontSize="large"
+                    className="icon"
+                    alt="Location Icon"
+                  />
+                </div>
                 <div className="event-data">
                   <h3>Event Location</h3>
                   <p>{latestEvent.location}</p>
@@ -140,7 +158,13 @@ const EventDetails = () => {
               </div>
 
               <div className="info-box animate-fade-in">
-                <img src={event_description} alt="Description Icon" />
+                <div className="event-icon">
+                  <DescriptionOutlinedIcon
+                    fontSize="large"
+                    className="icon"
+                    alt="Description Icon"
+                  />
+                </div>
                 <div className="event-data">
                   <h3>Description</h3>
                   <p>{latestEvent.description}</p>

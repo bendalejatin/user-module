@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
-import visitorImage from "../Assets/entryimg.jpg";
+import visitorImage from "../Assets/entry.png";
 import "./EntryPermissionForm.css";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
@@ -37,7 +37,7 @@ const EntryPermissionForm = () => {
           `${BASE_URL}/api/entries?userEmail=${userEmail}&status=pending`
         );
         if (response.data.length > 0) {
-          const latestEntry = response.data[0]; 
+          const latestEntry = response.data[0];
           setEntry({
             name: latestEntry.name,
             society: latestEntry.societyId.name,
@@ -81,7 +81,7 @@ const EntryPermissionForm = () => {
         expiry: "",
         status: "pending",
         _id: null,
-      }); 
+      });
     } catch (err) {
       setError("Failed to update entry status.");
       console.error("Error:", err);

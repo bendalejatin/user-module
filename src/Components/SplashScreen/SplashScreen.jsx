@@ -16,7 +16,9 @@ const SplashScreen = () => {
 
   return (
     <div className="splash-container">
-      <img src={logo} alt="App Logo" className="splash-logo" />
+      <div className="splash-logo">
+        <img src={logo} alt="App Logo" />
+      </div>
       <h1 className="splash-title">Welcome to EntryKart !</h1>
       <p className="splash-subtext">Getting things ready for you...</p>
       <div className="loader"></div>

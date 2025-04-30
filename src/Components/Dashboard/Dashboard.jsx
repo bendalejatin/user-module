@@ -17,11 +17,12 @@ const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [pendingEntries, setPendingEntries] = useState([]); 
+  const [pendingEntries, setPendingEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAllEvents, setShowAllEvents] = useState(false); // New state for toggling events
   const ownerEmail = localStorage.getItem("ownerEmail");
-  const currentDate = new Date("2025-04-21"); 
+  const currentDate = new Date("2025-04-21");
 
   useEffect(() => {
     if (!ownerEmail) {
@@ -131,6 +132,11 @@ const Dashboard = () => {
     );
   }
 
+  // Slice events to show only 2 by default unless showAllEvents is true
+  const displayedEvents = showAllEvents
+    ? upcomingEvents
+    : upcomingEvents.slice(0, 2);
+
   return (
     <div className="dashboard-container">
       <Navbar />
@@ -193,7 +199,6 @@ const Dashboard = () => {
         </div>
 
         {/* Broadcast Message Section */}
-
         <div className="broadcast-container">
           <h2>📢 Specific Broadcast Messages</h2>
           {specificBroadcasts.length > 0 ? (
@@ -214,8 +219,8 @@ const Dashboard = () => {
         <div className="event-section">
           <h3>Upcoming Events</h3>
           <div className="event-list">
-            {upcomingEvents.length > 0 ? (
-              upcomingEvents.map((event) => (
+            {displayedEvents.length > 0 ? (
+              displayedEvents.map((event) => (
                 <div key={event._id} className="event-card">
                   <img
                     src={event.image || "https://via.placeholder.com/150"}
@@ -236,6 +241,14 @@ const Dashboard = () => {
               <p>No upcoming events found for your society.</p>
             )}
           </div>
+          {upcomingEvents.length > 2 && (
+            <span
+              onClick={() => setShowAllEvents(!showAllEvents)}
+              className="more-link"
+            >
+              {showAllEvents ? "Show Less" : "More Events"}
+            </span>
+          )}
         </div>
       </div>
       <TabBar />

@@ -1,3 +1,4 @@
+/* Broadcast Page */
 .broadcast-page {
   padding: 20px;
   max-width: 800px;
@@ -5,37 +6,91 @@
 }
 
 .broadcast-page h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 20px;
+  color: #1a1a1a;
   text-align: center;
 }
 
+.campaignIcon {
+  color: #6366F1;
+}
+
+/* Tabs (All / Announcements / Events / Updates) */
+.broadcast-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.broadcast-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: #f1f1f1;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.broadcast-tab.active {
+  background-color: #6366F1;
+  color: #fff;
+}
+
+/* Broadcast List */
 .broadcast-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Each Broadcast Card */
 .broadcast-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .broadcast-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
-  color: #333;
+  margin: 0 0 12px;
+  font-size: 17px;
+  color: #111;
+  font-weight: 600;
 }
 
 .broadcast-card p {
   margin: 5px 0;
-  font-size: 1rem;
-  color: #666;
+  font-size: 14px;
+  color: #6366F1;
 }
 
-.broadcast-card p strong {
-  color: #000;
+.broadcast-card strong {
+  font-weight: 600;
+  color: #666;
+
+}
+
+/* Make links (type and society) colorful like in the image */
+.broadcast-card a {
+  color: #6366F1;
+  text-decoration: none;
+}
+
+.broadcast-card a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+
+  .broadcast-page h2 {
+    font-size: 1.5rem;
+  }
+
 }

@@ -3,7 +3,8 @@ import axios from "axios";
 import { jsPDF } from "jspdf";
 import Navbar from "../Navbar/Navbar";
 import "./Maintenance.css";
-import TabBar from "../TabBar/TabBar";
+import TabBar from "../TabBar/TabBar"; // Importing TabBar component
+import SystemUpdateAltOutlinedIcon from "@mui/icons-material/SystemUpdateAltOutlined";
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
@@ -105,7 +106,8 @@ const Receipt = ({ profile, maintenance, paymentDate }) => {
 
   return (
     <button onClick={generatePDF} className="receipt-button">
-      <i className="fas fa-download"></i> Download Receipt
+      <SystemUpdateAltOutlinedIcon />
+      Receipt
     </button>
   );
 };
@@ -203,7 +205,7 @@ const MaintenancePage = () => {
         console.error("Error fetching data:", err);
         setError(
           err.response?.status === 404
-            ? "No maintenance records found. Contact your admin."
+            ? "No maintenance records found."
             : "Failed to fetch maintenance details. Please try again."
         );
       } finally {
@@ -361,6 +363,7 @@ const MaintenancePage = () => {
                 ? "No payment due for this month."
                 : "Payment for this month has already been made."}
               <Receipt
+                className="CurrentReceipt"
                 profile={profile}
                 maintenance={maintenance}
                 paymentDate={payment.paymentDate}
@@ -547,7 +550,7 @@ const MaintenancePage = () => {
           )}
         </div>
       </div>
-      <TabBar />
+      <TabBar /> {/* Tab bar added */}
     </>
   );
 };

@@ -46,6 +46,12 @@ export default function IconLabelTabs() {
         ".MuiTab-root": {
           minWidth: 0,
           padding: "6px 8px",
+          // color: "#666", // default color
+          fontSize: "0.6rem", // label size
+        },
+
+        "&.Mui-selected": {
+          color: "#6366F1", // selected color
         },
         ".MuiTab-wrapper": {
           fontSize: "0.65rem",
