@@ -1,27 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 // import { Link } from "react-router-dom";
 import "./Navbar.css";
+import ProfileIcon from "@mui/icons-material/AccountCircle";
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
       <div className="nav-logo">My Society Mate</div>
-
-      {/* <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-        <li><Link to="/dashboard" onClick={() => setMenuOpen(false)}>Home</Link></li>
-        <li><Link to="/event-details" onClick={() => setMenuOpen(false)}>Event Details</Link></li>
-        <li><Link to="/my-coupons" onClick={() => setMenuOpen(false)}>My Coupons</Link></li>
-        <li><Link to="/maintenance" onClick={() => setMenuOpen(false)}>Maintenance</Link></li>
-        <li><Link to="/Entry-permission" onClick={() => setMenuOpen(false)}>Entry-Permissions</Link></li>
-        <li><Link to="/my-profile" onClick={() => setMenuOpen(false)}>My Profile</Link></li>
-        <li><Link to="/" className="logout-link" onClick={() => setMenuOpen(false)}>Logout</Link></li>
-      </div>
-
-      <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
-      </div> */}
+      
+      <div className="Profile" onClick={() => window.location.href = "/my-profile"}>
+        <ProfileIcon className="profile-icon" />
+        <p>Profile</p>
+      </div> 
     </nav>
   );
 };
