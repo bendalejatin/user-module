@@ -281,15 +281,23 @@ const MaintenancePage = () => {
 
   if (loading) {
     return (
-      <>
+      <div >
         <Navbar />
-        <div className="maintenance-container">
-          <h1 className="page-title">Maintenance Payment</h1>
-          <div className="loading-spinner">
-            <i className="fas fa-spinner fa-spin"></i> Loading...
-          </div>
+        <div className="loading">
+          <h2>Loading...</h2>
         </div>
-      </>
+        <TabBar />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="maintenance-container">
+        <Navbar />
+        <p>{error}</p>
+        <TabBar />
+      </div>
     );
   }
 

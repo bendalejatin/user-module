@@ -63,13 +63,13 @@ const Broadcast = () => {
 
   if (loading) {
     return (
-      <>
+      <div >
         <Navbar />
-        <div className="broadcast-page">
+        <div className="loading">
           <h2>Loading...</h2>
         </div>
         <TabBar />
-      </>
+      </div>
     );
   }
 

@@ -70,24 +70,23 @@ const MyCoupons = () => {
 
   if (loading) {
     return (
-      <>
+      <div >
         <Navbar />
-        <div className="coupons-container">
-          <h2 className="coupons-title">Loading Coupons...</h2>
+        <div className="loading">
+          <h2>Loading...</h2>
         </div>
-      </>
+        <TabBar />
+      </div>
     );
   }
 
   if (error) {
     return (
-      <>
+      <div className="coupons-container">
         <Navbar />
-        <div className="coupons-container">
-          <h2 className="coupons-title">Error</h2>
-          <p className="coupons-subtitle">{error}</p>
-        </div>
-      </>
+        <p>{error}</p>
+        <TabBar />
+      </div>
     );
   }
 

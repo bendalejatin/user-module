@@ -93,9 +93,11 @@ const EntryPermissionForm = () => {
 
   if (loading) {
     return (
-      <div className="entry-form-container">
+      <div >
         <Navbar />
-        <p>Loading...</p>
+        <div className="loading">
+          <h2>Loading...</h2>
+        </div>
         <TabBar />
       </div>
     );

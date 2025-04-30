@@ -109,9 +109,9 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="dashboard-container">
+      <div >
         <Navbar />
-        <div className="dashboard-content">
+        <div className="loading">
           <h2>Loading...</h2>
         </div>
         <TabBar />

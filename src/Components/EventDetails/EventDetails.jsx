@@ -15,6 +15,7 @@ const EventDetails = () => {
   const [profile, setProfile] = useState(null);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const ownerEmail = localStorage.getItem("ownerEmail");
   const currentDate = new Date();
 
@@ -41,6 +42,7 @@ const EventDetails = () => {
           return;
         }
         setProfile(owner);
+        setLoading(false);
         setError("");
       } catch (err) {
         console.error("Error fetching profile:", err.message);
@@ -78,6 +80,7 @@ const EventDetails = () => {
           } else {
             setError("");
           }
+          setLoading(false);
         } catch (err) {
           console.error("Error fetching events:", err.message);
           setError("Failed to fetch events. Please try again.");
@@ -103,6 +106,28 @@ const EventDetails = () => {
   const otherUpcomingEvents = upcomingEvents.filter(
     (event) => event._id !== (latestEvent ? latestEvent._id : null)
   );
+
+  if (loading) {
+    return (
+      <div >
+        <Navbar />
+        <div className="loading">
+          <h2>Loading...</h2>
+        </div>
+        <TabBar />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="event-container">
+        <Navbar />
+        <p>{error}</p>
+        <TabBar />
+      </div>
+    );
+  }
 
   return (
     <>

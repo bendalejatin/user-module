@@ -237,3 +237,27 @@
   color: #6a5acd;
   text-decoration: none;
 }
+
+.loading { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh; /* adjust as per your layout */
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555; /* dark gray for a softer look */
+  animation: pulse 1.5s infinite;
+}
+
+/* Optional: Add a pulsing animation to Loading... */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
