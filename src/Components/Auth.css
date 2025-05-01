@@ -1,0 +1,108 @@
+/* Reset box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Main container */
+.auth-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.auth-container h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: left;
+}
+
+/* Input field */
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+.auth-container input:focus {
+  border-color: #6366F1;
+}
+
+/* Button */
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6366F1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #4f46e5;
+}
+
+/* Message text */
+.auth-container p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #e53e3e; /* match error color like Login page */
+}
+
+/* Mobile View (up to 767px) */
+@media (max-width: 767px) {
+  .auth-container {
+    padding: 15px;
+    background-color: #FAFBFE;
+    box-shadow: none;
+  }
+
+  .auth-container h2 {
+    font-size: 20px;
+  }
+
+  .auth-container input {
+    font-size: 12px;
+  }
+
+  .auth-container button {
+    font-size: 14px;
+  }
+}
+
+/* iPad/Tablet View (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .auth-container {
+    padding: 20px;
+    background-color: #FAFBFE;
+  }
+
+  .auth-container h2 {
+    font-size: 22px;
+  }
+
+  .auth-container input {
+    font-size: 13px;
+  }
+
+  .auth-container button {
+    font-size: 15px;
+  }
+}

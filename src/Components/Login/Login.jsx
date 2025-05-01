@@ -92,7 +92,7 @@ const Login = () => {
           {message && <p className="error-message">{message}</p>}
           <p className="register-link">
             Forgot your password?{" "}
-            <span onClick={() => navigate("/signup")}>Reset it here</span>
+            <span onClick={() => navigate("/user/forgot-password")}>Reset it here</span>
           </p>
         </div>
       </div>
