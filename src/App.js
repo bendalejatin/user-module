@@ -14,6 +14,8 @@ import Maintenance from "./Components/Maintenance/MaintenancePage";
 import EntryPermission from "./Components/EntryPermission/EntryPermissionForm";
 import Broadcast from "./Components/broadcast_message/Broadcast";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
+import UserForgotPassword from "./Components/UserForgotPassword";
+import UserResetPassword from "./Components/UserResetPassword";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -26,6 +28,14 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route
+              path="/user/forgot-password"
+              element={<UserForgotPassword />}
+            />
+            <Route
+              path="/reset-password/:token"
+              element={<UserResetPassword />}
+            />
         <Route path="/splash" element={<SplashScreen />} />
         <Route
           path="/dashboard"
