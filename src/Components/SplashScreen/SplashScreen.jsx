@@ -16,14 +16,15 @@ const SplashScreen = () => {
 
   return (
     <div className="splash-container">
-      <div className="splash-logo">
-        <img src={logo} alt="App Logo" />
+      <div className="splash-content">
+        <h1 className="splash-title">MySocietyMate</h1>
+        <p className="splash-subtext">Getting things ready for you...</p>
+        <p className="splash-wait-text">Please wait while we prepare your experience</p>
       </div>
-      <h1 className="splash-title">Welcome to My Society Mate!</h1>
-      <p className="splash-subtext">Getting things ready for you...</p>
-      <div className="loader"></div>
     </div>
+
   );
+
 };
 
 export default SplashScreen;

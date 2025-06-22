@@ -16,6 +16,8 @@ import Broadcast from "./Components/broadcast_message/Broadcast";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
 import UserForgotPassword from "./Components/UserForgotPassword";
 import UserResetPassword from "./Components/UserResetPassword";
+import AddMember from "./Components/MyProfile/AddMember"; // Added import
+import CouponDetails from "./Components/MyCoupons/CouponDetails"; // Added import
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -90,6 +92,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Broadcast />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-member"
+          element={
+            <ProtectedRoute>
+              <AddMember />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/coupon/:id" 
+          element={
+            <ProtectedRoute>
+              <CouponDetails />
             </ProtectedRoute>
           }
         />

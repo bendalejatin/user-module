@@ -4,7 +4,7 @@ import axios from "axios";
 import login from "../Assets/loginlogo.jpg";
 import "./Login.css";
 
-//const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const Login = () => {
@@ -48,52 +48,53 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <div className="login-image">
-          <img src={login} alt="Login Illustration" />
+      <div className="login-wrapper">
+
+        <div className="login-header">
+          <h1>MySocietyMate</h1>
         </div>
-        <div className="login-form">
-          <h2>Welcome</h2>
-          <h4>Sign in to continue</h4>
-          <div className="input-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              placeholder="Enter a valid email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="login-options">
-            <div>
+        <div className="login-box">
+          <div className="login-form">
+            <div className="input-group">
+              <label>Email</label>
               <input
-                type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
+                type="email"
+                placeholder="Enter a valid email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <label htmlFor="remember"> Remember me</label>
             </div>
+            <div className="input-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="login-options">
+              <div>
+                <input
+                  type="checkbox"
+                  id="remember"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <label htmlFor="remember"> Remember me</label>
+              </div>
+            </div>
+            <button className="login-button" onClick={handleLogin}>
+              Login
+            </button>
+            {message && <p className="error-message">{message}</p>}
+            <p className="register-link">
+              Forgot your password?{" "}
+              <span onClick={() => navigate("/signup")}>Reset it here</span>
+            </p>
           </div>
-          <button className="login-button" onClick={handleLogin}>
-            Login
-          </button>
-          {message && <p className="error-message">{message}</p>}
-          <p className="register-link">
-            Forgot your password?{" "}
-            <span onClick={() => navigate("/user/forgot-password")}>Reset it here</span>
-          </p>
         </div>
       </div>
     </div>

@@ -3,9 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import HomeIcon from "@mui/icons-material/Home";
 import EventIcon from "@mui/icons-material/Event";
-import CouponIcon from "@mui/icons-material/LocalActivity";
-import MaintenanceIcon from "@mui/icons-material/Payment";
-import EntryIcon from "@mui/icons-material/ContentPaste";
+import EntryIcon from "@mui/icons-material/ContentPaste"; // Icon for Entry
+import PersonIcon from "@mui/icons-material/Person"; // Icon for Profile
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function IconLabelTabs() {
@@ -15,9 +14,8 @@ export default function IconLabelTabs() {
   const paths = [
     "/dashboard",
     "/event-details",
-    "/my-coupons",
-    "/maintenance",
-    "/Entry-permission"
+    "/entry-permission",
+    "/my-profile"
   ];
 
   const currentTab = paths.findIndex((path) =>
@@ -44,11 +42,7 @@ export default function IconLabelTabs() {
         ".MuiTab-root": {
           minWidth: 0,
           padding: "6px 8px",
-          // color: "#666", // default color
-          fontSize: "0.6rem", // label size
-        },
-        "&.Mui-selected": {
-          color: "#6366F1", // selected color
+          fontSize: "0.6rem",
         },
         ".MuiTab-wrapper": {
           fontSize: "0.65rem",
@@ -67,19 +61,14 @@ export default function IconLabelTabs() {
         onClick={() => navigate("/event-details")}
       />
       <Tab
-        icon={<CouponIcon fontSize="small" />}
-        label="COUPON"
-        onClick={() => navigate("/my-coupons")}
-      />
-      <Tab
-        icon={<MaintenanceIcon fontSize="small" />}
-        label="MAINTENANCE"
-        onClick={() => navigate("/maintenance")}
-      />
-      <Tab
         icon={<EntryIcon fontSize="small" />}
-        label="VISITOR"
-        onClick={() => navigate("/Entry-permission")}
+        label="ENTRY"
+        onClick={() => navigate("/entry-permission")}
+      />
+      <Tab
+        icon={<PersonIcon fontSize="small" />}
+        label="PROFILE"
+        onClick={() => navigate("/my-profile")}
       />
     </Tabs>
   );

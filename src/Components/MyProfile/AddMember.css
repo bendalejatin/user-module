@@ -1,0 +1,229 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container */
+.add-member-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #6b48ff 0%, #ffffff 40%);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: 50px;
+}
+
+.add-member-container::-webkit-scrollbar {
+    display: none;
+}
+
+.add-member-header {
+    text-align: left;
+    color: #ffffff;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.add-member-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.add-member-header p {
+    font-size: 14px;
+    margin: 5px 0 0;
+    color: #e0e0e0;
+}
+
+.add-member-form {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Ensure all inputs and selects are visible */
+.add-member-form input:not([type="hidden"]),
+.add-member-form select {
+    display: block;
+    visibility: visible;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background: #f9f9f9;
+    box-sizing: border-box;
+    display: block;
+}
+
+.form-input::placeholder {
+    color: #b0b0b0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #6b48ff;
+    background: #ffffff;
+    color: #333;
+}
+
+.select-input {
+    appearance: none;
+    background: #f9f9f9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23b0b0b0" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+    padding: 12px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.select-input:focus {
+    outline: none;
+    border-color: #6b48ff;
+    background: #ffffff;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.add-another-button,
+.save-button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.add-another-button {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.add-another-button:hover {
+    background: #d0d0d0;
+}
+
+.save-button {
+    background: #6b48ff;
+    color: #ffffff;
+}
+
+.save-button:hover {
+    background: #5a3de6;
+}
+
+.family-members-list {
+    width: 100%;
+    max-width: 350px;
+}
+
+.family-members-list h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.family-member-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.member-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.member-age-profession {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.member-contact {
+    font-size: 12px;
+    color: #666;
+}
+
+.member-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.member-relation {
+    font-size: 12px;
+    color: #6b48ff;
+    text-transform: uppercase;
+}

@@ -1,13 +1,44 @@
 .splash-container {
+  position: relative;
+  /* Enable positioning for pseudo-elements */
   height: 100vh;
-  background: linear-gradient(to bottom, #a0a7ff, #5d62f1);
+  background-color: #6F72F1;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   animation: fadeIn 1s ease-in-out;
+  overflow: hidden;
+  /* Hide overflow from decorative elements */
 }
+
+.splash-container::before {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background-color: #7f82f4; /* Slightly lighter than background */
+  border-radius: 50%;
+  z-index: 0;
+  box-shadow: 0 0 80px rgba(255, 255, 255, 0.08);
+}
+
+.splash-container::after {
+  content: "";
+  position: absolute;
+  bottom: 50px;
+  left: 70px;
+  width: 200px;
+  height: 200px;
+  background-color: #8d90f5; /* Even lighter tone */
+  border-radius: 50%;
+  z-index: 0;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.06);
+}
+
 
 .splash-logo {
   width: 100px;
@@ -29,18 +60,31 @@
 }
 
 .splash-title {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
+  /* Previously 1.8rem */
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   text-align: center;
 }
 
 .splash-subtext {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  /* Previously 1rem */
+  font-weight: bold;
+  margin-bottom: 15px;
   text-align: center;
 }
+
+
+.splash-wait-text {
+  font-size: 1rem;
+  /* Increased from 0.95rem */
+  color: rgba(255, 255, 255, 0.6);
+  /* Light color */
+  text-align: center;
+  margin-top: 10px;
+}
+
 
 /* Loader spinner (just a circular outline, no spinning) */
 .loader {
@@ -61,4 +105,12 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.splash-content {
+  transform: translateY(-90px); /* Move content upward */
+  z-index: 1; /* Ensure it's above decorative circles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -6,6 +6,7 @@
   margin: auto;
   padding: 20px;
   margin-bottom: 80px;
+  margin-top: -60px;
 }
 
 .event-title {
@@ -24,50 +25,85 @@
 /* Event Info Section */
 .event-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+  justify-content: center;
   margin-top: 20px;
 }
 
-.event-info {
+.event-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  flex: 1;
-}
-
-.info-box {
-  display: flex;
   align-items: center;
-  gap: 15px;
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  animation: pop 0.8s ease-in-out;
-}
-
-.event-data {
-  margin-top: -1px;
-}
-
-.info-box img {
-  width: 50px;
-  height: 50px;
 }
 
 .event-image {
-  flex: 1;
+  margin-bottom: 20px;
 }
 
 .event-image img {
   width: 100%;
-  max-width: 600px;
-  border-radius: 10px;
+  max-width: 500px;
+  border-radius: 16px;
 }
 
-/* Food Coupons Section */
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.event-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.event-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #EFEFFE;
+  flex-shrink: 0;
+}
+
+.icon {
+  color: #6366f1;
+}
+
+.event-data {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.event-data-header {
+  display: flex;
+  align-items: center;
+  min-height: 40px; /* Match the height of the icon for alignment */
+}
+
+.event-data h3 {
+  color: #4b5563;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.event-data p {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0 0 0;
+}
+
+/* Upcoming Events Section */
 .event-title2 {
   font-size: 24px;
   font-weight: 600;
@@ -91,7 +127,7 @@
   color: black;
   padding: 5px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 16px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
@@ -116,40 +152,40 @@
   color: gray;
 }
 
-/* ✅ Responsive layout for mobile */
+/* Responsive Layout for Mobile */
 @media (max-width: 768px) {
-  .event-content {
-    flex-direction: column-reverse;
-    /* Image first on mobile */
-    align-items: center;
-    text-align: center;
-  }
-
   .event-title {
     font-size: 1.5rem;
   }
 
-  .event-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .info-box {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .info-box img {
-    margin-bottom: 10px;
+  .event-card {
+    padding: 15px;
   }
 
   .event-image img {
     max-width: 100%;
     height: auto;
+  }
+
+  .event-detail-item {
+    gap: 8px;
+  }
+
+  .event-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .event-data-header {
+    min-height: 35px; /* Match the smaller icon height */
+  }
+
+  .event-data h3 {
+    font-size: 1rem;
+  }
+
+  .event-data p {
+    font-size: 0.9rem;
   }
 
   .upcoming-events {
@@ -171,86 +207,32 @@
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes pop {
   from {
     opacity: 0;
     transform: scale(0.8);
   }
-
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1s ease-in-out;
-}
-
-.animate-slide-in {
-  animation: slideIn 1s ease-in-out;
-}
-
 .animate-pop {
   animation: pop 0.8s ease-in-out;
 }
 
-.event-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
+.loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #EFEFFE;
-}
-
-.icon {
-  color: #6366f1;
-  /* background-color: #EFEFFE; */
-  border-radius: 100%;
-}
-
-h3 {
-  color: #4b5563;
-}
-
-.loading { 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70vh; /* adjust as per your layout */
+  height: 70vh;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #555; /* dark gray for a softer look */
+  color: #555;
   animation: pulse 1.5s infinite;
 }
 
-/* Optional: Add a pulsing animation to Loading... */
 @keyframes pulse {
   0% {
     opacity: 0.6;

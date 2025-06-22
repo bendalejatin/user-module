@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
 import "./MyCoupons.css";
-import DownloadIcon from "@mui/icons-material/Download";
 import { jsPDF } from "jspdf";
+import Navbar from "../Navbar/Navbar";
 
-//const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+
+// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const MyCoupons = () => {
   const [coupons, setCoupons] = useState([]);
-  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [activeTab, setActiveTab] = useState("ALL COUPONS");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCoupons = async () => {
@@ -24,13 +26,15 @@ const MyCoupons = () => {
           setLoading(false);
           return;
         }
-        const response = await axios.get(
-          `${BASE_URL}/api/coupons/user`,
-          {
-            params: { email },
-          }
-        );
-        setCoupons(response.data);
+        const response = await axios.get(`${BASE_URL}/api/coupons/user`, {
+          params: { email },
+        });
+        // Dynamically set status based on expiryDate
+        const updatedCoupons = response.data.map((coupon) => ({
+          ...coupon,
+          status: new Date(coupon.expiryDate) > new Date() ? "Active" : "Expired",
+        }));
+        setCoupons(updatedCoupons);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching coupons:", err.response || err);
@@ -45,98 +49,61 @@ const MyCoupons = () => {
     fetchCoupons();
   }, []);
 
-  const handleCouponClick = (coupon) => {
-    setSelectedCoupon(coupon);
-  };
-
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
+    return `Valid till ${date.toLocaleDateString("en-US", {
+      month: "short",
       day: "numeric",
-    });
+      year: "numeric",
+    })}`;
   };
 
-  const formatTime = (timeString) => {
-    if (!timeString) return "N/A";
-    const [hour, minute] = timeString.split(":");
-    const hourNum = parseInt(hour, 10);
-    const ampm = hourNum >= 12 ? "PM" : "AM";
-    const hour12 = hourNum % 12 || 12;
-    return `${hour12}:${minute} ${ampm}`;
+  const handleCopyCode = (code) => {
+    navigator.clipboard.writeText(code);
+    alert("Coupon code copied to clipboard!");
   };
-
-  if (loading) {
-    return (
-      <div >
-        <Navbar />
-        <div className="loading">
-          <h2>Loading...</h2>
-        </div>
-        <TabBar />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="coupons-container">
-        <Navbar />
-        <p>{error}</p>
-        <TabBar />
-      </div>
-    );
-  }
 
   const handleDownload = (coupon) => {
     const doc = new jsPDF();
 
-    // Page setup
     doc.setDrawColor(150);
     doc.setLineWidth(0.5);
-    doc.setLineDash([3, 3]); // dashed border for coupon effect
-    doc.rect(10, 10, 190, 277); // outer coupon border
+    doc.setLineDash([3, 3]);
+    doc.rect(10, 10, 190, 277);
 
-    // Title Section
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
     doc.text("Event Coupon", 105, 25, null, null, "center");
 
-    // QR Code centered
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
     doc.text("Scan to Redeem", 105, 40, null, null, "center");
-    doc.addImage(coupon.qrCode, "PNG", 80, 45, 50, 50); // center QR code
+    doc.addImage(coupon.qrCode || "", "PNG", 80, 45, 50, 50);
 
-    // Divider
     doc.setLineDash([]);
     doc.setDrawColor(200);
     doc.line(15, 100, 195, 100);
 
-    // Coupon Details
     doc.setFontSize(14);
     doc.setFont("helvetica", "bold");
     doc.text("Coupon Holder", 15, 110);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
-    doc.text(`Name: ${coupon.userName}`, 15, 120);
-    doc.text(`Flat No: ${coupon.flatNo}`, 15, 128);
+    doc.text(`Name: ${coupon.userName || "N/A"}`, 15, 120);
+    doc.text(`Flat No: ${coupon.flatNo || "N/A"}`, 15, 128);
     doc.text(`Society: ${coupon.society?.name || "N/A"}`, 15, 136);
-    doc.text(`Code: ${coupon.code}`, 15, 144);
+    doc.text(`Code: ${coupon.code || "N/A"}`, 15, 144);
     doc.text(
-      `Valid Until: ${new Date(coupon.expiryDate).toDateString()}`,
+      `Valid Until: ${new Date(coupon.expiryDate).toDateString() || "N/A"}`,
       15,
       152
     );
-    doc.text(`Status: ${coupon.status}`, 15, 160);
+    doc.text(`Status: ${coupon.status || "N/A"}`, 15, 160);
 
-    // Divider
     doc.setDrawColor(200);
     doc.line(15, 168, 195, 168);
 
-    // Event Info
     doc.setFont("helvetica", "bold");
     doc.setFontSize(14);
     doc.text("Event Details", 15, 178);
@@ -144,15 +111,13 @@ const MyCoupons = () => {
     doc.setFontSize(12);
     doc.text(`Title: ${coupon.event?.title || "Event Coupon"}`, 15, 188);
     doc.text(`Date: ${formatDate(coupon.event?.date)}`, 15, 196);
-    doc.text(`Time: ${formatTime(coupon.event?.time)}`, 15, 204);
+    doc.text(`Time: ${coupon.event?.time || "N/A"}`, 15, 204);
     doc.text(`Venue: ${coupon.event?.location || "N/A"}`, 15, 212);
 
-    // Description
     const description = coupon.event?.description || "N/A";
     const wrappedDesc = doc.splitTextToSize(`Description: ${description}`, 180);
     doc.text(wrappedDesc, 15, 222);
 
-    // Footer
     doc.setFontSize(10);
     doc.setTextColor(120);
     doc.text(
@@ -164,126 +129,135 @@ const MyCoupons = () => {
       "center"
     );
 
-    // Save PDF
-    doc.save(`${coupon.code}_coupon.pdf`);
+    doc.save(`${coupon.code || "coupon"}_coupon.pdf`);
   };
+
+  const handleCardClick = (coupon) => {
+    navigate(`/coupon/${coupon._id}`, { state: { coupon } });
+  };
+
+  const filteredCoupons = coupons.filter((coupon) => {
+    if (activeTab === "ALL COUPONS") return true;
+    if (activeTab === "Active") return coupon.status === "Active";
+    if (activeTab === "Used") return coupon.status === "Expired";
+    return false;
+  });
+
+  if (loading) {
+    return (
+      <div>
+        <div className="top-bar">
+          <h2 className="coupons-title">My Coupons</h2>
+          <span className="bell-icon">🔔</span>
+        </div>
+        <div className="loading">
+          <h2>Loading...</h2>
+        </div>
+        <TabBar />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="coupons-container">
+        <div className="top-bar">
+          <h2 className="coupons-title">My Coupons</h2>
+          <span className="bell-icon">🔔</span>
+        </div>
+        <p>{error}</p>
+        <TabBar />
+      </div>
+    );
+  }
 
   return (
     <>
+      {/* <div className="top-bar">
+        <h2 className="coupons-title">My Coupons</h2>
+        <span className="bell-icon">🔔</span>
+      </div> */}
       <Navbar />
       <div className="coupons-container">
-        <h2 className="coupons-title">My Coupons</h2>
-        <p className="coupons-subtitle">Redeem Now!</p>
+        <div className="tabs">
+          <button
+            className={`tab ${activeTab === "ALL COUPONS" ? "active" : ""}`}
+            onClick={() => setActiveTab("ALL COUPONS")}
+          >
+            <span>All Coupons</span>
+          </button>
+          <button
+            className={`tab ${activeTab === "Active" ? "active" : ""}`}
+            onClick={() => setActiveTab("Active")}
+          >
+            <span>Active</span>
+          </button>
+          <button
+            className={`tab ${activeTab === "Used" ? "active" : ""}`}
+            onClick={() => setActiveTab("Used")}
+          >
+            <span>Used</span>
+          </button>
+        </div>
 
         <div className="coupons-list">
-          {coupons.length === 0 ? (
+          {filteredCoupons.length === 0 ? (
             <p>No coupons available.</p>
           ) : (
-            coupons.map((coupon) => (
+            filteredCoupons.map((coupon, index) => (
               <div
                 key={coupon._id}
-                className="coupon-card animate-pop"
-                onClick={() => handleCouponClick(coupon)}
+                className={`coupon-card fade-in`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => handleCardClick(coupon)}
               >
                 <div className="card-header">
-                  <h3 className="coupon-title">
-                    {coupon.event?.title || "Event Coupon"}
-                  </h3>
-                  <DownloadIcon
-                    className="download-icon"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent card click
-                      handleDownload(coupon); // Your download logic
-                    }}
+                  <img
+                    src={coupon.event?.image || "default-image.png"}
+                    alt="Store"
+                    className="store-image"
                   />
+                  <div className="coupon-info">
+                    <h3 className="coupon-title">{coupon.event?.title}</h3>
+                  </div>
                 </div>
-                <div className="coupon-body">
-                  <p>
-                    For {coupon.userName} at {coupon.flatNo}
-                  </p>
-                  <p>Society: {coupon.society?.name || "N/A"}</p>
-                  <p>
-                    <strong>Code: {coupon.code}</strong>
-                  </p>
-                  <span className="expiry">
-                    Valid until {formatDate(coupon.expiryDate)}
-                  </span>
-                  <p className="status">
-                    <span className="status-dot"></span>
-                    Status: {coupon.status}
-                  </p>
+                <div className="coupon-details">
+                  <p className="society"><b>Society:</b> {coupon.society?.name}</p>
+                  <p className="house-number"><b>House No:</b> {coupon.flatNo}</p>
+                  <div className="code-section">
+                    <span className="code">{coupon.code}</span>
+                    <button
+                      className="copy-button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyCode(coupon.code);
+                      }}
+                    >
+                      📋
+                    </button>
+                  </div>
+                  <div className="footer-row">
+                    <span className="expiry">
+                      {formatDate(coupon.expiryDate) || "Valid till Jun 19, 2025"}
+                    </span>
+                    <button
+                      className={`status-button ${
+                        coupon.status === "Active" ? "active" : "expired"
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownload(coupon);
+                      }}
+                    >
+                      {coupon.status || "active"}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
           )}
         </div>
       </div>
-      {selectedCoupon && (
-        <div className="qr-modal">
-          <div className="qr-modal-content">
-            <div className="qr-container">
-              <button
-                className="close-btn"
-                onClick={() => setSelectedCoupon(null)}
-              >
-                ×
-              </button>
-              <div className="qr-image">
-                {selectedCoupon.event?.image ? (
-                  <img src={selectedCoupon.event.image} alt="Event" />
-                ) : (
-                  <p>No event image available</p>
-                )}
-              </div>
-              <div className="qr-section">
-                <h2>Scan QR Code for Event Details</h2>
-                {selectedCoupon.qrCode ? (
-                  <img
-                    src={selectedCoupon.qrCode}
-                    alt="Coupon QR Code"
-                    style={{
-                      maxWidth: "200px",
-                      height: "auto",
-                      margin: "10px 0",
-                    }}
-                  />
-                ) : (
-                  <p>No QR Code available</p>
-                )}
-                <p>Scan this QR code to get more details about the event.</p>
-                <div className="event-details">
-                  <h2>{selectedCoupon.event?.title || "N/A"}</h2>
-
-                  <div className="row">
-                    <span>
-                      <strong>Date</strong>
-                    </span>
-                    <span>{formatDate(selectedCoupon.event?.date)}</span>
-                  </div>
-                  <div className="row">
-                    <span>
-                      <strong>Time</strong>
-                    </span>
-                    <span>{formatTime(selectedCoupon.event?.time)}</span>
-                  </div>
-                  <div className="row">
-                    <span>
-                      <strong>Venue</strong>
-                    </span>
-                    <span>{selectedCoupon.event?.location || "N/A"}</span>
-                  </div>
-                  <div className="row">
-                    <span>
-                      <strong>Description</strong>
-                    </span>
-                    <span>{selectedCoupon.event?.description || "N/A"}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
       <TabBar />
     </>
   );

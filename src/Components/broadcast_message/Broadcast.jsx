@@ -7,7 +7,7 @@ import TabBar from "../TabBar/TabBar";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import "./Broadcast.css";
 
-//const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const tabs = ["All", "Society"];
@@ -90,10 +90,10 @@ const Broadcast = () => {
     <>
       <Navbar />
       <div className="broadcast-page">
-        <h2>
+        {/* <h2>
           <CampaignIcon fontSize="medium" className="campaignIcon" /> Your
           Broadcast Messages
-        </h2>
+        </h2> */}
 
         <div className="broadcast-tabs">
           {tabs.map((tab) => (
@@ -110,22 +110,22 @@ const Broadcast = () => {
         <div className="broadcast-list">
           {filteredBroadcasts.length > 0 ? (
             filteredBroadcasts.map((broadcast) => (
-              <div key={broadcast._id} className="broadcast-card">
-                <h3>{broadcast.message}</h3>
-                <p>
-                  <strong>Type:</strong> {broadcast.broadcastType}
-                </p>
-                <p>
-                  <strong>Society:</strong>{" "}
-                  {broadcast.broadcastType === "society"
-                    ? broadcast.society
-                    : "All Societies"}
-                </p>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(broadcast.createdAt).toLocaleString()}
-                </p>
+              <div className="broadcast-card" key={broadcast._id}>
+                <div className="broadcast-card-content">
+                  <h3>{broadcast.message}</h3>
+                  <p>Type: {broadcast.broadcastType}</p>
+                  <p>
+                    Society:{" "}
+                    {broadcast.broadcastType === "society"
+                      ? broadcast.society
+                      : "All Societies"}
+                  </p>
+                  <p className="timestamp">
+                    {new Date(broadcast.createdAt).toLocaleString()}
+                  </p>
+                </div>
               </div>
+
             ))
           ) : (
             <p>No messages available.</p>

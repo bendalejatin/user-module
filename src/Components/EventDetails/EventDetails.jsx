@@ -8,7 +8,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
-//const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const EventDetails = () => {
@@ -109,7 +109,7 @@ const EventDetails = () => {
 
   if (loading) {
     return (
-      <div >
+      <div>
         <Navbar />
         <div className="loading">
           <h2>Loading...</h2>
@@ -133,75 +133,65 @@ const EventDetails = () => {
     <>
       <Navbar />
       <div className="event-container">
-        <h2 className="event-title">Event Info</h2>
-        <p className="event-subtitle">Get all the details about the event</p>
+        <h2 className="event-title"></h2>
+        <p className="event-subtitle"></p>
         {error && <p className="error-message">{error}</p>}
 
         {latestEvent ? (
           <div className="event-content">
-            <div className="event-info">
-              <div className="info-box animate-fade-in">
-                <div className="event-icon">
-                  <InfoIcon
-                    fontSize="large"
-                    className="icon"
-                    alt="Title Icon"
-                  />
+            <div className="event-card animate-pop">
+              <div className="event-image">
+                <img
+                  src={latestEvent.image || "https://via.placeholder.com/300"}
+                  alt={latestEvent.title}
+                />
+              </div>
+              <div className="event-details">
+                <div className="event-detail-item">
+                  <div className="event-icon">
+                    <InfoIcon fontSize="large" className="icon" />
+                  </div>
+                  <div className="event-data">
+                    <div className="event-data-header">
+                      <h3>Event Title</h3>
+                    </div>
+                    <p>Car-1</p>
+                  </div>
                 </div>
-                <div className="event-data">
-                  <h3>Event Title</h3>
-                  <p>{latestEvent.title}</p>
+                <div className="event-detail-item">
+                  <div className="event-icon">
+                    <CalendarMonthOutlinedIcon fontSize="large" className="icon" />
+                  </div>
+                  <div className="event-data">
+                    <div className="event-data-header">
+                      <h3>Date</h3>
+                    </div>
+                    <p>6/24/2025</p>
+                  </div>
+                </div>
+                <div className="event-detail-item">
+                  <div className="event-icon">
+                    <LocationOnOutlinedIcon fontSize="large" className="icon" />
+                  </div>
+                  <div className="event-data">
+                    <div className="event-data-header">
+                      <h3>Event Location</h3>
+                    </div>
+                    <p>Amroli-Surat</p>
+                  </div>
+                </div>
+                <div className="event-detail-item">
+                  <div className="event-icon">
+                    <DescriptionOutlinedIcon fontSize="large" className="icon" />
+                  </div>
+                  <div className="event-data">
+                    <div className="event-data-header">
+                      <h3>Description</h3>
+                    </div>
+                    <p>Hello</p>
+                  </div>
                 </div>
               </div>
-
-              <div className="info-box animate-fade-in">
-                <div className="event-icon">
-                  <CalendarMonthOutlinedIcon
-                    fontSize="large"
-                    className="icon"
-                    alt="Date Icon"
-                  />
-                </div>
-                <div className="event-data">
-                  <h3>Date</h3>
-                  <p>{new Date(latestEvent.date).toLocaleDateString()}</p>
-                </div>
-              </div>
-
-              <div className="info-box animate-fade-in">
-                <div className="event-icon">
-                  <LocationOnOutlinedIcon
-                    fontSize="large"
-                    className="icon"
-                    alt="Location Icon"
-                  />
-                </div>
-                <div className="event-data">
-                  <h3>Event Location</h3>
-                  <p>{latestEvent.location}</p>
-                </div>
-              </div>
-
-              <div className="info-box animate-fade-in">
-                <div className="event-icon">
-                  <DescriptionOutlinedIcon
-                    fontSize="large"
-                    className="icon"
-                    alt="Description Icon"
-                  />
-                </div>
-                <div className="event-data">
-                  <h3>Description</h3>
-                  <p>{latestEvent.description}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="event-image animate-slide-in">
-              <img
-                src={latestEvent.image || "https://via.placeholder.com/300"}
-                alt={latestEvent.title}
-              />
             </div>
           </div>
         ) : (

@@ -1,11 +1,23 @@
 /* Default styling for web view (1024px and above) */
 .login-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
   background-color: #fff;
-  /* Assuming a different background for web view */
+  padding: 20px;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Optional: remove max-width from login-box and login-header individually */
+.login-box,
+.login-header {
+  width: 100%;
 }
 
 .login-box {
@@ -13,8 +25,8 @@
   width: 100%;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  padding: 30px;
   text-align: center;
 }
 
@@ -62,7 +74,7 @@
 }
 
 .input-group input:focus {
-  border-color: #6366F1;
+  border-color: #6F72F1;
 }
 
 .login-options {
@@ -81,7 +93,7 @@
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: #6366F1;
+  background-color: #6F72F1;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -109,7 +121,7 @@
 
 .forgot-password span,
 .register-link span {
-  color: #6366F1;
+  color: #6F72F1;
   cursor: pointer;
 }
 
@@ -128,7 +140,8 @@
 
   .login-box {
     padding: 15px;
-    box-shadow: none;
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
     background-color: #FAFBFE;
   }
 
@@ -152,7 +165,22 @@
   }
 
   .login-button {
-    font-size: 14px;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .register-link {
+    margin-top: 20px;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+  }
+
+  .login-box {
+    padding: 20px;
+    border-radius: 20px;
   }
 }
 
@@ -184,6 +212,8 @@
   }
 
   .input-group input {
+    border-radius: 12px;
+    padding: 12px;
     font-size: 13px;
     /* Adjust input text size for tablet */
   }
@@ -191,4 +221,22 @@
   .login-button {
     font-size: 15px;
   }
+}
+
+
+/* Gradient header like in screenshot */
+.login-header {
+  background: linear-gradient(90deg, #000000 0%, #6F72F1 100%);
+  border-radius: 12px;
+  padding: 15px 30px;
+  margin-bottom: 50px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-header h1 {
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
 }

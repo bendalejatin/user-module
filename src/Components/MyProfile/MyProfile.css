@@ -1,785 +1,250 @@
-/* Global styles */
+/* Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Header */
-.header {
-  /* background-color: #6366F1; */
-  color: #000;
-  padding: 10px 0;
-  text-align: center;
-  position: relative;
-  width: 100%;
-}
-
-/* .back-button {
-  position: absolute;
-  margin-top: -5px;
-  left: 10px;
-  background: none;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.back-button:focus {
-  outline: none;
-}
-
-.back-button::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-} */
-
-.profile-title {
-  margin: 0;
-  font-size: 2rem;
-}
-
-/* Profile container */
-.profile-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
   box-sizing: border-box;
 }
 
-.error-message {
-  color: #dc3545;
-  text-align: center;
-  margin-bottom: 15px;
-  padding: 10px;
+/* Container */
+.my-profile-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+  padding-bottom: 80px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Profile section */
-.profile-section {
-  background-color: #fff;
-  border-radius: 10px;
+.my-profile-container::-webkit-scrollbar {
+  display: none;
+}
+
+.profile-header {
+  color: white;
+  background: linear-gradient(90deg, #000000 0%, #6F72F1 100%); 
+  text-align: center;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  margin-bottom: 60px;
-}
-
-.profile-image {
-  text-align: center;
-  margin-bottom: 20px;
   position: relative;
+  width: 100%;
 }
 
-.image-container {
-  position: relative;
-  display: inline-block;
+.profile-header h1 {
+  margin: 0;
+  font-size: 24px;
 }
 
-.placeholder-image {
-  width: 150px;
-  height: 150px;
+.profile-picture {
+  width: 80px;
+  height: 80px;
+  background-color: #ccc;
   border-radius: 50%;
-  background-color: #e9ecef;
-  border: 4px solid #6366F1;
+  margin: 10px auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 0;
-  cursor: pointer;
-}
-
-.centered-camera-icon {
-  font-size: 2rem;
-  color: #6366F1;
-}
-
-.placeholder-image .upload-text {
-  color: #6366F1;
-  font-size: 0.95rem;
-  margin-top: 5px;
+  justify-content: center;
+  position: relative;
 }
 
 .profile-img {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #6366F1;
-  position: relative;
-}
-
-.camera-button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: #6366F1;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .camera-icon {
-  color: #fff;
-  font-size: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #4a90e2;
+  border-radius: 50%;
+  padding: 5px;
+  color: white;
 }
 
-.profile-form {
+.image-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.profile-completion {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  margin-top: -1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 20px);
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  position: relative;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 8px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  margin: 0 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #6c5ce7;
+  border-radius: 3px;
+  transition: width 0.3s ease-in-out;
+}
+
+.error-message {
+  color: #ff3333;
+  text-align: center;
+  margin: 10px;
+  font-size: 14px;
+  width: calc(100% - 20px);
+}
+
+.profile-details {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 20px);
+}
+
+.detail-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.view-mode {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 4px;
 }
 
-.name-section {
+.label {
+  color: #666;
+  font-size: 16px;
+}
+
+.detail-value {
+  font-size: 16px;
+  color: #333;
+}
+
+.family-members {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 20px);
+}
+
+.family-header {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-  /* Match mobile view spacing */
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.name-label {
-  font-size: 0.9rem;
-  /* Match mobile view font size */
-  color: #6c757d;
-  margin-bottom: 5px;
-  font-weight: bold;
-  /* Make label bold */
+.family-header h2 {
+  margin: 0;
+  font-size: 18px;
 }
 
-.name-input {
-  padding: 8px;
-  /* Match mobile view padding */
-  border: 1px solid #ccc;
-  /* Match mobile view border */
-  border-radius: 5px;
-  /* Match mobile view border radius */
-  background-color: #f8f9fa;
-  /* Match mobile view background */
-  font-size: 0.9rem;
-  /* Match mobile view font size */
-  width: 100%;
-}
-
-.name-input:disabled {
-  background-color: #e9ecef;
-  color: #6c757d;
-}
-
-.profile-button {
-  padding: 10px;
-  background-color: #6366F1;
-  color: #fff;
+.add-member {
+  background: none;
   border: none;
-  border-radius: 6px;
+  color: #4a90e2;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
-  width: 100%;
-  margin-top: 32px;
 }
 
-.profile-button:hover {
-  background-color: #5a4cb3;
+.family-member {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.logout-button {
-  padding: 10px;
-  background-color: #EEF2FF;
-  color: #6a5acd;
-  border: 1px solid #6366F1;
-  border-radius: 6px;
+.family-member:last-child {
+  border-bottom: none;
+}
+
+.member-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  width: 100%;
-  margin-top: 10px;
+  font-size: 12px;
 }
 
-.logout-button:hover {
-  background-color: #f8f9fa;
+.edit-button:hover {
+  background-color: #357abd;
+}
+
+.delete-button {
+  background-color: #ff3333;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
 }
 
 .button-group {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-}
-
-/* Member section */
-.member-section {
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 80px;
-  /* Increased to avoid overlap with tab bar */
-}
-
-.member-title {
-  color: #000000;
-  padding: 10px 20px;
-  border-radius: 5px 5px 0 0;
-  margin-bottom: 0;
-  text-align: left;
-  margin-left: -20px;
-  margin-top: -15px;
-}
-
-.member-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.form-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.member-field {
-  flex: 1;
-  min-width: 150px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.member-field label {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin-bottom: 5px;
-}
-
-.member-field input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f9fa;
-  font-size: 0.95rem;
-  width: 100%;
-}
-
-.add-member-button {
-  padding: 10px;
-  background-color: #6366F1;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  width: 100%;
-  margin-top: 32px;
-}
-
-.add-member-button:hover {
-  background-color: #5a4cb3;
-}
-
-.members-list {
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 15px;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.member-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-left: none;
   padding: 15px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: none;
   width: 100%;
+  margin-bottom: 20px;
 }
 
-.member-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.member-info,
-.member-data {
-  display: flex;
-  flex-direction: column;
-}
-
-.member-info p,
-.member-data p {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #333;
-}
-
-.member-info p strong {
-  color: #6c757d;
-  font-weight: normal;
-}
-
-.member-data {
-  text-align: right;
-}
-
-.member-data p {
-  font-weight: bold;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
-}
-
-.edit-button {
-  padding: 6px 12px;
-  background-color: #6366F1;
-  color: #fff;
+.logout-button {
+  background-color: #6F72F1;
+  color: white;
   border: none;
-  border-radius: 6px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s;
-  flex: 1;
+  font-size: 16px;
 }
 
-.edit-button:hover {
-  background-color: #4A5AB3;
-}
-
-.delete-button {
-  padding: 6px 12px;
-  background-color: #ffebee;
-  color: #d32f2f;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s;
-  flex: 1;
-}
-
-.delete-button:hover {
-  background-color: #E65C5C;
-}
-
-/* Responsive Design */
-@media (min-width: 1024px) {
-  .profile-container {
-    max-width: 800px;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .profile-section {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 30px;
-  }
-
-  .profile-image {
-    margin-right: 0;
-    margin-bottom: 20px;
-    align-self: center;
-  }
-
-  .profile-form {
-    flex: 1;
-    max-width: 100%;
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .name-section {
-    flex-direction: column;
-    /* Change to vertical layout like mobile view */
-    align-items: flex-start;
-    /* Align labels to the left */
-    gap: 5px;
-    /* Small gap between label and input */
-    margin-bottom: 12px;
-    /* Match mobile view spacing */
-  }
-
-  .name-label {
-    font-size: 0.9rem;
-    /* Match mobile view font size */
-    color: #6c757d;
-    margin-bottom: 5px;
-    font-weight: bold;
-    /* Make label bold */
-    width: auto;
-    /* Remove fixed width to match mobile view */
-  }
-
-  .name-input {
-    padding: 8px;
-    /* Match mobile view padding */
-    border: 1px solid #ccc;
-    /* Match mobile view border */
-    border-radius: 5px;
-    /* Match mobile view border radius */
-    background-color: #f8f9fa;
-    /* Match mobile view background */
-    font-size: 0.9rem;
-    /* Match mobile view font size */
-    width: 100%;
-    /* Full width like mobile view */
-  }
-
-  .button-group {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .form-row {
-    flex-wrap: nowrap;
-    gap: 15px;
-  }
-
-  .member-field {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .member-field label {
-    font-size: 1rem;
-  }
-
-  .member-field input {
-    font-size: 1rem;
-    padding: 8px;
-  }
-
-  .add-member-button {
-    margin-top: 28px;
-    align-self: flex-end;
-  }
-
-  .member-card {
-    border: 1px solid #ddd;
-    border-left: none;
-    box-shadow: none;
-  }
-
-  .member-content {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .member-info,
-  .member-data {
-    flex: 0 0 40%;
-  }
-
-  .button-container {
-    gap: 15px;
-  }
-
-  .edit-button,
-  .delete-button {
-    flex: 1;
-    min-width: 100px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .profile-container {
-    max-width: 700px;
-    padding: 15px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .profile-title {
-    font-size: 1.5rem;
-  }
-
-  .profile-section {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .profile-image {
-    margin-bottom: 15px;
-  }
-
-  .profile-form {
-    gap: 5px;
-  }
-
-  .name-section {
-    margin-bottom: 15px;
-  }
-
-  .name-label {
-    font-size: 1rem;
-  }
-
-  .name-input {
-    padding: 8px;
-    font-size: 1rem;
-  }
-
-  .form-row {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-
-  .member-field {
-    flex: 1;
-    min-width: 220px;
-  }
-
-  .member-field label {
-    font-size: 1rem;
-  }
-
-  .member-field input {
-    font-size: 1rem;
-    padding: 8px;
-  }
-
-  .add-member-button {
-    margin-top: 32px;
-  }
-
-  .member-card {
-    border: 1px solid #ddd;
-    border-left: none;
-    box-shadow: none;
-    padding: 15px;
-  }
-
-  .member-content {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 15px;
-  }
-
-  .member-info,
-  .member-data {
-    flex: 0 0 45%;
-  }
-
-  .button-container {
-    gap: 10px;
-  }
-
-  .edit-button,
-  .delete-button {
-    flex: 1;
-    min-width: 90px;
-    padding: 8px;
-  }
-}
-
-@media (max-width: 767px) {
-  .profile-container {
-    max-width: 100%;
-    padding: 0 10px;
-    margin: 0;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 10px;
-  }
-
-  .profile-title {
-    font-size: 1.5rem;
-  }
-
-  /* .header {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    background-color: transparent;
-    border-radius: 5px;
-    background-color: #6366F1;
-  } */
-
-  /* .back-button {
-    color: #333;
-    border: none;
-    outline: none;
-  }
-
-  .back-button:focus {
-    outline: none;
-  }
-
-  .back-button::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  } */
-
-  /* .profile-title {
-    width: 100%;
-    font-size: 1.1rem;
-  } */
-
-  .profile-section {
-    padding: 15px;
-    border-radius: 8px;
-  }
-
-  .profile-image {
-    margin-bottom: 15px;
-  }
-
-  .profile-form {
-    gap: 5px;
-  }
-
-  .name-section {
-    flex-direction: column;
-    margin-bottom: 12px;
-  }
-
-  .name-label {
-    font-size: 0.9rem;
-  }
-
-  .name-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f8f9fa;
-    font-size: 0.9rem;
-  }
-
-  .profile-button,
-  .logout-button {
-    padding: 8px;
-    font-size: 0.95rem;
-  }
-
-  .form-row {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .member-section {
-    margin-left: -10px;
-    margin-right: -10px;
-    width: calc(100% + 20px);
-    padding: 15px;
-  }
-
-  .member-title {
-    width: 100%;
-    /* margin-left: 0; */
-    margin-right: 0;
-    padding: 10px 20px 10px 30px;
-    background-color: #f8f9fa;
-    margin-bottom: 15px;
-    margin-top: -15px;
-    font-size: 1.1rem;
-  }
-
-  .member-form {
-    padding: 0 10px;
-  }
-
-  .members-list {
-    padding: 0 10px;
-  }
-
-  .member-field {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .member-field label {
-    font-size: 0.9rem;
-  }
-
-  .member-field input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f8f9fa;
-    font-size: 0.9rem;
-  }
-
-  .add-member-button {
-    margin-top: 20px;
-    padding: 8px;
-    font-size: 0.95rem;
-  }
-
-  .member-card {
-    border: 1px solid #ddd;
-    border-left: none;
-    background-color: #fff;
-    box-shadow: none;
-    padding: 12px;
-  }
-
-  .member-content {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .member-info,
-  .member-data {
-    flex: 0 0 45%;
-  }
-
-  .member-info p strong {
-    color: #6c757d;
-    font-weight: normal;
-    font-size: 0.85rem;
-  }
-
-  .member-data p {
-    font-weight: bold;
-    color: #333;
-    font-size: 0.85rem;
-  }
-
-  .button-container {
-    gap: 8px;
-  }
-
-  .edit-button,
-  .delete-button {
-    flex: 1;
-    padding: 6px;
-    font-size: 0.85rem;
-  }
+.logout-button:hover {
+  background-color: #6F72F1;
 }

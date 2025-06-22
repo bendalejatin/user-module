@@ -1,0 +1,152 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+/* Coupon Details Container */
+.coupon-details-container {
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  overflow-y: auto; /* Enable vertical scrollbar */
+}
+
+/* Custom Scrollbar for Desktop */
+.coupon-details-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.coupon-details-container::-webkit-scrollbar-track {
+  background: #f0f4f8;
+  border-radius: 4px;
+}
+
+.coupon-details-container::-webkit-scrollbar-thumb {
+  background: #4b6cb7;
+  border-radius: 4px;
+}
+
+.coupon-details-container::-webkit-scrollbar-thumb:hover {
+  background: #182848;
+}
+
+/* QR Frame */
+.qr-frame {
+  background: #fff;
+  border: 2px dashed #4b6cb7;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.qr-code {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.qr-instruction {
+  color: #4b6cb7;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Details Card */
+.details-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.details-card h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.details-card p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.details-card p strong {
+  color: #333;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background-color: #4b6cb7;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 200px;
+  align-self: center;
+}
+
+.cancel-btn:hover {
+  background-color: #182848;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coupon-details-container {
+    overflow-y: auto; /* Ensure scrolling on mobile */
+  }
+
+  .qr-frame {
+    width: 150px;
+    height: 150px;
+  }
+
+  .qr-code {
+    width: 130px;
+    height: 130px;
+  }
+
+  .details-card {
+    width: 85%;
+    margin-left: 7.5%;
+  }
+}
+
+@media (min-width: 769px) {
+  .details-card {
+    width: 40%;
+  }
+}

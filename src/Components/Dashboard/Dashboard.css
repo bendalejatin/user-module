@@ -1,83 +1,121 @@
-/* Dashboard.css */
-
 /* General container styling */
-.dashboard-container {
-  background-color: #fff;
-  font-family: 'Arial', sans-serif;
+.dash-container {
+  background-color: #F9F9F9;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
-.dashboard-content {
+.dash-content {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding-bottom: 80px; /* Consistent with previous compact gap */
 }
 
-
-
-
-/* Hero section styling (Welcome message) */
-.hero-section {
-  background-color: #6366F1;
+/* Profile Header Section */
+.dash-profile-header {
+  background: linear-gradient(90deg, #000000 0%, #6F72F1 100%);
   border-radius: 15px;
   margin: 20px;
   padding: 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
   color: #fff;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.hero-section h1 {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.dash-profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  flex-shrink: 0;
 }
 
-.hero-section p {
+.dash-profile-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.dash-profile-info h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-profile-info h2 {
   font-size: 16px;
-  color: #fff;
+  font-weight: 500;
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Dashboard icons grid */
-
-.dashboard-icons-section {
+/* Dashboard Icons Section */
+.dash-icons-section {
   padding: 0 20px;
+  margin-bottom: 30px;
 }
 
-.dashboard-grid {
+.dash-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  margin-bottom: 20px;
 }
 
-.dashboard-icon {
-  background-color: #f9f9f9;
+.dash-icon {
+  background: #fff;
+  border: 1px solid #E0E0E0;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-icon:hover {
-  transform: scale(1.05);
+.dash-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.dashboard-icon img {
-  width: 40px;
-  height: 40px;
+.dash-icon-symbol {
+  font-size: 40px;
   margin-bottom: 10px;
 }
 
-.dashboard-icon p {
+.dash-yellow-symbol {
+  color: #F59E0B;
+}
+
+.dash-pink-symbol {
+  color: #EC4899;
+}
+
+.dash-blue-symbol {
+  color: #6F72F1;
+}
+
+.dash-icon p {
   font-size: 14px;
   color: #333;
   margin: 0;
+  font-weight: 500;
 }
 
-.notification-badge {
-  background-color: #ff4d4f;
+.dash-notification-badge {
+  background-color: #FF4D4F;
   color: #fff;
   border-radius: 50%;
   padding: 2px 8px;
@@ -87,169 +125,347 @@
   right: 10px;
 }
 
-/* Broadcast messages section */
-.broadcast-container {
-  background-color: #F3F4F6;
-  /* Light blue-gray background as in the image */
-  border-left: 4px solid #6366F1;
-  /* Blue left border */
+/* Broadcast Messages Section */
+.dash-broadcast-container {
+  background-color: #fff;
+  border-left: 4px solid #6F72F1;
   border-radius: 5px;
   margin: 20px;
   padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-.broadcast-container h2 {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+.dash-broadcast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
-.broadcast-list {
-  list-style: none;
-  padding: 0;
+.dash-broadcast-container h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
 }
 
-.broadcast-item {
+.dash-broadcast-container h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dash-broadcast-container p {
   font-size: 14px;
   color: #666;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
-/* Upcoming events section */
-.event-section {
+.dash-broadcast-icon {
+  font-size: 16px;
+  color: #6F72F1;
+}
+
+.dash-see-all-button {
+  background: transparent;
+  color: #0400FF;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dash-see-all-button:hover {
+  transform: scale(1.05);
+}
+
+/* Maintenance Section */
+.dash-maintenance-section {
   padding: 0 20px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
-.event-section h3 {
-  font-size: 18px;
-  font-weight: bold;
+.dash-maintenance-section h2 {
+  font-size: 16px;
+  font-weight: 600;
   color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
+}
+
+.dash-maintenance-details {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.dash-maintenance-amount {
+  flex: 1;
+  min-width: 150px;
+}
+
+.dash-maintenance-amount p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.dash-maintenance-amount h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 5px 0 0;
+  white-space: nowrap;
+}
+
+.dash-status-badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.dash-status-paid {
+  background-color: #D4F4DD;
+  color: #1A7F3C;
+}
+
+.dash-status-unpaid {
+  background-color: #F4D4D4;
+  color: #7F1A1A;
+}
+
+.dash-view-details-link {
+  color: #6F72F1;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.dash-view-details-link:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+/* Upcoming Events Section */
+.dash-event-section {
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.dash-event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 15px;
 }
 
-.event-list {
+.dash-event-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
+}
+
+.dash-event-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
-.event-card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+.dash-event-card {
+  flex: 1;
+  min-width: 300px;
   border-radius: 10px;
   padding: 15px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.event-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
+.dash-event-card:hover {
+  transform: translateY(-3px);
 }
 
-.event-card h4 {
+.dash-orange-bg {
+  background: #FFF4E5;
+}
+
+.dash-purple-bg {
+  background: #F3E8FF;
+}
+
+.dash-event-card h4 {
   font-size: 16px;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: #000;
   margin: 0;
 }
 
-.event-card p {
+.dash-event-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+.dash-get-coupon-button {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: #fff;
+}
+
+.dash-get-coupon-button:hover {
+  transform: scale(1.05);
+}
+
+.dash-orange-button {
+  background: #F59E0B;
+}
+
+.dash-purple-button {
+  background: #A855F7;
+}
+
+/* Pending Entry Permissions Section */
+.dash-pending-section {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.dash-pending-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
+}
+
+.dash-pending-card {
+  background-color: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.dash-pending-card:hover {
+  transform: translateY(-3px);
+}
+
+.dash-pending-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.dash-pending-type p,
+.dash-pending-info p {
   font-size: 14px;
   color: #666;
   margin: 0;
 }
 
-.event-card button {
-  background-color: #6366F1;
-  /* Blue button color as in the image */
+.dash-pending-info p:first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+.dash-pending-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+.dash-deny-button {
+  background: linear-gradient(90deg, #FF4D4F 0%, #DA190B 100%);
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 6px 12px;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.3s ease;
 }
 
-.event-card button:hover {
-  background-color: #6a5acd;
+.dash-deny-button:hover {
+  transform: scale(1.05);
 }
 
-/* TabBar (Assuming TabBar component styling) */
-.tab-bar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #e0e0e0;
+.dash-approve-button {
+  background: linear-gradient(90deg, #4CAF50 0%, #45A049 100%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.tab-bar img {
-  width: 24px;
-  height: 24px;
-}
-
-.tab-bar p {
-  font-size: 12px;
-  color: #666;
-  margin: 0;
+.dash-approve-button:hover {
+  transform: scale(1.05);
 }
 
 /* Error message styling */
-.error-message {
-  color: #ff4d4f;
+.dash-error-message {
+  color: #FF4D4F;
   font-size: 14px;
   text-align: center;
   margin: 20px;
 }
 
 /* Loading state */
-.dashboard-content h2 {
-  text-align: center;
-  color: #333;
-  margin: 20px;
-}
-
-/* Show more link */
-.more-link {
-  display: block;
-  margin: 20px auto;
-  padding: 5px 10px;
-  color: #6366F1;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.more-link:hover {
-  color: #6a5acd;
-  text-decoration: none;
-}
-
-.loading { 
+.dash-loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh; /* adjust as per your layout */
+  height: 70vh;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #555; /* dark gray for a softer look */
+  color: #555;
   animation: pulse 1.5s infinite;
 }
 
-/* Optional: Add a pulsing animation to Loading... */
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -259,5 +475,168 @@
   }
   100% {
     opacity: 0.6;
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+  .dash-content {
+    padding: 20px;
+    padding-bottom: 90px;
+  }
+
+  .dash-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dash-event-card,
+  .dash-pending-card {
+    flex-direction: row;
+  }
+
+  .dash-maintenance-details {
+    flex-direction: row;
+  }
+
+  .dash-pending-section {
+    margin-bottom: 30px;
+  }
+
+  .dash-pending-card {
+    flex-wrap: nowrap;
+  }
+
+  .dash-pending-actions {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-content {
+    padding: 10px;
+    padding-bottom: 100px;
+  }
+
+  .dash-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(2, 100px); /* 2 rows with fixed height */
+    gap: 10px; /* Consistent gap */
+  }
+
+  .dash-icon {
+    padding: 10px; /* Reduced padding for compact layout */
+    font-size: 12px; /* Consistent text size */
+    width: 100%; /* Full width within grid cell */
+    height: 100px; /* Fixed height for uniformity */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Ensure padding doesn't affect size */
+  }
+
+  .dash-icon-symbol {
+    font-size: 28px; /* Slightly smaller icon size */
+    margin-bottom: 6px;
+  }
+
+  .dash-icon p {
+    font-size: 11px; /* Smaller text to fit */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dash-notification-badge {
+    top: 5px; /* Adjusted for smaller card */
+    right: 5px;
+    font-size: 10px; /* Smaller badge */
+    padding: 1px 6px;
+  }
+
+  .dash-icons-section {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-broadcast-container {
+    margin: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-maintenance-section {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-event-section {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-event-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dash-event-card {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .dash-pending-section {
+    padding: 0 10px;
+    margin-bottom: 30px;
+  }
+
+  .dash-pending-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .dash-pending-actions {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .dash-deny-button,
+  .dash-approve-button {
+    flex: 1;
+    text-align: center;
+  }
+
+  .dash-maintenance-details {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .dash-profile-header {
+    margin: 10px;
+    padding: 15px;
+    flex: row;
+    align-items: center;
+  }
+
+  /* Icon colors for mobile view */
+  .dash-icon:nth-child(1) .dash-icon-symbol, /* Event Details */
+  .dash-icon:nth-child(4) .dash-icon-symbol { /* Entry Permission */
+    color: #F59E0B; /* Yellow */
+  }
+
+  .dash-icon:nth-child(2) .dash-icon-symbol, /* My Coupons */
+  .dash-icon:nth-child(5) .dash-icon-symbol { /* My Profile */
+    color: #EC4899; /* Pink */
+  }
+
+  .dash-icon:nth-child(3) .dash-icon-symbol, /* Maintenance */
+  .dash-icon:nth-child(6) .dash-icon-symbol { /* Broadcast Messages */
+    color: #6F72F1; /* Blue */
   }
 }
