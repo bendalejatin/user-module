@@ -49,7 +49,7 @@
 }
 
 .tab.active {
-  background-color: #6b46c1;
+  background-color: #4A90E2;
 }
 
 .tab.active span {
@@ -188,11 +188,11 @@
 }
 
 .status-button.active {
-  background: #6b46c1;
+  background: #4A90E2;
 }
 
 .status-button.expired {
-  background: #6b46c1;
+  background: #4A90E2;
 }
 
 .b {
