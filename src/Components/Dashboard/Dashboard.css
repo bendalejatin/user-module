@@ -176,7 +176,7 @@
 }
 
 .dash-broadcast-icon {
-  font-size: 16_GB16px;
+  font-size: 16px;
   color: #6F72F1;
 }
 
@@ -200,35 +200,42 @@
 .dash-maintenance-section {
   padding: 0 20px;
   margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dash-maintenance-section h2 {
   font-size: 16px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
+  padding: 15px 15px 5px;
   border-bottom: 2px solid #6F72F1;
-  padding-bottom: 5px;
 }
 
 .dash-maintenance-details {
-  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
+  padding: 15px;
+  gap: 10px;
   flex-wrap: wrap;
+  background: #F9FAFB;
+  border-radius: 8px;
+  margin: 0 15px 15px;
 }
 
 .dash-maintenance-amount {
   flex: 1;
-  min-width: 150px;
+  min-width: 120px;
 }
 
 .dash-maintenance-amount p {
   font-size: 14px;
   color: #666;
   margin: 0;
+  font-weight: 500;
 }
 
 .dash-maintenance-amount h3 {
@@ -240,12 +247,14 @@
 }
 
 .dash-status-badge {
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 12px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   flex-shrink: 0;
+  text-align: center;
+  min-width: 70px;
 }
 
 .dash-status-paid {
@@ -264,12 +273,16 @@
   font-weight: 500;
   text-decoration: none;
   flex-shrink: 0;
-  transition: color 0.3s ease;
+  padding: 6px 12px;
+  border: 1px solid #6F72F1;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 .dash-view-details-link:hover {
-  color: #000000;
-  text-decoration: underline;
+  background-color: #6F72F1;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Upcoming Events Section */
@@ -503,6 +516,8 @@
 
   .dash-maintenance-details {
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .dash-pending-section {
@@ -548,10 +563,9 @@
     height: 28px !important; /* Explicit height to ensure consistency */
     min-width: 28px; /* Prevent shrinking */
     min-height: 28px; /* Prevent shrinking */
-    line-height: 28px; /* Align vertically */
+    line-height: 28px;
     margin-bottom: 6px;
-    display: inline-block; /* Consistent rendering */
-    box-sizing: border-box; /* Ensure size includes padding */
+    display: inline-block;
   }
 
   .dash-icon p {
@@ -584,6 +598,27 @@
   .dash-maintenance-section {
     padding: 0 10px;
     margin-bottom: 20px;
+  }
+
+  .dash-maintenance-details {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .dash-maintenance-amount {
+    min-width: 100%;
+  }
+
+  .dash-status-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dash-view-details-link {
+    width: 100%;
+    text-align: center;
   }
 
   .dash-event-section {
@@ -623,12 +658,6 @@
   .dash-approve-button {
     flex: 1;
     text-align: center;
-  }
-
-  .dash-maintenance-details {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
   }
 
   .dash-profile-header {
