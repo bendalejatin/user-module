@@ -280,3 +280,9 @@
     max-width: 280px;
   }
 }
+@media (max-width: 768px) {
+  .coupon-card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
