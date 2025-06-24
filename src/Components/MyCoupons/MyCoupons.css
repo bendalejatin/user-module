@@ -4,7 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-  
+
 
 /* Connected Tabs Section */
 .tabs {
@@ -66,6 +66,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -105,6 +106,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -210,9 +212,17 @@
 }
 
 @keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
 }
 
 /* Responsive Design */
@@ -280,6 +290,7 @@
     max-width: 280px;
   }
 }
+
 @media (max-width: 768px) {
   .coupon-card {
     margin-left: auto;
