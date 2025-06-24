@@ -91,11 +91,15 @@
 }
 
 .dash-icon-symbol {
-  font-size: 28px; /* Uniform size for all icons across all devices */
-  width: 28px; /* Explicit width to ensure consistency */
-  height: 28px; /* Explicit height to ensure consistency */
+  font-size: 28px !important; /* Uniform size for all icons */
+  width: 28px !important; /* Explicit width to ensure consistency */
+  height: 28px !important; /* Explicit height to ensure consistency */
+  min-width: 28px; /* Prevent shrinking on high-DPI displays */
+  min-height: 28px; /* Prevent shrinking on high-DPI displays */
+  line-height: 28px; /* Align vertically */
   margin-bottom: 10px;
-  display: inline-block; /* Ensure consistent rendering */
+  display: inline-block; /* Consistent rendering */
+  box-sizing: border-box; /* Ensure size includes padding */
 }
 
 .dash-yellow-symbol {
@@ -172,7 +176,7 @@
 }
 
 .dash-broadcast-icon {
-  font-size: 16px;
+  font-size: 16_GB16px;
   color: #6F72F1;
 }
 
@@ -539,11 +543,15 @@
   }
 
   .dash-icon-symbol {
-    font-size: 28px; /* Uniform size for all icons across all devices */
-    width: 28px; /* Explicit width to ensure consistency */
-    height: 28px; /* Explicit height to ensure consistency */
+    font-size: 28px !important; /* Uniform size for all icons */
+    width: 28px !important; /* Explicit width to ensure consistency */
+    height: 28px !important; /* Explicit height to ensure consistency */
+    min-width: 28px; /* Prevent shrinking */
+    min-height: 28px; /* Prevent shrinking */
+    line-height: 28px; /* Align vertically */
     margin-bottom: 6px;
-    display: inline-block; /* Ensure consistent rendering */
+    display: inline-block; /* Consistent rendering */
+    box-sizing: border-box; /* Ensure size includes padding */
   }
 
   .dash-icon p {

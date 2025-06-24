@@ -164,14 +164,14 @@ const Dashboard = () => {
               onClick={() => (window.location.href = "/event-details")}
             >
               <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Event Details</p>
+              <p>Events</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/my-coupons")}
             >
               <LocalOfferIcon className="dash-icon-symbol dash-pink-symbol" />
-              <p>My Coupons</p>
+              <p>Coupons</p>
             </div>
             <div
               className="dash-icon"
@@ -185,7 +185,7 @@ const Dashboard = () => {
               onClick={() => (window.location.href = "/entry-permission")}
             >
               <LockIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Entry Permission</p>
+              <p>Permission</p>
               {pendingEntries.length > 0 && (
                 <span className="dash-notification-badge">
                   {pendingEntries.length}
@@ -204,7 +204,7 @@ const Dashboard = () => {
               onClick={() => (window.location.href = "/broadcast-messages")}
             >
               <NotificationsIcon className="dash-icon-symbol dash-blue-symbol" />
-              <p>Broadcast Messages</p>
+              <p>Messages</p>
             </div>
           </div>
         </div>
