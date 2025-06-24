@@ -4,7 +4,7 @@
   align-items: center;
   height: 60px; /* Reduced from 100px to standard navbar height */
   width: 100%; /* Full width */
-  background: linear-gradient(90deg, #000000 0%, #6F72F1 100%); /* Gradient unchanged */
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient unchanged */
   padding: 10px 20px; /* Reduced from 20px 30px for compact look */
   color: white;
   font-family: "Poppins", sans-serif;
