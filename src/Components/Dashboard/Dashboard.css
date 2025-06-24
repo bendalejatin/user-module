@@ -91,8 +91,11 @@
 }
 
 .dash-icon-symbol {
-  font-size: 40px;
+  font-size: 28px; /* Uniform size for all icons across all devices */
+  width: 28px; /* Explicit width to ensure consistency */
+  height: 28px; /* Explicit height to ensure consistency */
   margin-bottom: 10px;
+  display: inline-block; /* Ensure consistent rendering */
 }
 
 .dash-yellow-symbol {
@@ -536,8 +539,11 @@
   }
 
   .dash-icon-symbol {
-    font-size: 28px; /* Slightly smaller icon size */
+    font-size: 28px; /* Uniform size for all icons across all devices */
+    width: 28px; /* Explicit width to ensure consistency */
+    height: 28px; /* Explicit height to ensure consistency */
     margin-bottom: 6px;
+    display: inline-block; /* Ensure consistent rendering */
   }
 
   .dash-icon p {
@@ -620,7 +626,7 @@
   .dash-profile-header {
     margin: 10px;
     padding: 15px;
-    flex: row;
+    flex-direction: row;
     align-items: center;
   }
 
