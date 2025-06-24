@@ -2,7 +2,7 @@
   position: relative;
   /* Enable positioning for pseudo-elements */
   height: 100vh;
-  background-color: #4A90E2;
+  background-color: #A8D5F9;
   color: white;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
   left: -100px;
   width: 400px;
   height: 400px;
-  background-color: #7f82f4; /* Slightly lighter than background */
+  background-color: #4A90E2; /* Slightly lighter than background */
   border-radius: 50%;
   z-index: 0;
   box-shadow: 0 0 80px rgba(255, 255, 255, 0.08);
