@@ -12,7 +12,7 @@
   background-color: #fff; /* White background for the card */
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
-  margin: -20px auto 0 auto; /* Negative margin-top to overlap navbar, centered */
+  margin: -7px auto 0 auto; /* Negative margin-top to overlap navbar, centered */
   position: relative;
   z-index: 1; /* Ensure card is above navbar content */
 }

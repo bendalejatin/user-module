@@ -35,8 +35,7 @@ body {
   padding: 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  margin-top: -0.5rem;
+  margin: -7px auto 0 auto;
   max-width: 85%;
   position: relative;
   z-index: 1;
@@ -248,8 +247,7 @@ body {
 
   .current-payment-card {
     max-width: 90%; /* Ensure the card is centered with appropriate width */
-    margin: 0 auto; /* Center the card */
-    margin-top: -0.8rem; /* Slightly move the card upward in mobile view */
+    margin: -7px auto 0 auto; /* Slightly move the card upward in mobile view */
     padding: 1.5rem;
   }
 }
