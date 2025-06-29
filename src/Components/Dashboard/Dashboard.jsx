@@ -13,8 +13,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
-const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-//const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
