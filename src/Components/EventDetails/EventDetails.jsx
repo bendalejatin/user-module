@@ -16,6 +16,7 @@ const EventDetails = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [selectedEvent, setSelectedEvent] = useState(null); // State for selected event details
   const ownerEmail = localStorage.getItem("ownerEmail");
   const currentDate = new Date();
 
@@ -72,7 +73,7 @@ const EventDetails = () => {
               );
               return isUpcoming;
             })
-            .sort((a, b) => new Date(a.date) - new Date(b.date)); // Sort ascending
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
           console.log("Upcoming events:", upcoming);
           setUpcomingEvents(upcoming);
           if (upcoming.length === 0) {
@@ -89,23 +90,6 @@ const EventDetails = () => {
       fetchEvents();
     }
   }, [profile, currentDate]);
-
-  // Find the latest upcoming event (closest to current date)
-  const latestEvent =
-    upcomingEvents.length > 0
-      ? upcomingEvents.reduce((latest, event) => {
-          const eventDate = new Date(event.date);
-          const latestDate = new Date(latest.date);
-          const diffCurrent = Math.abs(eventDate - currentDate);
-          const diffLatest = Math.abs(latestDate - currentDate);
-          return diffCurrent < diffLatest ? event : latest;
-        }, upcomingEvents[0])
-      : null;
-
-  // Filter out the latest event from upcoming events for the "Upcoming Events" section
-  const otherUpcomingEvents = upcomingEvents.filter(
-    (event) => event._id !== (latestEvent ? latestEvent._id : null)
-  );
 
   if (loading) {
     return (
@@ -137,13 +121,13 @@ const EventDetails = () => {
         <p className="event-subtitle"></p>
         {error && <p className="error-message">{error}</p>}
 
-        {latestEvent ? (
+        {selectedEvent ? (
           <div className="event-content">
             <div className="event-card animate-pop">
               <div className="event-image">
                 <img
-                  src={latestEvent.image || "https://via.placeholder.com/300"}
-                  alt={latestEvent.title}
+                  src={selectedEvent.image || "https://via.placeholder.com/300"}
+                  alt={selectedEvent.title}
                 />
               </div>
               <div className="event-details">
@@ -155,7 +139,7 @@ const EventDetails = () => {
                     <div className="event-data-header">
                       <h3>Event Title</h3>
                     </div>
-                    <p>Car-1</p>
+                    <p>{selectedEvent.title}</p>
                   </div>
                 </div>
                 <div className="event-detail-item">
@@ -166,7 +150,7 @@ const EventDetails = () => {
                     <div className="event-data-header">
                       <h3>Date</h3>
                     </div>
-                    <p>6/24/2025</p>
+                    <p>{new Date(selectedEvent.date).toLocaleDateString()}</p>
                   </div>
                 </div>
                 <div className="event-detail-item">
@@ -177,7 +161,7 @@ const EventDetails = () => {
                     <div className="event-data-header">
                       <h3>Event Location</h3>
                     </div>
-                    <p>Amroli-Surat</p>
+                    <p>{selectedEvent.location || "N/A"}</p>
                   </div>
                 </div>
                 <div className="event-detail-item">
@@ -188,37 +172,37 @@ const EventDetails = () => {
                     <div className="event-data-header">
                       <h3>Description</h3>
                     </div>
-                    <p>Hello</p>
+                    <p>{selectedEvent.description || "No description available"}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <p>No upcoming events found for your society.</p>
+          <>
+            <h2 className="event-title2">Upcoming Events</h2>
+            <div className="upcoming-events">
+              {upcomingEvents.length > 0 ? (
+                upcomingEvents.map((event) => (
+                  <div key={event._id} className="event-preview animate-pop" onClick={() => setSelectedEvent(event)}>
+                    <div className="event-image">
+                      <img
+                        src={event.image || "https://via.placeholder.com/150"}
+                        alt={event.title}
+                      />
+                    </div>
+                    <div className="event-preview-content">
+                      <p><strong>Event:</strong> {event.title}</p>
+                      <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No upcoming events found for your society.</p>
+              )}
+            </div>
+          </>
         )}
-
-        <h2 className="event-title2">Upcoming Events</h2>
-        <div className="upcoming-events">
-          {otherUpcomingEvents.length > 0 ? (
-            otherUpcomingEvents.map((event) => (
-              <div key={event._id} className="coupon-card animate-pop">
-                <img
-                  src={event.image || "https://via.placeholder.com/150"}
-                  alt={event.title}
-                />
-                <h3>{event.title}</h3>
-                <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(event.date).toLocaleDateString()}
-                </p>
-                <p>{event.description.substring(0, 60)}...</p>
-              </div>
-            ))
-          ) : (
-            <p>No additional upcoming events found for your society.</p>
-          )}
-        </div>
       </div>
       <TabBar />
     </>

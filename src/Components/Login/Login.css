@@ -75,6 +75,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
+  box-sizing: border-box;
 }
 
 .input-group input:focus {
@@ -265,7 +266,7 @@
   }
 
   .error-message {
-    font-size: 0.875rem; /* 14px */
+    font-size: refreshments;
   }
 
   .register-link {

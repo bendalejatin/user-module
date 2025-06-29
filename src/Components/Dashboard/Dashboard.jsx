@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
 import EventIcon from "@mui/icons-material/Event";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import PaymentIcon from "@mui/icons-material/Payment";
-import LockIcon from "@mui/icons-material/Lock";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
-// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
+//const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -25,11 +27,13 @@ const Dashboard = () => {
     status: "Paid",
     penalty: 0,
   });
+  const [recentVisitors, setRecentVisitors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showAllEvents, setShowAllEvents] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const eventListRef = useRef(null);
   const ownerEmail = localStorage.getItem("ownerEmail");
-  const currentDate = new Date("2025-06-02");
+  const currentDate = new Date("2025-06-25T20:35:00+05:30"); // Updated to current date and time (08:35 PM IST)
 
   useEffect(() => {
     if (!ownerEmail) {
@@ -92,27 +96,57 @@ const Dashboard = () => {
           setUpcomingEvents(upcoming);
         }
 
+        // Fetch recent visitors (allowed entries)
+        const recentResponse = await axios.get(
+          `${BASE_URL}/api/entries?userEmail=${ownerEmail}&status=allow`
+        );
+        setRecentVisitors(recentResponse.data);
+
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch data. Please try again later.");
-        setLoading(false);
-        console.error("Error fetching dashboard data:", err);
+        console.error("Error fetching dashboard data:", err.message);
       }
     };
     fetchData();
   }, [ownerEmail]);
 
-  const displayedEvents = showAllEvents
-    ? upcomingEvents
-    : upcomingEvents.slice(0, 2);
+  const handleScroll = (direction) => {
+    const container = eventListRef.current;
+    const cardWidth = window.innerWidth <= 768 ? 150 : 150; // Smaller card width
+    const maxScroll = container.scrollWidth - container.clientWidth;
+
+    let newScrollPosition = scrollPosition;
+    if (direction === "left") {
+      newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
+    } else if (direction === "right") {
+      newScrollPosition = Math.min(scrollPosition + cardWidth, maxScroll);
+    }
+
+    setScrollPosition(newScrollPosition);
+    container.scrollTo({
+      left: newScrollPosition,
+      behavior: "smooth",
+    });
+  };
 
   const handleEntryAction = async (entryId, status) => {
     try {
-      await axios.put(`${BASE_URL}/api/entries/${entryId}`, { status });
-      setPendingEntries(pendingEntries.filter((entry) => entry._id !== entryId));
+      // Update entry status
+      const updateResponse = await axios.put(`${BASE_URL}/api/entries/${entryId}`, { status });
+      if (updateResponse.status === 200) {
+        const approvedEntry = pendingEntries.find((entry) => entry._id === entryId);
+        if (approvedEntry && status === "allow") {
+          setRecentVisitors((prev) => [...prev, approvedEntry]);
+        }
+        setPendingEntries(pendingEntries.filter((entry) => entry._id !== entryId));
+      } else {
+        throw new Error(`Unexpected response: ${updateResponse.status}`);
+      }
     } catch (err) {
-      setError("Failed to update entry status.");
-      console.error("Error updating entry:", err);
+      setError(`Failed to update entry status: ${err.message}`);
+      console.log(`Request URL: ${BASE_URL}/api/entries/${entryId}`); // Debug URL
+      console.error("Error updating entry:", err.response ? err.response.data : err.message);
     }
   };
 
@@ -161,20 +195,6 @@ const Dashboard = () => {
           <div className="dash-grid">
             <div
               className="dash-icon"
-              onClick={() => (window.location.href = "/event-details")}
-            >
-              <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Events</p>
-            </div>
-            <div
-              className="dash-icon"
-              onClick={() => (window.location.href = "/my-coupons")}
-            >
-              <LocalOfferIcon className="dash-icon-symbol dash-pink-symbol" />
-              <p>Coupons</p>
-            </div>
-            <div
-              className="dash-icon"
               onClick={() => (window.location.href = "/maintenance")}
             >
               <PaymentIcon className="dash-icon-symbol dash-blue-symbol" />
@@ -184,8 +204,8 @@ const Dashboard = () => {
               className="dash-icon"
               onClick={() => (window.location.href = "/entry-permission")}
             >
-              <LockIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Permission</p>
+              <PersonAddAltIcon className="dash-icon-symbol dash-yellow-symbol" />
+              <p>Visitors</p>
               {pendingEntries.length > 0 && (
                 <span className="dash-notification-badge">
                   {pendingEntries.length}
@@ -194,17 +214,32 @@ const Dashboard = () => {
             </div>
             <div
               className="dash-icon"
-              onClick={() => (window.location.href = "/my-profile")}
+              onClick={() => (window.location.href = "/event-details")}
             >
-              <PersonIcon className="dash-icon-symbol dash-pink-symbol" />
-              <p>My Profile</p>
+              <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
+              <p>Event </p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/broadcast-messages")}
             >
               <NotificationsIcon className="dash-icon-symbol dash-blue-symbol" />
-              <p>Messages</p>
+              <p>Broadcast </p>
+            </div>
+            <div
+              className="dash-icon"
+              onClick={() => (window.location.href = "/my-coupons")}
+            >
+              <LocalOfferIcon className="dash-icon-symbol dash-pink-symbol" />
+              <p>My Coupons</p>
+            </div>
+
+            <div
+              className="dash-icon"
+              onClick={() => (window.location.href = "/my-profile")}
+            >
+              <PersonIcon className="dash-icon-symbol dash-pink-symbol" />
+              <p>Profile</p>
             </div>
           </div>
         </div>
@@ -238,10 +273,10 @@ const Dashboard = () => {
         </div>
 
         <div className="dash-maintenance-section">
-          <h2>MAINTENANCE PAYMENT</h2>
+          <h2>MAINTENANCE</h2>
           <div className="dash-maintenance-details">
             <div className="dash-maintenance-amount">
-              <p>Amount Due</p>
+              <p>Amount</p>
               <h3>₹{maintenance.amount.toLocaleString()}</h3>
             </div>
             <span
@@ -265,39 +300,57 @@ const Dashboard = () => {
               See All
             </button>
           </div>
-          <div className="dash-event-list">
-            {displayedEvents.length > 0 ? (
-              displayedEvents.map((event, index) => (
-                <div
-                  key={event._id}
-                  className={`dash-event-card ${
-                    index % 2 === 0 ? "dash-orange-bg" : "dash-purple-bg"
-                  }`}
-                >
-                  <div>
-                    <h4>{event.title}</h4>
-                    <p>
-                      {new Date(event.date).toLocaleDateString("en-GB", {
-                        weekday: "short",
-                        day: "numeric",
-                        month: "short",
-                      })}{" "}
-                      • {event.time || "8:00 PM"}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => (window.location.href = "/event-details")}
-                    className={`dash-get-coupon-button ${
-                      index % 2 === 0 ? "dash-orange-button" : "dash-purple-button"
+          <div className="dash-event-slider-container">
+            <button
+              className="dash-slider-button dash-slider-left"
+              onClick={() => handleScroll("left")}
+              disabled={scrollPosition === 0}
+            >
+              <ArrowBackIosIcon />
+            </button>
+            <div className="dash-event-list" ref={eventListRef}>
+              {upcomingEvents.length > 0 ? (
+                upcomingEvents.map((event, index) => (
+                  <div
+                    key={event._id}
+                    className={`dash-event-card ${
+                      index % 2 === 0 ? "dash-orange-bg" : "dash-purple-bg"
                     }`}
                   >
-                    Get Coupon
-                  </button>
-                </div>
-              ))
-            ) : (
-              <p>No upcoming events found for your society.</p>
-            )}
+                    <div className="dash-event-content">
+                      <h4>{event.title}</h4>
+                      <p>
+                        {new Date(event.date).toLocaleDateString("en-GB", {
+                          day: "numeric",
+                          month: "short",
+                        })}{" "}
+                        • {event.time || "8:00 PM"}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => (window.location.href = "/event-details")}
+                      className={`dash-get-coupon-button ${
+                        index % 2 === 0 ? "dash-orange-button" : "dash-purple-button"
+                      }`}
+                    >
+                      Get Coupon
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p>No upcoming events found.</p>
+              )}
+            </div>
+            <button
+              className="dash-slider-button dash-slider-right"
+              onClick={() => handleScroll("right")}
+              disabled={
+                scrollPosition >=
+                (eventListRef.current?.scrollWidth - eventListRef.current?.clientWidth)
+              }
+            >
+              <ArrowForwardIosIcon />
+            </button>
           </div>
         </div>
 
@@ -318,14 +371,18 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-pending-actions">
                   <button
+                    type="button" // Prevent form submission or navigation
                     className="dash-deny-button"
                     onClick={() => handleEntryAction(entry._id, "deny")}
                   >
                     Deny
                   </button>
                   <button
+                    type="button" // Prevent form submission or navigation
                     className="dash-approve-button"
-                    onClick={() => handleEntryAction(entry._id, "allow")}
+                    onClick={() => {
+                      handleEntryAction(entry._id, "allow");
+                    }}
                   >
                     Approve
                   </button>
@@ -334,6 +391,25 @@ const Dashboard = () => {
             ))
           ) : (
             <p>No pending entry permissions found.</p>
+          )}
+        </div>
+
+        <div className="dash-recent-visitors-section">
+          <h3>Recent Visitors</h3>
+          {recentVisitors.length > 0 ? (
+            recentVisitors.map((visitor) => (
+              <div key={visitor._id} className="dash-recent-visitor-card">
+                <div className="dash-recent-visitor-details">
+                  <p><strong>Name:</strong> {visitor.name}</p>
+                  <p><strong>Society:</strong> {visitor.societyId?.name || "N/A"}</p>
+                  <p><strong>Flat Number:</strong> {visitor.flatNumber}</p>
+                  <p><strong>Visitor Type:</strong> {visitor.visitorType}</p>
+                  <p><strong>Date & Time:</strong> {new Date(visitor.dateTime).toLocaleString("en-GB")}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No recent visitors found.</p>
           )}
         </div>
       </div>

@@ -12,7 +12,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px; /* Consistent with previous compact gap */
+  padding-bottom: 80px;
 }
 
 /* Profile Header Section */
@@ -91,28 +91,24 @@
 }
 
 .dash-icon-symbol {
-  font-size: 28px !important; /* Uniform size for all icons */
-  width: 28px !important; /* Explicit width to ensure consistency */
-  height: 28px !important; /* Explicit height to ensure consistency */
-  min-width: 28px; /* Prevent shrinking on high-DPI displays */
-  min-height: 28px; /* Prevent shrinking on high-DPI displays */
-  line-height: 28px; /* Align vertically */
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px;
+  min-height: 28px;
+  line-height: 28px;
   margin-bottom: 10px;
-  display: inline-block; /* Consistent rendering */
-  box-sizing: border-box; /* Ensure size includes padding */
+  display: inline-block;
+  box-sizing: border-box;
 }
 
-.dash-yellow-symbol {
-  color: #F59E0B;
-}
-
-.dash-pink-symbol {
-  color: #EC4899;
-}
-
-.dash-blue-symbol {
-  color: #6F72F1;
-}
+/* Darker colors for each icon */
+.dash-icon:nth-child(1) .dash-icon-symbol { color: #2F6CA7; }
+.dash-icon:nth-child(2) .dash-icon-symbol { color: #219653; }
+.dash-icon:nth-child(3) .dash-icon-symbol { color: #D97706; }
+.dash-icon:nth-child(4) .dash-icon-symbol { color: #BE185D; }
+.dash-icon:nth-child(5) .dash-icon-symbol { color: #CA8A04; }
+.dash-icon:nth-child(6) .dash-icon-symbol { color: #8C8C8C; }
 
 .dash-icon p {
   font-size: 14px;
@@ -141,6 +137,7 @@
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  width: calc(100% - 40px); /* Match margin */
 }
 
 .dash-broadcast-header {
@@ -198,11 +195,13 @@
 
 /* Maintenance Section */
 .dash-maintenance-section {
-  padding: 0 20px;
-  margin-bottom: 30px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: calc(100% - 40px); /* Match broadcast container width */
 }
 
 .dash-maintenance-section h2 {
@@ -216,14 +215,17 @@
 
 .dash-maintenance-details {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 15px;
+  padding: 10px;
   gap: 10px;
   flex-wrap: wrap;
   background: #F9FAFB;
   border-radius: 8px;
-  margin: 0 15px 15px;
+  margin: 0 0 15px;
+  min-height: 80px;
+  max-height: 100px;
+  width: 100%; /* Fill the parent container */
 }
 
 .dash-maintenance-amount {
@@ -257,15 +259,8 @@
   min-width: 70px;
 }
 
-.dash-status-paid {
-  background-color: #D4F4DD;
-  color: #1A7F3C;
-}
-
-.dash-status-unpaid {
-  background-color: #F4D4D4;
-  color: #7F1A1A;
-}
+.dash-status-paid { background-color: #D4F4DD; color: #1A7F3C; }
+.dash-status-unpaid { background-color: #F4D4D4; color: #7F1A1A; }
 
 .dash-view-details-link {
   color: #6F72F1;
@@ -307,59 +302,97 @@
   padding-bottom: 5px;
 }
 
+.dash-event-slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 750px; /* Allow for 4-5 small cards (600-750px) */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 .dash-event-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  flex-direction: row;
+  gap: 5px; /* Reduced gap between cards */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.dash-event-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
 }
 
 .dash-event-card {
-  flex: 1;
-  min-width: 300px;
-  border-radius: 10px;
-  padding: 15px;
+  flex: 0 0 150px;
+  height: 120px;
+  border-radius: 8px;
+  padding: 5px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
+  min-width: 150px;
 }
 
 .dash-event-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .dash-orange-bg {
-  background: #FFF4E5;
+  background: #FFE6CC;
+  color: #333;
 }
 
 .dash-purple-bg {
-  background: #F3E8FF;
+  background: #E6CCFF;
+  color: #333;
+}
+
+.dash-event-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px; /* Reduced internal gap */
 }
 
 .dash-event-card h4 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  color: #000;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dash-event-card p {
-  font-size: 14px;
+  font-size: 10px;
+  margin: 0;
   color: #666;
-  margin: 5px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dash-get-coupon-button {
   border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  font-size: 14px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
   font-weight: 500;
   cursor: pointer;
   transition: transform 0.3s ease;
   color: #fff;
+  width: 80%;
+  margin: 2px 0; /* Reduced margin */
 }
 
 .dash-get-coupon-button:hover {
@@ -367,11 +400,46 @@
 }
 
 .dash-orange-button {
-  background: #F59E0B;
+  background: #F5A623;
 }
 
 .dash-purple-button {
   background: #A855F7;
+}
+
+.dash-slider-button {
+  background: #6F72F1;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.dash-slider-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.dash-slider-left {
+  left: -30px;
+}
+
+.dash-slider-right {
+  right: -30px;
+}
+
+.dash-slider-button:hover:not(:disabled) {
+  background: #5A5CD1;
 }
 
 /* Pending Entry Permissions Section */
@@ -466,9 +534,44 @@
   transform: scale(1.05);
 }
 
+/* Recent Visitors Section */
+.dash-recent-visitors-section {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.dash-recent-visitors-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
+}
+
+.dash-recent-visitor-card {
+  background-color: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.dash-recent-visitor-card:hover {
+  transform: translateY(-3px);
+}
+
+.dash-recent-visitor-details p {
+  font-size: 14px;
+  color: #333;
+  margin: 5px 0;
+}
+
 /* Error message styling */
 .dash-error-message {
-  color: #FF4D4F;
+  color: #FF5D4F;
   font-size: 14px;
   text-align: center;
   margin: 20px;
@@ -487,15 +590,9 @@
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
-  }
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
 
 /* Responsive Design */
@@ -509,27 +606,14 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .dash-event-card,
-  .dash-pending-card {
-    flex-direction: row;
+  .dash-event-slider-container {
+    max-width: 750px; /* Allow for 4-5 small cards */
   }
 
-  .dash-maintenance-details {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .dash-pending-section {
-    margin-bottom: 30px;
-  }
-
-  .dash-pending-card {
-    flex-wrap: nowrap;
-  }
-
-  .dash-pending-actions {
-    flex-wrap: nowrap;
+  .dash-event-card {
+    flex: 0 0 150px;
+    height: 120px;
+    min-width: 150px;
   }
 }
 
@@ -540,36 +624,36 @@
   }
 
   .dash-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-template-rows: repeat(2, 100px); /* 2 rows with fixed height */
-    gap: 10px; /* Consistent gap */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 100px);
+    gap: 10px;
   }
 
   .dash-icon {
-    padding: 10px; /* Reduced padding for compact layout */
-    font-size: 12px; /* Consistent text size */
-    width: 100%; /* Full width within grid cell */
-    height: 100px; /* Fixed height for uniformity */
+    padding: 10px;
+    font-size: 12px;
+    width: 100%;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box; /* Ensure padding doesn't affect size */
+    box-sizing: border-box;
   }
 
   .dash-icon-symbol {
-    font-size: 28px !important; /* Uniform size for all icons */
-    width: 28px !important; /* Explicit width to ensure consistency */
-    height: 28px !important; /* Explicit height to ensure consistency */
-    min-width: 28px; /* Prevent shrinking */
-    min-height: 28px; /* Prevent shrinking */
+    font-size: 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px;
+    min-height: 28px;
     line-height: 28px;
     margin-bottom: 6px;
     display: inline-block;
   }
 
   .dash-icon p {
-    font-size: 11px; /* Smaller text to fit */
+    font-size: 11px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -578,9 +662,9 @@
   }
 
   .dash-notification-badge {
-    top: 5px; /* Adjusted for smaller card */
+    top: 5px;
     right: 5px;
-    font-size: 10px; /* Smaller badge */
+    font-size: 10px;
     padding: 1px 6px;
   }
 
@@ -593,32 +677,68 @@
     margin: 10px;
     padding: 10px;
     margin-bottom: 20px;
+    width: calc(100% - 20px); /* Match margin */
   }
 
   .dash-maintenance-section {
     padding: 0 10px;
+    margin: 10px;
     margin-bottom: 20px;
+    width: calc(100% - 20px); /* Match broadcast container width */
   }
 
   .dash-maintenance-details {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
-    gap: 15px;
+    gap: 5px;
+    background: #F9FAFB;
+    border-radius: 8px;
+    margin: 0 0 15px;
+    min-height: 80px;
+    max-height: 100px;
+    width: 100%; /* Fill the parent container */
+    box-sizing: border-box; /* Ensure padding is included in width */
   }
 
   .dash-maintenance-amount {
-    min-width: 100%;
+    min-width: 120px;
+    flex: 1;
+    margin-bottom: 5px;
+  }
+
+  .dash-maintenance-amount p {
+    font-size: 12px;
+    margin: 5px 0 0;
+  }
+
+  .dash-maintenance-amount h3 {
+    font-size: 25px;
+    margin: 5px 0 0;
   }
 
   .dash-status-badge {
-    width: 100%;
+    min-width: 70px;
     text-align: center;
+    margin-left: auto;
+    margin-top: 0;
   }
 
   .dash-view-details-link {
-    width: 100%;
     text-align: center;
+    margin-left: auto;
+    margin-bottom: 5px;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .dash-maintenance-details > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    width: 100%;
+    margin-top: 5px;
   }
 
   .dash-event-section {
@@ -626,19 +746,38 @@
     margin-bottom: 20px;
   }
 
+  .dash-event-slider-container {
+    max-width: 750px; /* Allow for 4-5 small cards */
+  }
+
   .dash-event-list {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 5px; /* Reduced gap */
+    max-width: 750px;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  .dash-event-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
   }
 
   .dash-event-card {
-    min-width: 100%;
-    padding: 10px;
+    flex: 0 0 150px;
+    height: 120px;
+    min-width: 150px;
+  }
+
+  .dash-slider-button {
+    width: 25px;
+    height: 25px;
+    left: -30px;
+    right: -30px;
   }
 
   .dash-pending-section {
     padding: 0 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .dash-pending-card {
@@ -660,26 +799,22 @@
     text-align: center;
   }
 
+  .dash-recent-visitors-section {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-recent-visitor-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
   .dash-profile-header {
     margin: 10px;
     padding: 15px;
     flex-direction: row;
     align-items: center;
-  }
-
-  /* Icon colors for mobile view */
-  .dash-icon:nth-child(1) .dash-icon-symbol, /* Event Details */
-  .dash-icon:nth-child(4) .dash-icon-symbol { /* Entry Permission */
-    color: #F59E0B; /* Yellow */
-  }
-
-  .dash-icon:nth-child(2) .dash-icon-symbol, /* My Coupons */
-  .dash-icon:nth-child(5) .dash-icon-symbol { /* My Profile */
-    color: #EC4899; /* Pink */
-  }
-
-  .dash-icon:nth-child(3) .dash-icon-symbol, /* Maintenance */
-  .dash-icon:nth-child(6) .dash-icon-symbol { /* Broadcast Messages */
-    color: #6F72F1; /* Blue */
   }
 }
