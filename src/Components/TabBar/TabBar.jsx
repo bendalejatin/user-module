@@ -5,6 +5,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import EventIcon from "@mui/icons-material/Event";
 import EntryIcon from "@mui/icons-material/ContentPaste"; // Icon for Entry
 import PersonIcon from "@mui/icons-material/Person"; // Icon for Profile
+import PaymentIcon from "@mui/icons-material/Payment"; // Icon for Maintenance
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function IconLabelTabs() {
@@ -15,7 +16,8 @@ export default function IconLabelTabs() {
     "/dashboard",
     "/event-details",
     "/entry-permission",
-    "/my-profile"
+    "/my-profile",
+    "/maintenance"
   ];
 
   const currentTab = paths.findIndex((path) =>
@@ -39,14 +41,30 @@ export default function IconLabelTabs() {
         width: "100%",
         bgcolor: "background.paper",
         zIndex: 999,
+        boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)",
         ".MuiTab-root": {
           minWidth: 0,
-          padding: "6px 8px",
-          fontSize: "0.6rem",
+          padding: { xs: "6px 4px", sm: "6px 8px" },
+          fontSize: { xs: "0.55rem", sm: "0.6rem" },
         },
         ".MuiTab-wrapper": {
-          fontSize: "0.65rem",
+          fontSize: { xs: "0.6rem", sm: "0.65rem" },
           gap: "2px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textTransform: "uppercase",
+        },
+        ".MuiSvgIcon-root": {
+          fontSize: { xs: "1.25rem", sm: "1.5rem" },
+        },
+        ".Mui-selected": {
+          color: "#3B82F6",
+          fontWeight: 600,
+        },
+        ".MuiTabs-indicator": {
+          backgroundColor: "#3B82F6",
+          height: "3px",
         },
       }}
     >
@@ -54,6 +72,11 @@ export default function IconLabelTabs() {
         icon={<HomeIcon fontSize="small" />}
         label="HOME"
         onClick={() => navigate("/dashboard")}
+      />
+      <Tab
+        icon={<PaymentIcon fontSize="small" />}
+        label="MAINTENANCE"
+        onClick={() => navigate("/maintenance")}
       />
       <Tab
         icon={<EventIcon fontSize="small" />}
