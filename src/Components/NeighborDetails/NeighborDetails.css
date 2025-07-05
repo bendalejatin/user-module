@@ -1,0 +1,113 @@
+/* General container styling */
+.neighbor-container {
+  background-color: #F9F9F9;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+.neighbor-content {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+
+.neighbor-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #6F72F1;
+  padding-bottom: 5px;
+}
+
+.neighbor-content p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.neighbor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.neighbor-card {
+  background-color: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.neighbor-card:hover {
+  transform: translateY(-3px);
+}
+
+.neighbor-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px;
+}
+
+.neighbor-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.neighbor-card p strong_INITIAL0
+strong {
+  color: #333;
+}
+
+/* Error message styling */
+.neighbor-error-message {
+  color: #FF5D4F;
+  font-size: 14px;
+  text-align: center;
+  margin: 20px;
+}
+
+/* Loading state */
+.neighbor-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .neighbor-content {
+    padding: 10px;
+    padding-bottom: 100px;
+  }
+
+  .neighbor-card {
+    padding: 10px;
+  }
+
+  .neighbor-card h3 {
+    font-size: 16px;
+  }
+
+  .neighbor-card p {
+    font-size: 12px;
+  }
+}

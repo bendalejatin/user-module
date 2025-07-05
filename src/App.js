@@ -10,14 +10,13 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import EventDetails from "./Components/EventDetails/EventDetails";
 import MyCoupons from "./Components/MyCoupons/MyCoupons";
 import MyProfile from "./Components/MyProfile/MyProfile";
+import AddMember from "./Components/MyProfile/AddMember";
 import Maintenance from "./Components/Maintenance/MaintenancePage";
 import EntryPermission from "./Components/EntryPermission/EntryPermissionForm";
 import Broadcast from "./Components/broadcast_message/Broadcast";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
-import UserForgotPassword from "./Components/UserForgotPassword";
-import UserResetPassword from "./Components/UserResetPassword";
-import AddMember from "./Components/MyProfile/AddMember"; // Added import
-import CouponDetails from "./Components/MyCoupons/CouponDetails"; // Added import
+import CouponDetails from "./Components/MyCoupons/CouponDetails";
+import NeighborDetails from "./Components/NeighborDetails/NeighborDetails"; // Added import
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -30,14 +29,6 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route
-              path="/user/forgot-password"
-              element={<UserForgotPassword />}
-            />
-            <Route
-              path="/reset-password/:token"
-              element={<UserResetPassword />}
-            />
         <Route path="/splash" element={<SplashScreen />} />
         <Route
           path="/dashboard"
@@ -80,18 +71,18 @@ const App = () => {
           }
         />
         <Route
-          path="/my-profile"
+          path="/coupon/:id"
           element={
             <ProtectedRoute>
-              <MyProfile />
+              <CouponDetails />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/broadcast-messages"
+          path="/my-profile"
           element={
             <ProtectedRoute>
-              <Broadcast />
+              <MyProfile />
             </ProtectedRoute>
           }
         />
@@ -104,10 +95,18 @@ const App = () => {
           }
         />
         <Route
-          path="/coupon/:id" 
+          path="/broadcast-messages"
           element={
             <ProtectedRoute>
-              <CouponDetails />
+              <Broadcast />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/neighbor-details"
+          element={
+            <ProtectedRoute>
+              <NeighborDetails />
             </ProtectedRoute>
           }
         />

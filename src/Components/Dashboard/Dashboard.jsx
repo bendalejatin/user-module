@@ -6,15 +6,14 @@ import EventIcon from "@mui/icons-material/Event";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import PaymentIcon from "@mui/icons-material/Payment";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import PersonIcon from "@mui/icons-material/Person";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import GroupIcon from "@mui/icons-material/Group";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
-// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -33,7 +32,7 @@ const Dashboard = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const eventListRef = useRef(null);
   const ownerEmail = localStorage.getItem("ownerEmail");
-  const currentDate = new Date("2025-06-25T20:35:00+05:30"); // Updated to current date and time (08:35 PM IST)
+  const currentDate = new Date();
 
   useEffect(() => {
     if (!ownerEmail) {
@@ -104,8 +103,12 @@ const Dashboard = () => {
 
         setLoading(false);
       } catch (err) {
-        setError("Failed to fetch data. Please try again later.");
-        console.error("Error fetching dashboard data:", err.message);
+        setError(
+          err.response?.data?.message ||
+            "Failed to fetch dashboard data. Please log in again or contact your society admin to ensure your account is set up."
+        );
+        console.error("Error fetching dashboard data:", err);
+        setLoading(false);
       }
     };
     fetchData();
@@ -113,7 +116,7 @@ const Dashboard = () => {
 
   const handleScroll = (direction) => {
     const container = eventListRef.current;
-    const cardWidth = window.innerWidth <= 768 ? 150 : 150; // Smaller card width
+    const cardWidth = window.innerWidth <= 768 ? 150 : 150;
     const maxScroll = container.scrollWidth - container.clientWidth;
 
     let newScrollPosition = scrollPosition;
@@ -132,7 +135,6 @@ const Dashboard = () => {
 
   const handleEntryAction = async (entryId, status) => {
     try {
-      // Update entry status
       const updateResponse = await axios.put(`${BASE_URL}/api/entries/${entryId}`, { status });
       if (updateResponse.status === 200) {
         const approvedEntry = pendingEntries.find((entry) => entry._id === entryId);
@@ -145,7 +147,6 @@ const Dashboard = () => {
       }
     } catch (err) {
       setError(`Failed to update entry status: ${err.message}`);
-      console.log(`Request URL: ${BASE_URL}/api/entries/${entryId}`); // Debug URL
       console.error("Error updating entry:", err.response ? err.response.data : err.message);
     }
   };
@@ -217,14 +218,14 @@ const Dashboard = () => {
               onClick={() => (window.location.href = "/event-details")}
             >
               <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Event </p>
+              <p>Event</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/broadcast-messages")}
             >
               <NotificationsIcon className="dash-icon-symbol dash-blue-symbol" />
-              <p>Broadcast </p>
+              <p>Broadcast</p>
             </div>
             <div
               className="dash-icon"
@@ -233,13 +234,12 @@ const Dashboard = () => {
               <LocalOfferIcon className="dash-icon-symbol dash-pink-symbol" />
               <p>My Coupons</p>
             </div>
-
             <div
               className="dash-icon"
-              onClick={() => (window.location.href = "/my-profile")}
+              onClick={() => (window.location.href = "/neighbor-details")}
             >
-              <PersonIcon className="dash-icon-symbol dash-pink-symbol" />
-              <p>Profile</p>
+              <GroupIcon className="dash-icon-symbol dash-green-symbol" />
+              <p>Neighbors</p>
             </div>
           </div>
         </div>
@@ -371,18 +371,16 @@ const Dashboard = () => {
                 </div>
                 <div className="dash-pending-actions">
                   <button
-                    type="button" // Prevent form submission or navigation
+                    type="button"
                     className="dash-deny-button"
                     onClick={() => handleEntryAction(entry._id, "deny")}
                   >
                     Deny
                   </button>
                   <button
-                    type="button" // Prevent form submission or navigation
+                    type="button"
                     className="dash-approve-button"
-                    onClick={() => {
-                      handleEntryAction(entry._id, "allow");
-                    }}
+                    onClick={() => handleEntryAction(entry._id, "allow")}
                   >
                     Approve
                   </button>
