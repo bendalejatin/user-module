@@ -355,6 +355,20 @@
   color: #333;
 }
 
+.dash-white-bg{
+  background: white;
+}
+
+.dash-blue-bg{
+  background: #60acf9;
+}
+.dash-green-bg{
+  background: #4ce78f;
+}
+.dash-pink-bg{
+  background: #e83f86;
+}
+
 .dash-event-content {
   flex-grow: 1;
   display: flex;
@@ -534,38 +548,120 @@
 }
 
 /* Recent Visitors Section */
-.dash-recent-visitors-section {
+.dash-visitor-section {
   padding: 0 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.dash-recent-visitors-section h3 {
+.dash-visitor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.dash-visitor-section h3 {
   font-size: 16px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0;
   border-bottom: 2px solid #6F72F1;
   padding-bottom: 5px;
 }
 
-.dash-recent-visitor-card {
-  background-color: #fff;
-  border: 1px solid #E0E0E0;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.dash-visitor-slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 750px; /* Allow for 4-5 small cards (600-750px) */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.dash-visitor-list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px; /* Reduced gap between cards */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.dash-visitor-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.dash-visitor-card {
+  flex: 0 0 150px;
+  height: 120px;
+  border-radius: 8px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
+  min-width: 150px;
 }
 
-.dash-recent-visitor-card:hover {
-  transform: translateY(-3px);
+.dash-visitor-card:hover {
+  transform: translateY(-2px);
 }
 
-.dash-recent-visitor-details p {
-  font-size: 14px;
+.dash-visitor-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.dash-visitor-initial {
+  width: 40px;
+  height: 40px;
+  /* background: #f0d0d0; */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
   color: #333;
-  margin: 5px 0;
+  margin-bottom: 5px;
+}
+
+.dash-visitor-card p {
+  font-size: 14px;
+  margin: 0;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 130px; /* Adjusted to fit within 150px card with padding */
+  height: 100px; /* Adjusted to fit within 120px card with padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Error message styling */
@@ -610,6 +706,16 @@
   }
 
   .dash-event-card {
+    flex: 0 0 150px;
+    height: 120px;
+    min-width: 150px;
+  }
+
+  .dash-visitor-slider-container {
+    max-width: 750px; /* Allow for 4-5 small cards */
+  }
+
+  .dash-visitor-card {
     flex: 0 0 150px;
     height: 120px;
     min-width: 150px;
@@ -767,6 +873,33 @@
     min-width: 150px;
   }
 
+  .dash-visitor-section {
+    padding: 0 10px;
+    margin-bottom: 20px;
+  }
+
+  .dash-visitor-slider-container {
+    max-width: 750px; /* Allow for 4-5 small cards */
+  }
+
+  .dash-visitor-list {
+    flex-direction: row;
+    gap: 5px; /* Reduced gap */
+    max-width: 750px;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  .dash-visitor-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
+
+  .dash-visitor-card {
+    flex: 0 0 150px;
+    height: 120px;
+    min-width: 150px;
+  }
+
   .dash-slider-button {
     width: 25px;
     height: 25px;
@@ -796,18 +929,6 @@
   .dash-approve-button {
     flex: 1;
     text-align: center;
-  }
-
-  .dash-recent-visitors-section {
-    padding: 0 10px;
-    margin-bottom: 20px;
-  }
-
-  .dash-recent-visitor-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    margin-bottom: 10px;
   }
 
   .dash-profile-header {

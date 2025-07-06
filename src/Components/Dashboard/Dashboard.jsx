@@ -14,7 +14,7 @@ import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "https://dec-entrykart-backend.onrender.com"; // deployment url
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -31,7 +31,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [visitorScrollPosition, setVisitorScrollPosition] = useState(0);
   const eventListRef = useRef(null);
+  const visitorListRef = useRef(null);
   const ownerEmail = localStorage.getItem("ownerEmail");
   const currentDate = new Date();
 
@@ -115,19 +117,23 @@ const Dashboard = () => {
     fetchData();
   }, [ownerEmail]);
 
-  const handleScroll = (direction) => {
-    const container = eventListRef.current;
+  const handleScroll = (direction, section) => {
+    const container = section === "events" ? eventListRef.current : visitorListRef.current;
     const cardWidth = window.innerWidth <= 768 ? 150 : 150;
     const maxScroll = container.scrollWidth - container.clientWidth;
 
-    let newScrollPosition = scrollPosition;
+    let newScrollPosition = section === "events" ? scrollPosition : visitorScrollPosition;
     if (direction === "left") {
-      newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
+      newScrollPosition = Math.max(newScrollPosition - cardWidth, 0);
     } else if (direction === "right") {
-      newScrollPosition = Math.min(scrollPosition + cardWidth, maxScroll);
+      newScrollPosition = Math.min(newScrollPosition + cardWidth, maxScroll);
     }
 
-    setScrollPosition(newScrollPosition);
+    if (section === "events") {
+      setScrollPosition(newScrollPosition);
+    } else {
+      setVisitorScrollPosition(newScrollPosition);
+    }
     container.scrollTo({
       left: newScrollPosition,
       behavior: "smooth",
@@ -304,7 +310,7 @@ const Dashboard = () => {
           <div className="dash-event-slider-container">
             <button
               className="dash-slider-button dash-slider-left"
-              onClick={() => handleScroll("left")}
+              onClick={() => handleScroll("left", "events")}
               disabled={scrollPosition === 0}
             >
               <ArrowBackIosIcon />
@@ -344,7 +350,7 @@ const Dashboard = () => {
             </div>
             <button
               className="dash-slider-button dash-slider-right"
-              onClick={() => handleScroll("right")}
+              onClick={() => handleScroll("right", "events")}
               disabled={
                 scrollPosition >=
                 (eventListRef.current?.scrollWidth - eventListRef.current?.clientWidth)
@@ -393,23 +399,60 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="dash-recent-visitors-section">
-          <h3>Recent Visitors</h3>
-          {recentVisitors.length > 0 ? (
-            recentVisitors.map((visitor) => (
-              <div key={visitor._id} className="dash-recent-visitor-card">
-                <div className="dash-recent-visitor-details">
-                  <p><strong>Name:</strong> {visitor.name}</p>
-                  <p><strong>Society:</strong> {visitor.societyId?.name || "N/A"}</p>
-                  <p><strong>Flat Number:</strong> {visitor.flatNumber}</p>
-                  <p><strong>Visitor Type:</strong> {visitor.visitorType}</p>
-                  <p><strong>Date & Time:</strong> {new Date(visitor.dateTime).toLocaleString("en-GB")}</p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No recent visitors found.</p>
-          )}
+        <div className="dash-visitor-section">
+          <div className="dash-visitor-header">
+            <h3>Recent Visitors</h3>
+            <button
+              className="dash-see-all-button"
+              onClick={() => (window.location.href = "/entry-permission")}
+            >
+              See All
+            </button>
+          </div>
+          <div className="dash-visitor-slider-container">
+            <button
+              className="dash-slider-button dash-slider-left"
+              onClick={() => handleScroll("left", "visitors")}
+              disabled={visitorScrollPosition === 0}
+            >
+              <ArrowBackIosIcon />
+            </button>
+            <div className="dash-visitor-list" ref={visitorListRef}>
+              {recentVisitors.length > 0 ? (
+                recentVisitors.map((visitor, index) => (
+                  <div
+                    key={visitor._id}
+                    className={`dash-visitor-card ${
+                      index % 2 === 0 ? "dash-white-bg" : "dash-white-bg"
+                    }`}
+                  >
+                    <div className="dash-visitor-content">
+                      <div
+                        key={visitor._id}
+                        className={`dash-visitor-initial ${
+                        index % 3 === 0 ? "dash-blue-bg" : index % 3 === 1 ? "dash-green-bg" : "dash-pink-bg"
+                      }`}>
+                        {visitor.name.charAt(0).toUpperCase()}
+                      </div>
+                      <p>{visitor.name}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No recent visitors found.</p>
+              )}
+            </div>
+            <button
+              className="dash-slider-button dash-slider-right"
+              onClick={() => handleScroll("right", "visitors")}
+              disabled={
+                visitorScrollPosition >=
+                (visitorListRef.current?.scrollWidth - visitorListRef.current?.clientWidth)
+              }
+            >
+              <ArrowForwardIosIcon />
+            </button>
+          </div>
         </div>
       </div>
       <TabBar />
