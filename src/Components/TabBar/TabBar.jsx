@@ -12,10 +12,11 @@ export default function IconLabelTabs() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Reordered paths: home, event, maintenance, entry, profile
   const paths = [
     "/dashboard",
-    "/maintenance",
     "/event-details",
+    "/maintenance",
     "/entry-permission",
     "/my-profile",
   ];
@@ -74,14 +75,14 @@ export default function IconLabelTabs() {
         onClick={() => navigate("/dashboard")}
       />
       <Tab
-        icon={<PaymentIcon fontSize="small" />}
-        label="MAINTENANCE"
-        onClick={() => navigate("/maintenance")}
-      />
-      <Tab
         icon={<EventIcon fontSize="small" />}
         label="EVENT"
         onClick={() => navigate("/event-details")}
+      />
+      <Tab
+        icon={<PaymentIcon fontSize="small" />}
+        label="MAINTENANCE"
+        onClick={() => navigate("/maintenance")}
       />
       <Tab
         icon={<EntryIcon fontSize="small" />}
