@@ -24,7 +24,7 @@
   text-align: left;
   padding: 16px;
   margin: 0;
-  background: linear-gradient(90deg, #4B3BFF 0%, #A855F7 100%); /* Gradient matching the image */
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient matching the image */
   border-radius: 16px 16px 0 0;
 }
 
@@ -48,12 +48,12 @@
 .entry-form .input-field,
 .entry-form textarea {
   width: 100%;
-  padding: 0.75px 1rem; /* Smaller padding for mobile */
-  font-size: 0.9rem; /* Smaller font for mobile */
+  padding: 1rem 1.25rem; /* Match laptop view */
+  font-size: 1rem; /* Match laptop view */
   color: #333; /* Text color */
   background-color: #fff;
-  border: 1px solid #e0e0e0; /* Light border */
-  border-radius: 10px;
+  border: 1px solid #ccc; /* Match laptop view */
+  border-radius: 6px; /* Match laptop view */
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -64,7 +64,7 @@
 .entry-form .input-field::placeholder,
 .entry-form textarea::placeholder {
   color: #999;
-  font-size: 0.9rem; /* Matching placeholder font size */
+  font-size: 1rem; /* Match laptop view */
 }
 
 .entry-form .input-field[type="datetime-local"] {
@@ -100,11 +100,11 @@
 }
 
 .allow-btn {
-  background: linear-gradient(90deg, #4B3BFF 0%, #A855F7 100%); /* Gradient for Allow button */
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient for Allow button */
 }
 
 .allow-btn:hover {
-  background: linear-gradient(90deg, #3A2ECC 0%, #9740E6 100%); /* Darker gradient on hover */
+  background: linear-gradient(90deg, #3887e2 0%, #9fcff6 100%); /* Darker gradient on hover */
 }
 
 .deny-btn {
@@ -221,39 +221,59 @@
   background-color: #a71e2a;
 }
 
+/* Search Input Styles */
+.entry-form-content .search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1.25rem; /* Match laptop view, adjusted for icon */
+  font-size: 1rem; /* Match laptop view */
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc; /* Match laptop view */
+  border-radius: 6px; /* Match laptop view */
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 20px; /* Moved inline style to CSS */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.entry-form-content .search-input::placeholder {
+  color: #999;
+  font-size: 1rem; /* Match laptop view */
+}
+
+.entry-form-content .search-input:focus {
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
 /* Desktop view (min-width: 768px) */
 @media (min-width: 768px) {
   .entry-card {
-    width: 80%; /* Slightly wider for desktop */
+    width: 80%;
     max-width: 600px;
   }
 
   .entry-form label {
-    font-size: 1rem; /* Larger font for desktop */
-  }
-
-  .entry-form .input-field,
-  .entry-form textarea {
-    padding: 1rem 1.25rem; /* Larger padding for desktop */
-    font-size: 1rem; /* Larger font for desktop */
-  }
-
-  .entry-form .input-field::placeholder,
-  .entry-form textarea::placeholder {
-    font-size: 1rem; /* Matching placeholder font size */
+    font-size: 1rem;
   }
 
   .submit-btn {
-    padding: 1rem; /* Larger padding for desktop */
-    font-size: 1rem; /* Larger font for desktop */
+    padding: 1rem;
+    font-size: 1rem;
+    width: 100%; /* Optional: match input size */
+    box-sizing: border-box;
   }
 
   .entry-form-container p {
-    font-size: 1rem; /* Larger font for desktop */
+    font-size: 1rem;
   }
 
   .loading {
-    font-size: 1.5rem; /* Larger font for desktop */
+    font-size: 1.5rem;
   }
 
   .entry-details h4 {
@@ -275,5 +295,15 @@
   .entry-card {
     width: 70%; /* Even wider for large screens */
     max-width: 700px;
+  }
+
+  .entry-form-content .search-input {
+    padding: 1rem 3.5rem 1rem 1.5rem; /* Slightly larger padding for larger screens */
+    font-size: 1rem; /* Consistent with laptop view */
+    background-size: 20px; /* Larger icon for larger screens */
+  }
+
+  .entry-form-content .search-input::placeholder {
+    font-size: 1rem; /* Consistent with laptop view */
   }
 }

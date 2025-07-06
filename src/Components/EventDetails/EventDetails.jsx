@@ -7,9 +7,10 @@ import InfoIcon from "@mui/icons-material/Info";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "https://dec-entrykart-backend.onrender.com"; // deployment url
 
 const EventDetails = () => {
   const [profile, setProfile] = useState(null);
@@ -176,6 +177,14 @@ const EventDetails = () => {
                   </div>
                 </div>
               </div>
+              <button
+                className="buttons"
+                onClick={() => setSelectedEvent(null)}
+                title="Back to Events"
+              >
+                <ArrowBackIcon fontSize="medium" />
+                Back
+              </button>
             </div>
           </div>
         ) : (
@@ -204,7 +213,7 @@ const EventDetails = () => {
           </>
         )}
       </div>
-      <TabBar />
+      <TabBar activeSection="events" />
     </>
   );
 };

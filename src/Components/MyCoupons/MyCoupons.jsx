@@ -6,9 +6,8 @@ import "./MyCoupons.css";
 import { jsPDF } from "jspdf";
 import Navbar from "../Navbar/Navbar";
 
-
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "https://dec-entrykart-backend.onrender.com"; // deployment url
 
 const MyCoupons = () => {
   const [coupons, setCoupons] = useState([]);
@@ -146,10 +145,7 @@ const MyCoupons = () => {
   if (loading) {
     return (
       <div>
-        <div className="top-bar">
-          <h2 className="coupons-title">My Coupons</h2>
-          <span className="bell-icon">🔔</span>
-        </div>
+        <Navbar />
         <div className="loading">
           <h2>Loading...</h2>
         </div>
@@ -161,10 +157,7 @@ const MyCoupons = () => {
   if (error) {
     return (
       <div className="coupons-container">
-        <div className="top-bar">
-          <h2 className="coupons-title">My Coupons</h2>
-          <span className="bell-icon">🔔</span>
-        </div>
+        <Navbar />
         <p>{error}</p>
         <TabBar />
       </div>
@@ -173,10 +166,6 @@ const MyCoupons = () => {
 
   return (
     <>
-      {/* <div className="top-bar">
-        <h2 className="coupons-title">My Coupons</h2>
-        <span className="bell-icon">🔔</span>
-      </div> */}
       <Navbar />
       <div className="coupons-container">
         <div className="tabs">

@@ -275,7 +275,6 @@ const EntryPermissionForm = () => {
       <Navbar />
       <div className="entry-form-container">
         <div className="entry-card">
-          <div className="form-title">Entry Permission Form</div>
           <div className="entry-form-content">
             <form className="entry-form" onSubmit={(e) => e.preventDefault()}>
               <label htmlFor="name">Name *</label>
@@ -412,8 +411,7 @@ const EntryPermissionForm = () => {
               placeholder="Search entries..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="input-field"
-              style={{ marginBottom: "20px" }}
+              className="input-field search-input"
             />
 
             <div className="entries-list">

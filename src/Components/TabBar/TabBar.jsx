@@ -14,10 +14,10 @@ export default function IconLabelTabs() {
 
   const paths = [
     "/dashboard",
+    "/maintenance",
     "/event-details",
     "/entry-permission",
     "/my-profile",
-    "/maintenance"
   ];
 
   const currentTab = paths.findIndex((path) =>
