@@ -73,15 +73,16 @@ export default function IconLabelTabs() {
         label="HOME"
         onClick={() => navigate("/dashboard")}
       />
-      <Tab
-        icon={<PaymentIcon fontSize="small" />}
-        label="MAINTENANCE"
-        onClick={() => navigate("/maintenance")}
-      />
+
       <Tab
         icon={<EventIcon fontSize="small" />}
         label="EVENT"
         onClick={() => navigate("/event-details")}
+      />
+      <Tab
+        icon={<PaymentIcon fontSize="small" />}
+        label="MAINTENANCE"
+        onClick={() => navigate("/maintenance")}
       />
       <Tab
         icon={<EntryIcon fontSize="small" />}
