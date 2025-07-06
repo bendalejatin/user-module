@@ -27,6 +27,11 @@ const EntryPermissionForm = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  
+  // User-specific data
+  const [userProfile, setUserProfile] = useState(null);
+  const [userSocietyId, setUserSocietyId] = useState("");
+  const [userFlatNumber, setUserFlatNumber] = useState("");
 
   const userEmail = localStorage.getItem("ownerEmail");
   const superadminEmail = "dec@gmail.com"; // Superadmin email for API queries
@@ -38,11 +43,32 @@ const EntryPermissionForm = () => {
       return;
     }
 
+    fetchUserProfile();
     fetchSocieties();
     fetchUsers();
     fetchEntries();
     checkExpiringPermissions();
   }, [userEmail]);
+
+  const fetchUserProfile = async () => {
+    try {
+      const profileResponse = await axios.get(
+        `${BASE_URL}/api/flats/owner-by-email-fallback/${userEmail}`
+      );
+      const owner = profileResponse.data;
+      setUserProfile(owner);
+      
+      // Find the society ID for the user's society
+      const userSociety = societies.find(soc => soc.name === owner.societyName);
+      if (userSociety) {
+        setUserSocietyId(userSociety._id);
+      }
+      setUserFlatNumber(owner.flatNumber || "");
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+      setError("Failed to fetch user profile. Please ensure your account is set up properly.");
+    }
+  };
 
   const fetchSocieties = async () => {
     try {
@@ -236,7 +262,24 @@ const EntryPermissionForm = () => {
     setSociety("");
   };
 
-  const filteredEntries = entries.filter(
+  // Filter entries to show only user's society and flat specific entries
+  const getUserSpecificEntries = () => {
+    if (!userProfile) return [];
+    
+    return entries.filter((entry) => {
+      const entrySocietyId = getSocietyId(entry.societyId);
+      const userSocietyFromProfile = societies.find(soc => soc.name === userProfile.societyName);
+      const userSocietyIdFromProfile = userSocietyFromProfile?._id || "";
+      
+      // Check if entry belongs to user's society and flat
+      const belongsToUserSociety = entrySocietyId === userSocietyIdFromProfile;
+      const belongsToUserFlat = entry.flatNumber === userProfile.flatNumber;
+      
+      return belongsToUserSociety && belongsToUserFlat;
+    });
+  };
+
+  const filteredEntries = getUserSpecificEntries().filter(
     (entry) =>
       entry.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       entry.visitorType?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -404,7 +447,14 @@ const EntryPermissionForm = () => {
         </div>
 
         <div className="entry-card" style={{ marginTop: "20px" }}>
-          <div className="form-title">My Entry Permissions</div>
+          <div className="form-title">
+            My Entry Permissions
+            {userProfile && (
+              <span className="user-info">
+                {" "}({userProfile.societyName} - Flat {userProfile.flatNumber})
+              </span>
+            )}
+          </div>
           <div className="entry-form-content">
             <input
               type="text"
@@ -416,7 +466,12 @@ const EntryPermissionForm = () => {
 
             <div className="entries-list">
               {filteredEntries.length === 0 ? (
-                <p>No entry permissions found.</p>
+                <p>
+                  {userProfile 
+                    ? `No entry permissions found for ${userProfile.societyName} - Flat ${userProfile.flatNumber}.`
+                    : "No entry permissions found."
+                  }
+                </p>
               ) : (
                 filteredEntries.map((entry) => (
                   <div key={entry._id} className="entry-item">
