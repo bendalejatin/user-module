@@ -16,11 +16,11 @@ import EntryPermission from "./Components/EntryPermission/EntryPermissionForm";
 import Broadcast from "./Components/broadcast_message/Broadcast";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
 import CouponDetails from "./Components/MyCoupons/CouponDetails";
-import NeighborDetails from "./Components/NeighborDetails/NeighborDetails"; // Added import
+import NeighborDetails from "./Components/NeighborDetails/NeighborDetails";
+import ServiceEntryDetails from "./Components/ServiceEntryDetails/ServiceEntryDetails"; // New component
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
-
   return isAuthenticated ? children : <Navigate to="/" replace />;
 };
 
@@ -32,83 +32,47 @@ const App = () => {
         <Route path="/splash" element={<SplashScreen />} />
         <Route
           path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><Dashboard /></ProtectedRoute>}
         />
         <Route
           path="/event-details"
-          element={
-            <ProtectedRoute>
-              <EventDetails />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><EventDetails /></ProtectedRoute>}
         />
         <Route
           path="/maintenance"
-          element={
-            <ProtectedRoute>
-              <Maintenance />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><Maintenance /></ProtectedRoute>}
         />
         <Route
           path="/entry-permission"
-          element={
-            <ProtectedRoute>
-              <EntryPermission />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><EntryPermission /></ProtectedRoute>}
         />
         <Route
           path="/my-coupons"
-          element={
-            <ProtectedRoute>
-              <MyCoupons />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><MyCoupons /></ProtectedRoute>}
         />
         <Route
           path="/coupon/:id"
-          element={
-            <ProtectedRoute>
-              <CouponDetails />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><CouponDetails /></ProtectedRoute>}
         />
         <Route
           path="/my-profile"
-          element={
-            <ProtectedRoute>
-              <MyProfile />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><MyProfile /></ProtectedRoute>}
         />
         <Route
           path="/add-member"
-          element={
-            <ProtectedRoute>
-              <AddMember />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><AddMember /></ProtectedRoute>}
         />
         <Route
           path="/broadcast-messages"
-          element={
-            <ProtectedRoute>
-              <Broadcast />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><Broadcast /></ProtectedRoute>}
         />
         <Route
           path="/neighbor-details"
-          element={
-            <ProtectedRoute>
-              <NeighborDetails />
-            </ProtectedRoute>
-          }
+          element={<ProtectedRoute><NeighborDetails /></ProtectedRoute>}
+        />
+        <Route
+          path="/service-entries"
+          element={<ProtectedRoute><ServiceEntryDetails /></ProtectedRoute>} // New route
         />
       </Routes>
     </Router>

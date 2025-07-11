@@ -1,0 +1,53 @@
+.service-entry-container {
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.entry-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.entry-item {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.entry-details h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.entry-details p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .service-entry-container {
+    padding: 10px;
+  }
+}
