@@ -5,7 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
+const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
 
 
 const ProfileCompletionModal = ({ profile, onClose, onProfileUpdate, createMode }) => {
