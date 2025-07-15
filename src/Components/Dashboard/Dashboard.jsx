@@ -14,7 +14,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
-const BASE_URL = "http://localhost:5000";
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://entrykart-admin.onrender.com"; 
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
