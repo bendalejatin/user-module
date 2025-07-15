@@ -8,13 +8,13 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import GroupIcon from "@mui/icons-material/Group";
+import WorkIcon from "@mui/icons-material/Work"; // New icon for service entries
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
-// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://entrykart-admin.onrender.com"; // deployment url
+const BASE_URL = "http://localhost:5000";
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -46,7 +46,6 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try {
-        // Fetch broadcasts
         const broadcastResponse = await axios.get(
           `${BASE_URL}/api/broadcast/user?email=${ownerEmail}`
         );
@@ -55,13 +54,11 @@ const Dashboard = () => {
         );
         setSpecificBroadcasts(specificMessages);
 
-        // Fetch pending entries
         const entriesResponse = await axios.get(
           `${BASE_URL}/api/entries?userEmail=${ownerEmail}&status=pending`
         );
         setPendingEntries(entriesResponse.data);
 
-        // Fetch user profile
         const profileResponse = await axios.get(
           `${BASE_URL}/api/flats/owner-by-email-fallback/${ownerEmail}`
         );
@@ -72,7 +69,6 @@ const Dashboard = () => {
           image: owner.image || profile,
         });
 
-        // Fetch maintenance
         const maintenanceResponse = await axios.get(
           `${BASE_URL}/api/maintenance/maintenance/${ownerEmail}`
         );
@@ -86,7 +82,6 @@ const Dashboard = () => {
           penalty: maint?.penalty || 0,
         });
 
-        // Fetch events
         if (owner.societyName) {
           const eventsResponse = await axios.get(`${BASE_URL}/api/events`, {
             params: { societyName: owner.societyName },
@@ -98,7 +93,6 @@ const Dashboard = () => {
           setUpcomingEvents(upcoming);
         }
 
-        // Fetch recent visitors (allowed entries)
         const recentResponse = await axios.get(
           `${BASE_URL}/api/entries?userEmail=${ownerEmail}&status=allow`
         );
@@ -220,13 +214,13 @@ const Dashboard = () => {
                 </span>
               )}
             </div>
-            <div
+            {/* <div
               className="dash-icon"
               onClick={() => (window.location.href = "/event-details")}
             >
               <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
               <p>Event</p>
-            </div>
+            </div> */}
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/broadcast-messages")}
@@ -248,9 +242,17 @@ const Dashboard = () => {
               <GroupIcon className="dash-icon-symbol dash-green-symbol" />
               <p>Neighbors</p>
             </div>
+            <div
+              className="dash-icon"
+              onClick={() => (window.location.href = "/service-entries")}
+            >
+              <WorkIcon className="dash-icon-symbol dash-purple-symbol" />
+              <p>Service Entries</p> {/* New button */}
+            </div>
           </div>
         </div>
 
+        {/* Rest of the dashboard remains unchanged */}
         <div className="dash-broadcast-container">
           <div className="dash-broadcast-header">
             <h2>BROADCAST MESSAGES</h2>
@@ -428,10 +430,10 @@ const Dashboard = () => {
                   >
                     <div className="dash-visitor-content">
                       <div
-                        key={visitor._id}
                         className={`dash-visitor-initial ${
-                        index % 3 === 0 ? "dash-blue-bg" : index % 3 === 1 ? "dash-green-bg" : "dash-pink-bg"
-                      }`}>
+                          index % 3 === 0 ? "dash-blue-bg" : index % 3 === 1 ? "dash-green-bg" : "dash-pink-bg"
+                        }`}
+                      >
                         {visitor.name.charAt(0).toUpperCase()}
                       </div>
                       <p>{visitor.name}</p>
