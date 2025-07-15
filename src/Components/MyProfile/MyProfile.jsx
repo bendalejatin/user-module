@@ -7,7 +7,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import ProfileCompletionModal from "./ProfileCompletionModal";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://backend-clr8.onrender.com" ; // deployment url
+const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
 
 const MyProfile = () => {
   const navigate = useNavigate();
