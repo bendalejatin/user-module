@@ -7,7 +7,7 @@ import TabBar from "../TabBar/TabBar";
 import SystemUpdateAltOutlinedIcon from "@mui/icons-material/SystemUpdateAltOutlined";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
+const BASE_URL = "https://backend-clr8.onrender.com" ; // deployment url
 
 const Receipt = ({ profile, maintenance, paymentDate }) => {
   const generatePDF = () => {
