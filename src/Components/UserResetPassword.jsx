@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./Auth.css"; 
 
 //const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
 
 const UserResetPassword = () => {
   const { token } = useParams(); // ✅ Get token from URL

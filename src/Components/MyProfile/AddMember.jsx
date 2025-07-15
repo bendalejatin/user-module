@@ -5,7 +5,7 @@ import "./AddMember.css";
 import TabBar from "../TabBar/TabBar";
 
 // const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://dec-entrykart-backend.onrender.com" ; // deployment url
+const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
 
 const AddMember = () => {
   const navigate = useNavigate();
