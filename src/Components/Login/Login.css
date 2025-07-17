@@ -1,16 +1,22 @@
-/* Default styling for web view (1024px and above) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Login Container */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #fff;
+  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif; /* Match dashboard font */
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Login Wrapper */
 .login-wrapper {
   width: 100%;
   max-width: 600px;
@@ -25,6 +31,7 @@
   width: 100%;
 }
 
+/* Login Box */
 .login-box {
   max-width: 600px;
   background-color: #fff;
@@ -34,27 +41,32 @@
   text-align: center;
 }
 
+/* Login Image */
 .login-image img {
   width: 250px;
   margin-bottom: 20px;
 }
 
+/* Login Form Headers */
 .login-form h2 {
-  font-size: 2.5rem; /* 40px equivalent, scalable */
-  font-weight: 600;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
   margin-bottom: 5px;
-  color: #333;
+  color: #333; /* Match dashboard text color */
   text-align: left;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .login-form h4 {
-  font-size: 1.125rem; /* 18px */
-  font-weight: 600;
+  font-size: 16px; /* Match dashboard .dash-profile-info h2 */
+  font-weight: 400; /* Match dashboard h2 weight */
   margin-bottom: 20px;
-  color: #333;
+  color: #333; /* Match dashboard text color */
   text-align: left;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Input Group */
 .input-group {
   margin-bottom: 15px;
   text-align: left;
@@ -62,26 +74,31 @@
 
 .input-group label {
   display: block;
-  font-size: 1rem; /* 16px */
-  font-weight: 500;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard label weight */
   margin-bottom: 5px;
-  color: #333;
+  color: #666; /* Match dashboard secondary text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .input-group input {
   width: 100%;
   padding: 10px;
-  font-size: 1rem; /* 16px */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
   border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
   box-sizing: border-box;
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .input-group input:focus {
-  border-color: #6F72F1;
+  border-color: #6F72F1; /* Match dashboard accent color */
 }
 
+/* Login Options */
 .login-options {
   display: flex;
   justify-content: space-between;
@@ -90,43 +107,53 @@
 }
 
 .login-options label {
-  font-size: 0.875rem; /* 14px */
-  color: #333;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
   margin-left: 5px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Login Button */
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: #4A90E2;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 1.125rem; /* 18px */
-  font-weight: 500;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
   cursor: pointer;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .login-button:hover {
-  background-color: #4f46e5;
+  background-color: #5A5CD1; /* Updated to match dashboard .dash-slider-button:hover */
 }
 
+/* Error Message */
 .error-message {
-  color: #e53e3e;
-  font-size: 0.875rem; /* 14px */
+  color: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
+  font-size: 14px; /* Match dashboard .dash-error-message */
+  font-weight: 400; /* Match dashboard lighter weight */
   margin-top: 10px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Forgot Password and Register Links */
 .forgot-password,
 .register-link {
-  font-size: 0.875rem; /* 14px */
-  color: #666;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
   margin-top: 10px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .forgot-password span,
 .register-link span {
-  color: #6F72F1;
+  color: #6F72F1; /* Match dashboard accent color */
   cursor: pointer;
 }
 
@@ -135,9 +162,9 @@
   text-decoration: underline;
 }
 
-/* Gradient header */
+/* Gradient Header */
 .login-header {
-  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%);
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Match dashboard .dash-profile-header */
   border-radius: 12px;
   padding: 15px 30px;
   margin-bottom: 50px;
@@ -147,16 +174,17 @@
 
 .login-header h1 {
   color: white;
-  font-size: 2rem; /* 32px */
-  font-weight: bold;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
   margin: 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
-/* Mobile View (up to 767px) */
-@media (max-width: 767px) {
+/* Mobile View (up to 768px to align with dashboard) */
+@media (max-width: 768px) {
   .login-container {
-    padding: 15px;
-    background-color: #FAFBFE;
+    padding: 10px; /* Match dashboard mobile .dash-content */
+    background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -164,10 +192,10 @@
   }
 
   .login-box {
-    padding: 15px;
-    border-radius: 24px;
+    padding: 20px;
+    border-radius: 20px;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    background-color: #FAFBFE;
+    background-color: #fff; /* Updated to match dashboard .dash-broadcast-container */
   }
 
   .login-image img {
@@ -175,54 +203,67 @@
   }
 
   .login-form h2 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 18px; /* Slightly smaller than desktop to align with dashboard scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .login-form h4 {
-    font-size: 0.875rem; /* 14px */
+    font-size: 14px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .input-group label {
-    font-size: 0.875rem; /* 14px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .input-group input {
-    font-size: 0.875rem; /* 14px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .login-options label {
-    font-size: 0.75rem; /* 12px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .login-button {
     border-radius: 12px;
     padding: 12px;
-    font-size: 1rem; /* 16px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .error-message {
-    font-size: 0.75rem; /* 12px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .register-link {
     margin-top: 20px;
-    font-size: 0.75rem; /* 12px */
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .login-header h1 {
-    font-size: 1.5rem; /* 24px */
-  }
-
-  .login-box {
-    padding: 20px;
-    border-radius: 20px;
+    font-size: 18px; /* Slightly smaller than desktop to align with dashboard scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 }
 
-/* iPad/Tablet View (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* iPad/Tablet View (769px to 1024px to align with dashboard) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .login-container {
-    background-color: #fff;
+    background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
     padding: 20px;
     min-height: 100vh;
     display: flex;
@@ -232,7 +273,7 @@
 
   .login-box {
     padding: 20px;
-    background-color: #FAFBFE;
+    background-color: #fff; /* Updated to match dashboard .dash-broadcast-container */
   }
 
   .login-image img {
@@ -240,36 +281,52 @@
   }
 
   .login-form h2 {
-    font-size: 1.75rem; /* 28px */
+    font-size: 18px; /* Match dashboard scaling for smaller headers */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .login-form h4 {
-    font-size: 1rem; /* 16px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .input-group label {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .input-group input {
     border-radius: 12px;
     padding: 12px;
-    font-size: 0.9375rem; /* 15px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .login-options label {
-    font-size: 0.875rem; /* 14px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .login-button {
-    font-size: 1.0625rem; /* 17px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .error-message {
-    font-size: refreshments;
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .register-link {
-    font-size: 0.875rem; /* 14px */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 }

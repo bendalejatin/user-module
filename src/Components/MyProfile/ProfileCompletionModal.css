@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 /* Modal Overlay */
 .modal-overlay {
   position: fixed;
@@ -17,8 +19,7 @@
 .modal-content {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #4A90E2 0%, #ffffff 40%);
-  
+  background: linear-gradient(180deg, #4A90E2 0%, #ffffff 40%); /* Match dashboard .dash-profile-header */
   border-radius: 0;
   padding: 20px;
   max-width: none;
@@ -26,19 +27,22 @@
   overflow-y: auto;
   box-shadow: none;
   position: relative;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif; /* Updated to match dashboard font */
   display: flex;
   flex-direction: column;
   align-items: center;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .modal-content::-webkit-scrollbar {
   display: none;
 }
 
+/* Modal Header */
 .modal-header {
   text-align: center;
   color: #ffffff;
@@ -51,13 +55,15 @@
 }
 
 .modal-header h2 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
   margin: 0;
   flex-grow: 1;
   text-align: center;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Back Button */
 .back-button {
   background: none;
   border: none;
@@ -73,6 +79,7 @@
   opacity: 0.8;
 }
 
+/* Edit Toggle Button */
 .edit-toggle-button {
   background: none;
   border: none;
@@ -96,6 +103,7 @@
   font-size: 24px;
 }
 
+/* Completion Section */
 .completion-section {
   display: flex;
   flex-direction: column;
@@ -105,6 +113,7 @@
   max-width: 350px;
 }
 
+/* Profile Picture */
 .profile-picture {
   width: 100px;
   height: 100px;
@@ -126,7 +135,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: #4a90e2;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   border-radius: 50%;
   padding: 5px;
   color: white;
@@ -141,39 +150,47 @@
   cursor: pointer;
 }
 
+/* Completion Text */
 .completion-text {
-  font-size: 18px;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
   color: #ffffff;
-  font-weight: 600;
   background: rgba(255, 255, 255, 0.2);
   padding: 5px 15px;
   border-radius: 15px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Error and Success Messages */
 .error-message {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
-  color: #ff3333;
-  font-size: 14px;
+  color: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
+  font-size: 14px; /* Match dashboard .dash-error-message */
+  font-weight: 400; /* Match dashboard lighter weight */
   margin-bottom: 10px;
   max-width: 350px;
   padding: 8px;
   text-align: center;
   width: 100%;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .success-message {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
-  color: #28a745;
-  font-size: 14px;
+  color: #1A7F3C; /* Updated to match dashboard .dash-status-paid */
+  font-size: 14px; /* Match dashboard .dash-error-message */
+  font-weight: 400; /* Match dashboard lighter weight */
   margin-bottom: 10px;
   max-width: 350px;
   padding: 8px;
   text-align: center;
   width: 100%;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Fields Status */
 .fields-status {
   background: #ffffff;
   border-radius: 20px;
@@ -187,6 +204,7 @@
   gap: 20px;
 }
 
+/* Field Item */
 .field-item {
   display: flex;
   flex-direction: column;
@@ -194,39 +212,47 @@
 }
 
 .field-item span {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 500; /* Match dashboard label weight */
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Modal Input */
 .modal-input {
   width: 100%;
   padding: 12px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 14px;
-  color: #333;
-  background: #f9f9f9;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #333; /* Match dashboard text color */
+  background: #f9f9fb; /* Updated to match dashboard .dash-container */
   box-sizing: border-box;
   transition: border-color 0.3s ease;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .modal-input:focus {
   outline: none;
-  border-color: #6b48ff;
+  border-color: #6F72F1; /* Updated to match dashboard accent color */
 }
 
 .modal-input:disabled {
   background: #f0f0f0;
-  color: #666;
+  color: #666; /* Match dashboard secondary text color */
   cursor: not-allowed;
 }
 
 .modal-input::placeholder {
   color: #b0b0b0;
   font-style: italic;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Save Button */
 .save-button-container {
   width: 100%;
   max-width: 350px;
@@ -236,19 +262,20 @@
 }
 
 .save-button {
-  background-color: #6b48ff;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
   transition: background-color 0.3s ease;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .save-button:hover {
-  background-color: #5638d1;
+  background-color: #5A5CD1; /* Updated to match dashboard .dash-slider-button:hover */
 }
 
 .save-button:disabled {
@@ -256,18 +283,21 @@
   cursor: not-allowed;
 }
 
+/* Family Members List */
 .family-members-list {
   width: 100%;
   max-width: 350px;
 }
 
 .family-members-list h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  color: #333; /* Match dashboard text color */
   margin-bottom: 15px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Family Member Card */
 .family-member-card {
   background: #ffffff;
   border-radius: 10px;
@@ -279,6 +309,7 @@
   align-items: flex-start;
 }
 
+/* Member Info */
 .member-info {
   display: flex;
   flex-direction: column;
@@ -286,23 +317,23 @@
 }
 
 .member-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  color: #333; /* Match dashboard text color */
   margin-bottom: 5px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
-.member-age-profession {
-  font-size: 12px;
-  color: #666;
-  margin-bottom: 5px;
-}
-
+.member-age-profession,
 .member-contact {
-  font-size: 12px;
-  color: #666;
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
+  margin-bottom: 5px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Member Details */
 .member-details {
   display: flex;
   flex-direction: column;
@@ -310,7 +341,80 @@
 }
 
 .member-relation {
-  font-size: 12px;
-  color: #6b48ff;
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 500; /* Match dashboard label weight */
+  color: #6F72F1; /* Updated to match dashboard accent color */
   text-transform: uppercase;
+  letter-spacing: 0.2px; /* Match dashboard typography */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-header h2 {
+    font-size: 18px; /* Match dashboard mobile scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .completion-text {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .error-message,
+  .success-message {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .field-item span {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .modal-input {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .modal-input::placeholder {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .save-button {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .family-members-list h3 {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .member-name {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .member-age-profession,
+  .member-contact {
+    font-size: 12px; /* Match dashboard mobile .dash-notification-badge */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .member-relation {
+    font-size: 12px; /* Match dashboard mobile .dash-notification-badge */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
 }

@@ -1,18 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* General container styling */
 .service-entry-container {
   padding: 20px;
-  font-family: "Poppins", sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Inter', sans-serif; /* Updated to match dashboard font */
+  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Form Title */
 .form-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
+  color: #333; /* Match dashboard text color */
   margin-bottom: 20px;
   text-align: center;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Entry Card */
 .entry-card {
   background: #fff;
   border-radius: 10px;
@@ -21,33 +29,59 @@
   margin-bottom: 20px;
 }
 
+/* Entries List */
 .entries-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Entry Item */
 .entry-item {
-  background: #f9fafb;
+  background: #f9f9fb; /* Updated to match dashboard .dash-container */
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Entry Details */
 .entry-details h4 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  color: #333; /* Match dashboard text color */
   margin-bottom: 10px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .entry-details p {
-  font-size: 14px;
-  color: #666;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
   margin: 5px 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
   .service-entry-container {
     padding: 10px;
+  }
+
+  .form-title {
+    font-size: 18px; /* Match dashboard mobile scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .entry-details h4 {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .entry-details p {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 }

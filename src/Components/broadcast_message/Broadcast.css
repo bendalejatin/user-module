@@ -1,19 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 /* Broadcast Page Container */
 .broadcast-page {
   padding: 16px;
   max-width: 600px;
   margin: 0 auto;
   background-color: #f9f9fb;
+  font-family: "Inter", sans-serif; /* Match dashboard font */
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header Section (assumed to be part of Navbar component) */
 .broadcast-header {
-  background: linear-gradient(90deg, #0f172a, #6F72F1);
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Updated to match dashboard gradient */
   color: white;
   padding: 20px;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
   text-align: left;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 /* Tabs */
@@ -26,16 +32,17 @@
 
 .broadcast-tab {
   padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #1e293b;
+  font-size: 14px; /* Match dashboard smaller text (e.g., .dash-icon p) */
+  font-weight: 500; /* Match dashboard tab-like elements */
+  color: #333; /* Match dashboard text color */
   cursor: pointer;
   white-space: nowrap;
   position: relative;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .broadcast-tab.active {
-  color: #6F72F1;
+  color: #6F72F1; /* Retained to match dashboard accent color */
 }
 
 .broadcast-tab.active::after {
@@ -50,12 +57,6 @@
 }
 
 /* Broadcast Card Styles */
-.broadcast-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .broadcast-card {
   background-color: #ffffff;
   border-radius: 16px;
@@ -76,22 +77,27 @@
 }
 
 .broadcast-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  color: #333; /* Match dashboard text color */
   margin-bottom: 8px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .broadcast-card p {
-  font-size: 14px;
-  color: #64748b;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  color: #666; /* Match dashboard secondary text color */
   margin: 4px 0;
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .broadcast-card .timestamp {
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 12px; /* Match dashboard smaller text (e.g., .dash-notification-badge) */
+  color: #94a3b8; /* Retained for contrast */
   margin-top: 6px;
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 /* Right Arrow Icon (Placeholder with > character) */
@@ -108,10 +114,11 @@
   justify-content: center;
   align-items: center;
   height: 70vh;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.5rem; /* Retained for visibility */
+  font-weight: 400; /* Match dashboard .dash-loading */
   color: #555;
   animation: pulse 1.5s infinite;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 @keyframes pulse {
@@ -121,9 +128,9 @@
 }
 
 /* Responsive */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) { /* Aligned with dashboard breakpoint */
   .broadcast-page {
-    padding: 12px;
+    padding: 10px; /* Match dashboard mobile padding */
   }
 
   .broadcast-card {
@@ -131,11 +138,15 @@
   }
 
   .broadcast-card h3 {
-    font-size: 15px;
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .broadcast-tab {
-    font-size: 13px;
+    font-size: 13px; /* Match dashboard mobile text scaling */
     padding: 10px 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 }

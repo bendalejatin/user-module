@@ -1,14 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
+/* Event Container */
 .event-container {
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif; /* Match dashboard font */
   margin: auto;
-  padding-bottom: 80px; 
+  padding-bottom: 80px;
   margin-bottom: 50px;
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Event Card */
 .event-card {
-  background: #f9f9f9;
+  background: #f9f9fb; /* Updated to match dashboard .dash-container */
   border-radius: 16px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -19,12 +23,14 @@
   margin: 0 auto; /* Center the container */
 }
 
+/* Event Card Hover */
 .event-card:hover {
   transform: translateY(-5px);
 }
 
+/* Event Preview */
 .event-preview {
-  background: #f9f9f9;
+  background: #f9f9fb; /* Updated to match dashboard .dash-container */
   border-radius: 16px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -36,10 +42,12 @@
   margin: 0 auto; /* Center the container */
 }
 
+/* Event Preview Hover */
 .event-preview:hover {
   transform: translateY(-5px);
 }
 
+/* Event Image */
 .event-image {
   height: 60%; /* Image takes 60% of the preview container height */
   overflow: hidden;
@@ -53,6 +61,7 @@
   border-top-right-radius: 16px;
 }
 
+/* Event Preview Content */
 .event-preview-content {
   padding: 15px;
   text-align: center;
@@ -64,13 +73,16 @@
 
 .event-preview-content p {
   margin: 5px 0;
-  color: #333;
-  font-size: 1rem;
+  color: #333; /* Match dashboard text color */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; /* Prevent text from wrapping */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Event Details */
 .event-details {
   display: flex;
   flex-direction: column;
@@ -78,12 +90,14 @@
   padding: 20px;
 }
 
+/* Event Detail Item */
 .event-detail-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
 }
 
+/* Event Icon */
 .event-icon {
   width: 40px;
   height: 40px;
@@ -96,15 +110,17 @@
 }
 
 .icon {
-  color: #6366f1;
+  color: #6F72F1; /* Updated to match dashboard accent color */
 }
 
+/* Event Data */
 .event-data {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
+/* Event Data Header */
 .event-data-header {
   display: flex;
   align-items: center;
@@ -112,15 +128,19 @@
 }
 
 .event-data h3 {
-  color: #4b5563;
-  font-size: 1.1rem;
+  color: #333; /* Match dashboard text color */
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
   margin: 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .event-data p {
-  font-size: 1rem;
-  color: #333;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
   margin: 5px 0 0 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 /* Back Button Styles */
@@ -128,31 +148,36 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #6366f1; /* Dark gray background */
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: white;
   border: none;
   border-radius: 8px;
   padding: 10px 15px;
   margin: 15px auto;
   cursor: pointer;
-  font-size: 1rem;
-  font-family: "Poppins", sans-serif;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-family: "Inter", sans-serif; /* Match dashboard font */
+  font-weight: 500; /* Match dashboard button weight */
   transition: background-color 0.3s ease;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Back Button Hover */
 .back-button:hover {
-  background-color: #6366f1; /* Indigo on hover for consistency with app theme */
+  background-color: #5A5CD1; /* Updated to match dashboard .dash-slider-button:hover */
 }
 
 /* Upcoming Events Section */
 .event-title2 {
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h2 */
+  font-weight: 500; /* Match dashboard h2 weight */
   text-align: center;
   margin: 15px 0 20px;
-  color: #333;
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Upcoming Events Grid */
 .upcoming-events {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -165,7 +190,7 @@
 
 /* TabBar Hover Effect for Events Section */
 .tab-bar-events:hover {
-  background-color: #6366f1;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: white;
   transform: scale(1.05);
   transition: all 0.3s ease;
@@ -174,7 +199,7 @@
 /* Responsive Layout for Mobile */
 @media (max-width: 768px) {
   .event-container {
-    padding: 15px;
+    padding: 10px; /* Match dashboard mobile padding */
     padding-bottom: 70px;
     margin-bottom: 50px;
   }
@@ -202,7 +227,9 @@
   }
 
   .event-preview-content p {
-    font-size: 0.9rem;
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .event-details {
@@ -210,7 +237,7 @@
   }
 
   .event-icon {
-    width: 35px;
+    /* allocation: 35px; */
     height: 35px;
   }
 
@@ -219,11 +246,15 @@
   }
 
   .event-data h3 {
-    font-size: 1rem;
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .event-data p {
-    font-size: 0.9rem;
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .upcoming-events {
@@ -235,11 +266,14 @@
 
   .buttons {
     padding: 8px 12px;
-    font-size: 0.9rem;
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 }
 
-@media (min-width: 1025px) {
+/* Desktop view (min-width: 769px) */
+@media (min-width: 769px) {
   .upcoming-events {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
@@ -262,15 +296,17 @@
   animation: pop 0.8s ease-in-out;
 }
 
+/* Loading State */
 .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70vh;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.5rem; /* Retained for visibility */
+  font-weight: 400; /* Match dashboard .dash-loading */
   color: #555;
   animation: pulse 1.5s infinite;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 @keyframes pulse {

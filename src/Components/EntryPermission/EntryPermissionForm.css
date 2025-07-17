@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Entry Form Container */
 .entry-form-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f5f5; /* Light gray background for contrast */
+  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
   padding-bottom: 80px; /* Space for the tab bar */
+  font-family: "Inter", sans-serif; /* Match dashboard font */
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Entry Card */
 .entry-card {
   width: 90%; /* Slightly narrower on mobile */
   max-width: 600px; /* Increased max-width for desktop */
@@ -17,40 +24,48 @@
   z-index: 1; /* Ensure card is above navbar content */
 }
 
+/* Form Title */
 .form-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
   color: #fff; /* White text on gradient */
   text-align: left;
   padding: 16px;
   margin: 0;
-  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient matching the image */
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient matching dashboard */
   border-radius: 16px 16px 0 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Entry Form Content */
 .entry-form-content {
   padding: 1.5rem; /* Consistent padding with relative units */
 }
 
+/* Entry Form */
 .entry-form {
   display: flex;
   flex-direction: column;
   gap: 1rem; /* Consistent spacing between form elements */
 }
 
+/* Form Labels */
 .entry-form label {
-  font-size: 0.9rem; /* Slightly smaller font for mobile */
-  font-weight: 500;
-  color: #666; /* Gray labels */
+  font-size: 14px; /* Match dashboard smaller text (e.g., .dash-icon p) */
+  font-weight: 500; /* Match dashboard label weight */
+  color: #666; /* Match dashboard secondary text color */
   margin-bottom: 0.25rem;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Input Fields and Textarea */
 .entry-form .input-field,
 .entry-form textarea {
   width: 100%;
   padding: 1rem 1.25rem; /* Match laptop view */
-  font-size: 1rem; /* Match laptop view */
-  color: #333; /* Text color */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #333; /* Match dashboard text color */
   background-color: #fff;
   border: 1px solid #ccc; /* Match laptop view */
   border-radius: 6px; /* Match laptop view */
@@ -64,7 +79,9 @@
 .entry-form .input-field::placeholder,
 .entry-form textarea::placeholder {
   color: #999;
-  font-size: 1rem; /* Match laptop view */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .entry-form .input-field[type="datetime-local"] {
@@ -81,17 +98,19 @@
   font-family: inherit;
 }
 
+/* Decision Buttons */
 .decision-buttons {
   display: flex;
   gap: 1rem; /* Consistent button spacing */
   margin-top: 1.5rem;
 }
 
+/* Submit Buttons */
 .submit-btn {
   flex: 1;
   padding: 0.75rem; /* Consistent padding */
-  font-size: 0.9rem; /* Consistent font size */
-  font-weight: 600;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -99,40 +118,48 @@
   text-transform: uppercase;
   transition: background 0.2s; /* Smooth transition for hover */
   box-sizing: border-box;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Allow Button */
 .allow-btn {
-  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient for Allow button */
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient matching dashboard */
 }
 
 .allow-btn:hover {
   background: linear-gradient(90deg, #3887e2 0%, #9fcff6 100%); /* Darker gradient on hover */
 }
 
+/* Deny Button */
 .deny-btn {
-  background: linear-gradient(90deg, #FF3B3B 0%, #FF6B6B 100%); /* Red gradient for Deny button */
+  background: linear-gradient(90deg, #FF4D4F 0%, #DA190B 100%); /* Updated to match dashboard .dash-deny-button */
 }
 
 .deny-btn:hover {
-  background: linear-gradient(90deg, #CC2E2E 0%, #E65A5A 100%); /* Darker red gradient on hover */
+  background: linear-gradient(90deg, #CC2E2E 0%, #B51405 100%); /* Darker gradient on hover to match dashboard */
 }
 
+/* Form Paragraph */
 .entry-form-container p {
-  font-size: 0.9rem; /* Smaller font for mobile */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
   color: #666;
   text-align: center;
   padding: 1rem;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Loading State */
 .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70vh;
-  font-size: 1.2rem; /* Slightly smaller for mobile */
-  font-weight: 600;
+  font-size: 1.5rem; /* Retained for visibility */
+  font-weight: 400; /* Match dashboard .dash-loading */
   color: #555;
   animation: pulse 1.5s infinite;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 @keyframes pulse {
@@ -154,6 +181,7 @@
   gap: 1rem;
 }
 
+/* Entry Item */
 .entry-item {
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
@@ -162,28 +190,33 @@
   position: relative;
 }
 
+/* Entry Details */
 .entry-details h4 {
   margin: 0 0 0.5rem 0;
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: #333; /* Match dashboard text color */
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .entry-details p {
   margin: 0.25rem 0;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #666; /* Match dashboard secondary text color */
   text-align: left;
   padding: 0;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .entry-details .status {
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 500; /* Match dashboard badge weight */
   text-transform: uppercase;
   margin-left: 0.5rem;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .status.pending {
@@ -192,45 +225,49 @@
 }
 
 .status.allow {
-  background-color: #d1edff;
-  color: #0c5460;
+  background-color: #d4f4dd; /* Updated to match dashboard .dash-status-paid */
+  color: #1a7f3c; /* Updated to match dashboard .dash-status-paid */
 }
 
 .status.deny {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #f4d4d4; /* Updated to match dashboard .dash-status-unpaid */
+  color: #7f1a1a; /* Updated to match dashboard .dash-status-unpaid */
 }
 
+/* Entry Actions */
 .entry-actions {
   display: flex;
   gap: 1rem; /* Match decision-buttons gap for consistency */
   margin-top: 1rem;
 }
 
+/* Delete Button */
 .delete-btn {
   flex: 1; /* Match submit-btn */
   padding: 0.75rem; /* Match submit-btn */
-  font-size: 0.9rem; /* Match submit-btn */
-  font-weight: 600; /* Match submit-btn */
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
   border: none;
   border-radius: 10px; /* Match submit-btn */
   cursor: pointer;
   color: #fff; /* Match submit-btn */
   text-transform: uppercase; /* Match submit-btn */
   transition: background 0.2s; /* Match submit-btn */
-  background: linear-gradient(90deg, #dc3545 0%, #e4606a 100%); /* Gradient for Delete button */
+  background: linear-gradient(90deg, #FF4D4F 0%, #DA190B 100%); /* Updated to match dashboard .dash-deny-button */
   box-sizing: border-box;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .delete-btn:hover {
-  background: linear-gradient(90deg, #a71e2a 0%, #c44d55 100%); /* Darker gradient on hover */
+  background: linear-gradient(90deg, #CC2E2E 0%, #B51405 100%); /* Darker gradient on hover to match dashboard */
 }
 
 /* Search Input Styles */
 .entry-form-content .search-input {
   width: 100%;
   padding: 1rem 3rem 1rem 1.25rem; /* Match laptop view, adjusted for icon */
-  font-size: 1rem; /* Match laptop view */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
   color: #333;
   background-color: #fff;
   border: 1px solid #ccc; /* Match laptop view */
@@ -247,7 +284,9 @@
 
 .entry-form-content .search-input::placeholder {
   color: #999;
-  font-size: 1rem; /* Match laptop view */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .entry-form-content .search-input:focus {
@@ -255,39 +294,51 @@
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
-/* Desktop view (min-width: 768px) */
-@media (min-width: 768px) {
+/* Desktop view (min-width: 769px to align with dashboard) */
+@media (min-width: 769px) {
   .entry-card {
     width: 80%;
     max-width: 600px;
   }
 
   .entry-form label {
-    font-size: 1rem;
+    font-size: 14px; /* Consistent with mobile for simplicity */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .submit-btn,
   .delete-btn {
     padding: 1rem; /* Match desktop submit-btn */
-    font-size: 1rem; /* Match desktop submit-btn */
+    font-size: 14px; /* Match dashboard .dash-icon p */
+    font-weight: 500;
     width: 100%; /* Match input size */
     box-sizing: border-box;
+    letter-spacing: 0.2px;
   }
 
   .entry-form-container p {
-    font-size: 1rem;
+    font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .loading {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Match dashboard .dash-loading */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .entry-details h4 {
-    font-size: 1.2rem;
+    font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .entry-details p {
-    font-size: 0.9rem;
+    font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 }
 
@@ -300,11 +351,15 @@
 
   .entry-form-content .search-input {
     padding: 1rem 3.5rem 1rem 1.5rem; /* Slightly larger padding for larger screens */
-    font-size: 1rem; /* Consistent with laptop view */
+    font-size: 14px; /* Consistent with mobile/desktop */
+    font-weight: 400;
     background-size: 20px; /* Larger icon for larger screens */
+    letter-spacing: 0.2px;
   }
 
   .entry-form-content .search-input::placeholder {
-    font-size: 1rem; /* Consistent with laptop view */
+    font-size: 14px; /* Consistent with mobile/desktop */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 }

@@ -1,63 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px; /* Reduced from 100px to standard navbar height */
+  height: 60px; /* Standard navbar height */
   width: 100%; /* Full width */
   background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Gradient unchanged */
-  padding: 10px 20px; /* Reduced from 20px 30px for compact look */
+  padding: 10px 20px; /* Compact padding */
   color: white;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif; /* Updated to match dashboard */
   box-sizing: border-box; /* Ensure padding doesn’t affect width */
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .nav-logo {
-  font-size: 1.5rem; /* 24px, reduced from 28px for balance */
-  font-weight: bold;
+  font-size: 20px; /* Match dashboard h1 (e.g., .dash-profile-info h1) */
+  font-weight: 500; /* Match dashboard h1 weight */
   display: flex;
   flex-direction: column; /* Stack title and subtitle vertically */
-  line-height: 1.2; /* Adjusted for compact spacing */
+  line-height: 1.2; /* Compact spacing */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .nav-subtitle {
-  font-size: 0.875rem; /* 14px, reduced from 16px for compactness */
-  font-weight: 400; /* Lighter weight for contrast */
-  color: #f0f0f0; /* Lighter color for contrast */
+  font-size: 14px; /* Match dashboard smaller text (e.g., .dash-icon p) */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #f0f0f0; /* Lighter color for contrast, retained from original */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .Profile {
   display: flex;
   align-items: center; /* Ensure vertical alignment */
-  font-size: 1.75rem; /* 28px, reduced from 32px */
   cursor: pointer;
 }
 
-.Profile p {
-  margin-left: 8px; /* Reduced from 10px for compact spacing */
-  font-size: 1rem; /* 16px, reduced from 20px */
-  color: white;
+.profile-icon {
+  font-size: 36px; /* Retained from original for consistency */
 }
 
-/* Mobile View (up to 767px) */
-@media (max-width: 767px) {
+/* Hide profile text as per original */
+.Profile p {
+  margin-left: 8px;
+  font-size: 14px; /* Match dashboard smaller text (e.g., .dash-icon p) */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: white;
+  letter-spacing: 0.2px; /* Match dashboard typography */
+}
+
+/* Mobile View (up to 768px to align with dashboard) */
+@media (max-width: 768px) {
   .navbar {
-    height: 70px; /* Slightly taller for mobile, reduced from 120px */
+    height: 70px; /* Slightly taller for mobile, retained from original */
     padding: 10px 15px; /* Adjusted for smaller screens */
   }
 
   .nav-logo {
-    font-size: 1.25rem; /* 20px, reduced from 32px */
+    font-size: 18px; /* Slightly smaller than desktop, aligned with dashboard scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .nav-subtitle {
-    font-size: 0.75rem; /* 12px, reduced from 15px */
+    font-size: 12px; /* Match dashboard mobile text scaling (e.g., .dash-icon p) */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .Profile {
-    display: flex; /* Changed from display: block to align icon */
+    display: flex; /* Align icon */
     align-items: center;
-    font-size: 1.5rem; /* 24px, reduced from 38px */
-    margin-right: 10px; /* Reduced from 20px */
+    margin-right: 10px;
+  }
+
+  .profile-icon {
+    font-size: 32px; /* Retained from original for mobile */
   }
 
   .Profile p {
@@ -65,27 +84,38 @@
   }
 }
 
-/* Tablet View (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* Tablet View (769px to 1024px to align with dashboard) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .navbar {
-    height: 65px; /* Slightly taller than desktop for touch targets */
+    height: 65px; /* Slightly taller than desktop, retained from original */
     padding: 10px 20px;
   }
 
   .nav-logo {
-    font-size: 1.375rem; /* 22px */
+    font-size: 18px; /* Match dashboard scaling for smaller headers */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .nav-subtitle {
-    font-size: 0.8125rem; /* 13px */
+    font-size: 13px; /* Match dashboard mobile text scaling */
+    font-weight: 400;
+    letter-spacing: 0.2px;
   }
 
   .Profile {
-    font-size: 1.625rem; /* 26px */
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-icon {
+    font-size: 34px; /* Retained from original for tablet */
   }
 
   .Profile p {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 14px; /* Match dashboard smaller text */
+    font-weight: 400;
     margin-left: 8px;
+    letter-spacing: 0.2px;
   }
 }

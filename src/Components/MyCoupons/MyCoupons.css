@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 /* Reset */
 * {
   margin: 0;
@@ -7,8 +9,11 @@
 
 /* Navbar Styling for MyCoupons Page */
 .navbar {
-  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%) !important;
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%) !important; /* Match dashboard .dash-profile-header */
   transition: none !important; /* Prevent transition delays */
+  font-family: 'Inter', sans-serif; /* Match dashboard font */
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Connected Tabs Section */
@@ -21,14 +26,17 @@
   margin: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  font-family: 'Inter', sans-serif; /* Match dashboard font */
 }
 
+/* Tab */
 .tab {
   flex: 1;
   padding: 8px 15px;
   text-align: center;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard tab-like elements */
+  color: #666; /* Match dashboard secondary text color */
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -41,12 +49,15 @@
   justify-content: center;
   min-width: 100px;
   margin: 0 5px;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .tab span {
   position: relative;
   z-index: 1;
-  color: #333;
+  color: #333; /* Match dashboard text color */
+  font-weight: 500; /* Match dashboard tab-like elements */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .tab:hover {
@@ -54,11 +65,13 @@
 }
 
 .tab.active {
-  background-color: #4A90E2;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
 }
 
 .tab.active span {
   color: #fff;
+  font-weight: 500; /* Match dashboard tab-like elements */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 /* Animation */
@@ -89,8 +102,10 @@
   margin: 0 auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: 'Inter', sans-serif; /* Match dashboard font */
 }
 
+/* Hide Scrollbar */
 .coupons-list::-webkit-scrollbar {
   display: none;
 }
@@ -105,6 +120,7 @@
   animation: fade-in 0.5s ease-in-out;
 }
 
+/* Fade-in Animation */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -116,13 +132,15 @@
   }
 }
 
+/* Card Header */
 .card-header {
   display: flex;
   align-items: center;
   padding: 10px;
-  background: #f9f9f9;
+  background: #f9f9fb; /* Updated to match dashboard .dash-container */
 }
 
+/* Store Image */
 .store-image {
   width: 50px;
   height: 50px;
@@ -131,75 +149,98 @@
   margin-right: 10px;
 }
 
+/* Coupon Info */
 .coupon-info {
   flex-grow: 1;
 }
 
+/* Coupon Title */
 .coupon-title {
   margin: 0;
-  font-size: 18px;
-  color: #333;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Coupon Details */
 .coupon-details {
   padding: 15px;
 }
 
+/* Society and House Number */
 .society,
 .house-number {
   margin: 5px 0;
-  color: #666;
-  font-size: 14px;
+  color: #666; /* Match dashboard secondary text color */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Code Section */
 .code-section {
   margin: 20px 0;
 }
 
+/* Coupon Code */
 .code {
   background: #e0e0e0;
   padding: 5px 10px;
   border-radius: 5px;
-  font-weight: bold;
-  margin-right: 10px;
+  font-weight: 500; /* Match dashboard label weight */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Copy Button */
 .copy-button {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 18px;
+  color: #6F72F1; /* Updated to match dashboard accent color */
 }
 
+/* Footer Row */
 .footer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Expiry */
 .expiry {
-  color: #888;
-  font-size: 12px;
+  color: #666; /* Match dashboard secondary text color */
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Status Button */
 .status-button {
   padding: 5px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .status-button.active {
-  background: #4A90E2;
+  background: #6F72F1; /* Updated to match dashboard accent color */
 }
 
 .status-button.expired {
-  background: #4A90E2;
+  background: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
 }
 
+/* Miscellaneous */
 .b {
-  color: rgb(0, 0, 0);
+  color: #333; /* Updated to match dashboard text color */
 }
 
 /* Loading */
@@ -208,12 +249,14 @@
   justify-content: center;
   align-items: center;
   height: 70vh;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.5rem; /* Retained for visibility */
+  font-weight: 400; /* Match dashboard .dash-loading */
   color: #555;
   animation: pulse 1.5s infinite;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Pulse Animation */
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -236,10 +279,24 @@
   }
 
   .tab {
-    font-size: 0.85rem;
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
     padding: 6px 10px;
     min-width: 90px;
     margin: 0 3px;
+    letter-spacing: 0.2px;
+  }
+
+  .tab span {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .tab.active span {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 
   .coupons-list {
@@ -258,6 +315,39 @@
   .coupon-card {
     max-width: 80%;
     min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .coupon-title {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .society,
+  .house-number {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .code {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .expiry {
+    font-size: 12px; /* Match dashboard .dash-notification-badge */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .status-button {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
   }
 }
 
@@ -278,12 +368,5 @@
 
   .coupon-card {
     max-width: 280px;
-  }
-}
-
-@media (max-width: 768px) {
-  .coupon-card {
-    margin-left: auto;
-    margin-right: auto;
   }
 }

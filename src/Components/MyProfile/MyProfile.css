@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 /* Reset */
 * {
   margin: 0;
@@ -10,8 +12,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
+  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
+  font-family: 'Inter', sans-serif; /* Updated to match dashboard font */
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -20,15 +22,18 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .my-profile-container::-webkit-scrollbar {
   display: none;
 }
 
+/* Profile Header */
 .profile-header {
   color: white;
-  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); 
+  background: linear-gradient(90deg, #4A90E2 0%, #A8D5F9 100%); /* Match dashboard .dash-profile-header */
   text-align: center;
   padding: 20px;
   position: relative;
@@ -37,9 +42,12 @@
 
 .profile-header h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
+  font-weight: 500; /* Match dashboard h1 weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Profile Picture */
 .profile-picture {
   width: 80px;
   height: 80px;
@@ -63,7 +71,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: #4a90e2;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   border-radius: 50%;
   padding: 5px;
   color: white;
@@ -78,6 +86,7 @@
   cursor: pointer;
 }
 
+/* Profile Completion */
 .profile-completion {
   background: white;
   margin: 10px;
@@ -89,12 +98,14 @@
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: calc(100% - 20px);
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 500; /* Match dashboard label weight */
+  color: #333; /* Match dashboard text color */
   position: relative;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Progress Bar */
 .progress-bar {
   flex-grow: 1;
   height: 8px;
@@ -106,19 +117,23 @@
 
 .progress {
   height: 100%;
-  background-color: #6c5ce7;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   border-radius: 3px;
   transition: width 0.3s ease-in-out;
 }
 
+/* Error Message */
 .error-message {
-  color: #ff3333;
+  color: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
   text-align: center;
   margin: 10px;
-  font-size: 14px;
+  font-size: 14px; /* Match dashboard .dash-error-message */
+  font-weight: 400; /* Match dashboard lighter weight */
   width: calc(100% - 20px);
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Profile Details */
 .profile-details {
   background: white;
   margin: 10px;
@@ -128,6 +143,7 @@
   width: calc(100% - 20px);
 }
 
+/* Detail Item */
 .detail-item {
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
@@ -144,15 +160,20 @@
 }
 
 .label {
-  color: #666;
-  font-size: 16px;
+  color: #666; /* Match dashboard secondary text color */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .detail-value {
-  font-size: 16px;
-  color: #333;
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
+  font-weight: 400; /* Match dashboard lighter weight */
+  color: #333; /* Match dashboard text color */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Family Members */
 .family-members {
   background: white;
   margin: 10px;
@@ -171,17 +192,22 @@
 
 .family-header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
+  font-weight: 500; /* Match dashboard h3 weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .add-member {
   background: none;
   border: none;
-  color: #4a90e2;
-  font-weight: bold;
+  color: #6F72F1; /* Updated to match dashboard accent color */
+  font-weight: 500; /* Match dashboard label weight */
+  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
   cursor: pointer;
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
+/* Family Member */
 .family-member {
   display: flex;
   justify-content: space-between;
@@ -198,34 +224,41 @@
   gap: 10px;
 }
 
+/* Edit Button */
 .edit-button {
-  background-color: #4a90e2;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 500; /* Match dashboard button weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .edit-button:hover {
-  background-color: #357abd;
+  background-color: #5A5CD1; /* Updated to match dashboard .dash-slider-button:hover */
 }
 
+/* Delete Button */
 .delete-button {
-  background-color: #ff3333;
+  background-color: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 12px; /* Match dashboard .dash-notification-badge */
+  font-weight: 500; /* Match dashboard button weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .delete-button:hover {
-  background-color: #cc0000;
+  background-color: #E63946; /* Slightly darker shade for hover, consistent with dashboard */
 }
 
+/* Button Group */
 .button-group {
   display: flex;
   justify-content: center;
@@ -235,16 +268,77 @@
   margin-bottom: 20px;
 }
 
+/* Logout Button */
 .logout-button {
-  background-color: #6F72F1;
+  background-color: #6F72F1; /* Updated to match dashboard accent color */
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px; /* Match dashboard .dash-icon p */
+  font-weight: 500; /* Match dashboard button weight */
+  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .logout-button:hover {
-  background-color: #6F72F1;
+  background-color: #5A5CD1; /* Updated to match dashboard .dash-slider-button:hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-header h1 {
+    font-size: 18px; /* Match dashboard mobile scaling */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .profile-completion {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .error-message {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .label {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .detail-value {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .family-header h2 {
+    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .add-member {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 12px; /* Match dashboard mobile .dash-notification-badge */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .logout-button {
+    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
 }
