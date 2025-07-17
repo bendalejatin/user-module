@@ -2,20 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
-import EventIcon from "@mui/icons-material/Event";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import PaymentIcon from "@mui/icons-material/Payment";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import GroupIcon from "@mui/icons-material/Group";
-import WorkIcon from "@mui/icons-material/Work"; // New icon for service entries
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import RedeemIcon from "@mui/icons-material/Redeem";
+import PeopleIcon from "@mui/icons-material/People";
+import BuildIcon from "@mui/icons-material/Build";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
 // const BASE_URL = "http://localhost:5000";
-const BASE_URL = "https://entrykart-admin.onrender.com"; 
+const BASE_URL = "https://entrykart-admin.onrender.com";
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -200,14 +199,14 @@ const Dashboard = () => {
               className="dash-icon"
               onClick={() => (window.location.href = "/maintenance")}
             >
-              <PaymentIcon className="dash-icon-symbol dash-blue-symbol" />
+              <AccountBalanceWalletIcon className="dash-icon-symbol" />
               <p>Maintenance</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/entry-permission")}
             >
-              <PersonAddAltIcon className="dash-icon-symbol dash-yellow-symbol" />
+              <PersonAddIcon className="dash-icon-symbol" />
               <p>Visitors</p>
               {pendingEntries.length > 0 && (
                 <span className="dash-notification-badge">
@@ -219,41 +218,40 @@ const Dashboard = () => {
               className="dash-icon"
               onClick={() => (window.location.href = "/event-details")}
             >
-              <EventIcon className="dash-icon-symbol dash-yellow-symbol" />
-              <p>Event</p>
+              <EventIcon className="dash-icon-symbol" />
+              <p>Events</p>
             </div> */}
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/broadcast-messages")}
             >
-              <NotificationsIcon className="dash-icon-symbol dash-blue-symbol" />
+              <CampaignIcon className="dash-icon-symbol" />
               <p>Broadcast</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/my-coupons")}
             >
-              <LocalOfferIcon className="dash-icon-symbol dash-pink-symbol" />
+              <RedeemIcon className="dash-icon-symbol" />
               <p>My Coupons</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/neighbor-details")}
             >
-              <GroupIcon className="dash-icon-symbol dash-green-symbol" />
+              <PeopleIcon className="dash-icon-symbol" />
               <p>Neighbors</p>
             </div>
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/service-entries")}
             >
-              <WorkIcon className="dash-icon-symbol dash-purple-symbol" />
-              <p>Service Entries</p> {/* New button */}
+              <BuildIcon className="dash-icon-symbol" />
+              <p>Service Entries</p>
             </div>
           </div>
         </div>
 
-        {/* Rest of the dashboard remains unchanged */}
         <div className="dash-broadcast-container">
           <div className="dash-broadcast-header">
             <h2>BROADCAST MESSAGES</h2>
