@@ -7,7 +7,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import PeopleIcon from "@mui/icons-material/People";
-import BuildIcon from "@mui/icons-material/Build";
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import profile from "../Assets/user.png";
@@ -214,13 +214,6 @@ const Dashboard = () => {
                 </span>
               )}
             </div>
-            {/* <div
-              className="dash-icon"
-              onClick={() => (window.location.href = "/event-details")}
-            >
-              <EventIcon className="dash-icon-symbol" />
-              <p>Events</p>
-            </div> */}
             <div
               className="dash-icon"
               onClick={() => (window.location.href = "/broadcast-messages")}
@@ -246,7 +239,7 @@ const Dashboard = () => {
               className="dash-icon"
               onClick={() => (window.location.href = "/service-entries")}
             >
-              <BuildIcon className="dash-icon-symbol" />
+              <HomeRepairServiceIcon className="dash-icon-symbol" />
               <p>Service Entries</p>
             </div>
           </div>
