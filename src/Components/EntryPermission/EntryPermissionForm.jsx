@@ -27,14 +27,17 @@ const EntryPermissionForm = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  
-  // User-specific data
-  const [userProfile, setUserProfile] = useState(null);
-  const [userSocietyId, setUserSocietyId] = useState("");
-  const [userFlatNumber, setUserFlatNumber] = useState("");
+  const [showForm, setShowForm] = useState(false); // New state to toggle form visibility
+
+  const [userProfile, setUserProfile] = useState({
+    societyName: "",
+    flatNumber: "",
+    email: "",
+    societyId: "",
+  });
 
   const userEmail = localStorage.getItem("ownerEmail");
-  const superadminEmail = "dec@gmail.com"; // Superadmin email for API queries
+  const superadminEmail = "dec@gmail.com";
 
   useEffect(() => {
     if (!userEmail) {
@@ -52,29 +55,47 @@ const EntryPermissionForm = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const profileResponse = await axios.get(
-        `${BASE_URL}/api/flats/owner-by-email-fallback/${userEmail}`
-      );
-      const owner = profileResponse.data;
-      setUserProfile(owner);
-      
-      // Find the society ID for the user's society
-      const userSociety = societies.find(soc => soc.name === owner.societyName);
-      if (userSociety) {
-        setUserSocietyId(userSociety._id);
+      const response = await axios.get(`${BASE_URL}/api/flats/owner-by-email-fallback/${userEmail}`);
+      const owner = response.data;
+      if (owner && owner._id) {
+        setUserProfile({
+          societyName: owner.societyName || "",
+          flatNumber: owner.flatNumber || "",
+          email: owner.email || "",
+          societyId: owner.societyId || "",
+        });
       }
-      setUserFlatNumber(owner.flatNumber || "");
-    } catch (error) {
-      console.error("Error fetching user profile:", error);
-      setError("Failed to fetch user profile. Please ensure your account is set up properly.");
+    } catch (err) {
+      console.error("Error fetching user profile:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (societies.length > 0 && userProfile.societyName) {
+      autoFillUserDetails();
+    }
+  }, [societies, userProfile]);
+
+  const autoFillUserDetails = () => {
+    const userSociety = societies.find(
+      (soc) => soc.name.toLowerCase() === userProfile.societyName.toLowerCase()
+    );
+    if (userSociety) {
+      setSelectedSociety(userSociety._id);
+      setSociety(userSociety.name);
+      setFlats(userSociety.flats || []);
+      if (userProfile.flatNumber && userSociety.flats && userSociety.flats.includes(userProfile.flatNumber)) {
+        setFlatNumber(userProfile.flatNumber);
+      }
+      if (userProfile.email) {
+        setEmail(userProfile.email);
+      }
     }
   };
 
   const fetchSocieties = async () => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/societies?email=${superadminEmail}`
-      );
+      const response = await axios.get(`${BASE_URL}/api/societies?email=${superadminEmail}`);
       setSocieties(response.data);
     } catch (error) {
       console.error("Error fetching societies:", error);
@@ -85,9 +106,7 @@ const EntryPermissionForm = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/users?email=${superadminEmail}`
-      );
+      const response = await axios.get(`${BASE_URL}/api/users?email=${superadminEmail}`);
       setUsers(response.data);
       setLoading(false);
     } catch (err) {
@@ -99,9 +118,7 @@ const EntryPermissionForm = () => {
 
   const fetchEntries = async () => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/entries?email=${superadminEmail}`
-      );
+      const response = await axios.get(`${BASE_URL}/api/entries?email=${superadminEmail}`);
       setEntries(response.data);
     } catch (err) {
       console.error("Error fetching entries:", err);
@@ -134,25 +151,13 @@ const EntryPermissionForm = () => {
   const handleFlatChange = (flatNo) => {
     setFlatNumber(flatNo);
     const user = users.find(
-      (user) =>
-        user.flatNumber === flatNo &&
-        user.society &&
-        user.society._id === selectedSociety
+      (user) => user.flatNumber === flatNo && user.society && user.society._id === selectedSociety
     );
     setEmail(user ? user.email : "");
   };
 
   const handleSave = async () => {
-    if (
-      !name ||
-      !selectedSociety ||
-      !flatNumber ||
-      !visitorType ||
-      !description ||
-      !dateTime ||
-      !expiry ||
-      !status
-    ) {
+    if (!name || !selectedSociety || !flatNumber || !visitorType || !description || !dateTime || !expiry || !status) {
       toast.error("All fields are required");
       return;
     }
@@ -164,7 +169,6 @@ const EntryPermissionForm = () => {
 
     const entryDate = new Date(dateTime);
     const expiryDate = new Date(expiry);
-
     if (entryDate >= expiryDate) {
       toast.error("Expiry date must be after entry date");
       return;
@@ -188,21 +192,17 @@ const EntryPermissionForm = () => {
         adminEmail: userEmail,
       };
 
-      console.log("Sending payload:", payload);
-
       const res = await axios.post(`${BASE_URL}/api/entries`, payload);
       setEntries([...entries, res.data]);
       toast.success("Entry added successfully!");
       resetForm();
+      setShowForm(false); // Hide form after saving
     } catch (error) {
       console.error("Error saving entry:", error);
       if (error.response) {
         const errorMessage =
-          error.response.data?.message ||
-          error.response.data?.error ||
-          `Server error: ${error.response.status}`;
+          error.response.data?.message || error.response.data?.error || `Server error: ${error.response.status}`;
         toast.error(errorMessage);
-        console.error("Server error details:", error.response.data);
       } else if (error.request) {
         toast.error("No response from server. Please check your connection.");
       } else {
@@ -215,17 +215,11 @@ const EntryPermissionForm = () => {
     try {
       const payload = { status: newStatus };
       await axios.put(`${BASE_URL}/api/entries/${id}`, payload);
-      setEntries(
-        entries.map((entry) =>
-          entry._id === id ? { ...entry, status: newStatus } : entry
-        )
-      );
+      setEntries(entries.map((entry) => (entry._id === id ? { ...entry, status: newStatus } : entry)));
       toast.success(`Entry ${newStatus} successfully!`);
     } catch (error) {
       console.error(`Error updating entry status to ${newStatus}:`, error);
-      toast.error(
-        `Error updating entry status: ${error.response?.data?.message || error.message}`
-      );
+      toast.error(`Error updating entry status: ${error.response?.data?.message || error.message}`);
     }
   };
 
@@ -250,36 +244,14 @@ const EntryPermissionForm = () => {
 
   const resetForm = () => {
     setName("");
-    setSelectedSociety("");
-    setFlats([]);
-    setFlatNumber("");
-    setEmail("");
     setVisitorType("");
     setStatus("pending");
     setDescription("");
     setDateTime("");
     setExpiry("");
-    setSociety("");
   };
 
-  // Filter entries to show only user's society and flat specific entries
-  const getUserSpecificEntries = () => {
-    if (!userProfile) return [];
-    
-    return entries.filter((entry) => {
-      const entrySocietyId = getSocietyId(entry.societyId);
-      const userSocietyFromProfile = societies.find(soc => soc.name === userProfile.societyName);
-      const userSocietyIdFromProfile = userSocietyFromProfile?._id || "";
-      
-      // Check if entry belongs to user's society and flat
-      const belongsToUserSociety = entrySocietyId === userSocietyIdFromProfile;
-      const belongsToUserFlat = entry.flatNumber === userProfile.flatNumber;
-      
-      return belongsToUserSociety && belongsToUserFlat;
-    });
-  };
-
-  const filteredEntries = getUserSpecificEntries().filter(
+  const filteredEntries = entries.filter(
     (entry) =>
       entry.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       entry.visitorType?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -318,144 +290,141 @@ const EntryPermissionForm = () => {
       <Navbar />
       <div className="entry-form-container">
         <div className="entry-card">
+          <div className="form-title">My Entry Permissions</div>
           <div className="entry-form-content">
-            <form className="entry-form" onSubmit={(e) => e.preventDefault()}>
-              <label htmlFor="name">Name *</label>
-              <input
-                type="text"
-                id="name"
-                className="input-field"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter Visitor Name"
-                required
-              />
-
-              <label htmlFor="society">Society *</label>
-              <select
-                id="society"
-                className="input-field select-field"
-                value={selectedSociety}
-                onChange={(e) => handleSocietyChange(e.target.value)}
-                required
+            <div className="add-entry-button-container">
+              <button
+                type="button"
+                className="submit-btn allow-btn"
+                onClick={() => setShowForm(!showForm)}
               >
-                <option value="">Select Society</option>
-                {societies.map((society) => (
-                  <option key={society._id} value={society._id}>
-                    {society.name}
-                  </option>
-                ))}
-              </select>
+                {showForm ? "Cancel" : "Add Entry"}
+              </button>
+            </div>
 
-              <label htmlFor="flat-number">Flat Number *</label>
-              <select
-                id="flat-number"
-                className="input-field select-field"
-                value={flatNumber}
-                onChange={(e) => handleFlatChange(e.target.value)}
-                disabled={!selectedSociety}
-                required
-              >
-                <option value="">Select Flat</option>
-                {flats.map((flat) => (
-                  <option key={flat} value={flat}>
-                    {flat}
-                  </option>
-                ))}
-              </select>
+            {showForm && (
+              <form className="entry-form" onSubmit={(e) => e.preventDefault()}>
+                <label htmlFor="name">Visitor Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="input-field"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter Visitor Name"
+                  required
+                />
 
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="input-field"
-                value={email}
-                readOnly
-                placeholder="Email"
-              />
-
-              <label htmlFor="visitor-type">Visitor Type *</label>
-              <select
-                id="visitor-type"
-                className="input-field select-field"
-                value={visitorType}
-                onChange={(e) => setVisitorType(e.target.value)}
-                required
-              >
-                <option value="">-- Select Visitor Type --</option>
-                <option value="Guest">Guest</option>
-                <option value="Swiggy/Zomato">Swiggy/Zomato</option>
-                <option value="Maid">Maid</option>
-                <option value="Other">Other</option>
-              </select>
-
-              <label htmlFor="status">Status *</label>
-              <select
-                id="status"
-                className="input-field select-field"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                required
-              >
-                <option value="pending">Pending</option>
-                <option value="allow">Allow</option>
-                <option value="deny">Deny</option>
-              </select>
-
-              <label htmlFor="description">Description *</label>
-              <textarea
-                id="description"
-                className="input-field"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Enter Description"
-                rows="3"
-                required
-              />
-
-              <label htmlFor="datetime">Date & Time *</label>
-              <input
-                type="datetime-local"
-                id="datetime"
-                className="input-field"
-                value={dateTime}
-                onChange={(e) => setDateTime(e.target.value)}
-                required
-              />
-
-              <label htmlFor="expiry">Expiry Date & Time *</label>
-              <input
-                type="datetime-local"
-                id="expiry"
-                className="input-field"
-                value={expiry}
-                onChange={(e) => setExpiry(e.target.value)}
-                required
-              />
-
-              <div className="decision-buttons">
-                <button
-                  type="button"
-                  className="submit-btn allow-btn"
-                  onClick={handleSave}
+                <label htmlFor="society">Society *</label>
+                <select
+                  id="society"
+                  className="input-field select-field"
+                  value={selectedSociety}
+                  onChange={(e) => handleSocietyChange(e.target.value)}
+                  required
                 >
-                  Add Entry
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+                  <option value="">Select Society</option>
+                  {societies.map((society) => (
+                    <option key={society._id} value={society._id}>
+                      {society.name}
+                    </option>
+                  ))}
+                </select>
 
-        <div className="entry-card" style={{ marginTop: "20px" }}>
-          <div className="form-title">
-            My Entry Permissions
-            {userProfile && (
-              <span className="user-info">
-                {" "}({userProfile.societyName} - Flat {userProfile.flatNumber})
-              </span>
+                <label htmlFor="flat-number">Flat Number *</label>
+                <select
+                  id="flat-number"
+                  className="input-field select-field"
+                  value={flatNumber}
+                  onChange={(e) => handleFlatChange(e.target.value)}
+                  disabled={!selectedSociety}
+                  required
+                >
+                  <option value="">Select Flat</option>
+                  {flats.map((flat) => (
+                    <option key={flat} value={flat}>
+                      {flat}
+                    </option>
+                  ))}
+                </select>
+
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  className="input-field"
+                  value={email}
+                  readOnly
+                  placeholder="Email"
+                />
+
+                <label htmlFor="visitor-type">Visitor Type *</label>
+                <select
+                  id="visitor-type"
+                  className="input-field select-field"
+                  value={visitorType}
+                  onChange={(e) => setVisitorType(e.target.value)}
+                  required
+                >
+                  <option value="">-- Select Visitor Type --</option>
+                  <option value="Guest">Guest</option>
+                  <option value="Swiggy/Zomato">Swiggy/Zomato</option>
+                  <option value="Maid">Maid</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <label htmlFor="status">Status *</label>
+                <select
+                  id="status"
+                  className="input-field select-field"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  required
+                >
+                  <option value="pending">Pending</option>
+                  <option value="allow">Allow</option>
+                  <option value="deny">Deny</option>
+                </select>
+
+                <label htmlFor="description">Description *</label>
+                <textarea
+                  id="description"
+                  className="input-field"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Enter Description"
+                  rows="3"
+                  required
+                />
+
+                <label htmlFor="datetime">Date & Time *</label>
+                <input
+                  type="datetime-local"
+                  id="datetime"
+                  className="input-field"
+                  value={dateTime}
+                  onChange={(e) => setDateTime(e.target.value)}
+                  required
+                />
+
+                <label htmlFor="expiry">Expiry Date & Time *</label>
+                <input
+                  type="datetime-local"
+                  id="expiry"
+                  className="input-field"
+                  value={expiry}
+                  onChange={(e) => setExpiry(e.target.value)}
+                  required
+                />
+
+                <div className="decision-buttons">
+                  <button type="button" className="submit-btn allow-btn" onClick={handleSave}>
+                    Add Entry
+                  </button>
+                </div>
+              </form>
             )}
-          </div>
-          <div className="entry-form-content">
+
             <input
               type="text"
               placeholder="Search entries..."
@@ -466,12 +435,7 @@ const EntryPermissionForm = () => {
 
             <div className="entries-list">
               {filteredEntries.length === 0 ? (
-                <p>
-                  {userProfile 
-                    ? `No entry permissions found for ${userProfile.societyName} - Flat ${userProfile.flatNumber}.`
-                    : "No entry permissions found."
-                  }
-                </p>
+                <p>No entry permissions found.</p>
               ) : (
                 filteredEntries.map((entry) => (
                   <div key={entry._id} className="entry-item">
@@ -479,9 +443,7 @@ const EntryPermissionForm = () => {
                       <h4>{entry.name}</h4>
                       <p>
                         <strong>Society:</strong>{" "}
-                        {societies.find(
-                          (soc) => soc._id === getSocietyId(entry.societyId)
-                        )?.name || "N/A"}
+                        {societies.find((soc) => soc._id === getSocietyId(entry.societyId))?.name || "N/A"}
                       </p>
                       <p><strong>Flat Number:</strong> {entry.flatNumber}</p>
                       <p><strong>Email:</strong> {entry.email || "N/A"}</p>
@@ -494,12 +456,10 @@ const EntryPermissionForm = () => {
                       </p>
                       <p><strong>Description:</strong> {entry.description}</p>
                       <p>
-                        <strong>Date & Time:</strong>{" "}
-                        {new Date(entry.dateTime).toLocaleString()}
+                        <strong>Date & Time:</strong> {new Date(entry.dateTime).toLocaleString()}
                       </p>
                       <p>
-                        <strong>Expiry:</strong>{" "}
-                        {new Date(entry.additionalDateTime).toLocaleString()}
+                        <strong>Expiry:</strong> {new Date(entry.additionalDateTime).toLocaleString()}
                       </p>
                     </div>
                     {entry.status === "pending" && (
@@ -516,10 +476,7 @@ const EntryPermissionForm = () => {
                         >
                           Deny
                         </button>
-                        <button
-                          className="delete-btn"
-                          onClick={() => handleDelete(entry._id)}
-                        >
+                        <button className="delete-btn" onClick={() => handleDelete(entry._id)}>
                           Delete
                         </button>
                       </div>
