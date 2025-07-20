@@ -32,6 +32,13 @@ const Navbar = () => {
         return "Login";
       case "/splash":
         return "Splash";
+      case "/service-entries":
+        return (
+          <>
+            Service Entries
+            <span className="nav-subtitle">Service Personnel Management</span>
+          </>
+        );
       default:
         return "MySocietyMate"; // Fallback title
     }

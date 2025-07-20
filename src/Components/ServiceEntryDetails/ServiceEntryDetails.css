@@ -2,85 +2,194 @@
 
 /* General container styling */
 .service-entry-container {
-  padding: 20px;
-  font-family: 'Inter', sans-serif; /* Updated to match dashboard font */
-  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
+  background-color: #f9f9fb; /* Match NeighborDetails .neighbor-container */
+  font-family: 'Inter', sans-serif; /* Match NeighborDetails font */
   min-height: 100vh;
-  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
+  position: relative;
+  -webkit-font-smoothing: antialiased; /* Match NeighborDetails font smoothing */
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Form Title */
-.form-title {
-  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
-  font-weight: 500; /* Match dashboard h1 weight */
-  color: #333; /* Match dashboard text color */
-  margin-bottom: 20px;
-  text-align: center;
-  letter-spacing: 0.2px; /* Match dashboard typography */
-}
-
-/* Entry Card */
-.entry-card {
-  background: #fff;
-  border-radius: 10px;
+.service-entry-content {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding-bottom: 80px;
 }
 
-/* Entries List */
+.service-entry-content h2 {
+  font-size: 20px; /* Match NeighborDetails .neighbor-content h2 */
+  font-weight: 500; /* Match NeighborDetails h2 weight */
+  color: #333; /* Match NeighborDetails text color */
+  margin-bottom: 10px;
+  border-bottom: 2px solid #6F72F1; /* Match NeighborDetails accent color */
+  padding-bottom: 5px;
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
+.service-entry-content p {
+  font-size: 14px; /* Match NeighborDetails .neighbor-content p */
+  font-weight: 400; /* Match NeighborDetails lighter weight */
+  color: #666; /* Match NeighborDetails secondary text color */
+  margin-bottom: 20px;
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
 .entries-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Entry Item */
-.entry-item {
-  background: #f9f9fb; /* Updated to match dashboard .dash-container */
+.entry-card {
+  background-color: #fff;
+  border: 1px solid #EBEBEB; /* Match NeighborDetails .neighbor-card border */
+  border-radius: 10px;
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Match NeighborDetails .neighbor-card shadow */
+  transition: transform 0.3s ease; /* Match NeighborDetails .neighbor-card transition */
 }
 
-/* Entry Details */
+.entry-card:hover {
+  transform: translateY(-3px); /* Match NeighborDetails .neighbor-card hover */
+}
+
 .entry-details h4 {
-  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
-  font-weight: 500; /* Match dashboard h3 weight */
-  color: #333; /* Match dashboard text color */
-  margin-bottom: 10px;
-  letter-spacing: 0.2px; /* Match dashboard typography */
+  font-size: 16px; /* Match NeighborDetails .neighbor-card h3 */
+  font-weight: 500; /* Match NeighborDetails h3 weight */
+  color: #333; /* Match NeighborDetails text color */
+  margin: 0 0 10px;
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
 }
 
 .entry-details p {
-  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
-  font-weight: 400; /* Match dashboard lighter weight */
-  color: #666; /* Match dashboard secondary text color */
+  font-size: 14px; /* Match NeighborDetails .neighbor-card p */
+  font-weight: 400; /* Match NeighborDetails lighter weight */
+  color: #666; /* Match NeighborDetails secondary text color */
   margin: 5px 0;
-  letter-spacing: 0.2px; /* Match dashboard typography */
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
+.entry-details p strong {
+  color: #333; /* Match NeighborDetails .neighbor-card p strong */
+  font-weight: 500; /* Match NeighborDetails label weight */
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
+/* Entry Photo */
+.entry-photo {
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Status Styling */
+.entry-details .status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+  letter-spacing: 0.2px;
+}
+
+.status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.allow {
+  background-color: #d4f4dd;
+  color: #1a7f3c;
+}
+
+.status.deny {
+  background-color: #f4d4d4;
+  color: #7f1a1a;
+}
+
+/* Error message styling */
+.service-entry-error-message {
+  color: #FF4D4F; /* Match NeighborDetails .neighbor-error-message */
+  font-size: 14px; /* Match NeighborDetails .neighbor-error-message */
+  font-weight: 400; /* Match NeighborDetails lighter weight */
+  text-align: center;
+  margin: 20px;
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
+/* Loading state */
+.service-entry-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  font-size: 1.5rem; /* Match NeighborDetails .neighbor-loading */
+  font-weight: 400; /* Match NeighborDetails .neighbor-loading */
+  color: #555;
+  animation: pulse 1.5s infinite;
+  letter-spacing: 0.2px; /* Match NeighborDetails typography */
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .service-entry-container {
+  .service-entry-content {
+    padding: 10px;
+    padding-bottom: 100px;
+  }
+
+  .entry-card {
     padding: 10px;
   }
 
-  .form-title {
-    font-size: 18px; /* Match dashboard mobile scaling */
+  .service-entry-content h2 {
+    font-size: 18px; /* Match NeighborDetails mobile scaling */
     font-weight: 500;
     letter-spacing: 0.2px;
   }
 
+  .service-entry-content p {
+    font-size: 12px; /* Match NeighborDetails mobile .neighbor-content p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
   .entry-details h4 {
-    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
+    font-size: 15px; /* Match NeighborDetails mobile .neighbor-card h3 */
     font-weight: 500;
     letter-spacing: 0.2px;
   }
 
   .entry-details p {
-    font-size: 12px; /* Match dashboard mobile .dash-icon p */
+    font-size: 12px; /* Match NeighborDetails mobile .neighbor-card p */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .entry-details p strong {
+    font-size: 12px; /* Match NeighborDetails mobile .neighbor-card p strong */
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .service-entry-error-message {
+    font-size: 12px; /* Match NeighborDetails mobile .neighbor-error-message */
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  .service-entry-loading {
+    font-size: 1.2rem; /* Match NeighborDetails mobile .neighbor-loading */
     font-weight: 400;
     letter-spacing: 0.2px;
   }

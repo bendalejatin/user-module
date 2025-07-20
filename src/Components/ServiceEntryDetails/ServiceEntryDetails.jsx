@@ -72,7 +72,6 @@ const ServiceEntryDetails = () => {
   return (
     <div className="service-entry-container">
       <Navbar />
-      <h2 className="form-title">Service Entries</h2>
       <div className="entry-card">
         <div className="entries-list">
           {entries.length === 0 ? (
