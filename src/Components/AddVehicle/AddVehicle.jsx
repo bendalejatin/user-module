@@ -5,7 +5,8 @@ import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
 import AddIcon from "@mui/icons-material/Add";
 
-const BASE_URL = "http://localhost:5000";
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://entrykart-admin.onrender.com";
 
 const AddVehicle = () => {
   const [vehicles, setVehicles] = useState([]);
