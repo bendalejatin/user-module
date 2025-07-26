@@ -10,11 +10,13 @@ import PeopleIcon from "@mui/icons-material/People";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import profile from "../Assets/user.png";
 import "./Dashboard.css";
 
 // const BASE_URL = "http://localhost:5000";
 const BASE_URL = "https://entrykart-admin.onrender.com";
+
 
 const Dashboard = () => {
   const [specificBroadcasts, setSpecificBroadcasts] = useState([]);
@@ -193,14 +195,14 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="dash-icons-section">
+       <div className="dash-icons-section">
           <div className="dash-grid">
             <div
               className="dash-icon"
-              onClick={() => (window.location.href = "/maintenance")}
+              onClick={() => (window.location.href = "/add-vehicle")}
             >
-              <AccountBalanceWalletIcon className="dash-icon-symbol" />
-              <p>Maintenance</p>
+              <DirectionsCarIcon className="dash-icon-symbol" />
+              <p>Vehicle</p>
             </div>
             <div
               className="dash-icon"

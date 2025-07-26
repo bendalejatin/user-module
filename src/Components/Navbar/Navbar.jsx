@@ -28,17 +28,16 @@ const Navbar = () => {
         return "My Coupons";
       case "/my-profile":
         return "My Profile";
+      case "/service-entries":
+        return "Service Entries";
+      case "/neighbor-details":
+        return "Neighbor Details";
+      case "/add-vehicle":
+        return "Add Vehicle";
       case "/":
         return "Login";
       case "/splash":
         return "Splash";
-      case "/service-entries":
-        return (
-          <>
-            Service Entries
-            <span className="nav-subtitle">Service Personnel Management</span>
-          </>
-        );
       default:
         return "MySocietyMate"; // Fallback title
     }

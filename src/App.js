@@ -17,7 +17,8 @@ import Broadcast from "./Components/broadcast_message/Broadcast";
 import SplashScreen from "./Components/SplashScreen/SplashScreen";
 import CouponDetails from "./Components/MyCoupons/CouponDetails";
 import NeighborDetails from "./Components/NeighborDetails/NeighborDetails";
-import ServiceEntryDetails from "./Components/ServiceEntryDetails/ServiceEntryDetails"; // New component
+import ServiceEntryDetails from "./Components/ServiceEntryDetails/ServiceEntryDetails"; 
+import AddVehicle from "./Components/AddVehicle/AddVehicle";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -72,7 +73,11 @@ const App = () => {
         />
         <Route
           path="/service-entries"
-          element={<ProtectedRoute><ServiceEntryDetails /></ProtectedRoute>} // New route
+          element={<ProtectedRoute><ServiceEntryDetails /></ProtectedRoute>} 
+        />
+        <Route
+          path="/add-vehicle"
+          element={<ProtectedRoute><AddVehicle /></ProtectedRoute>} 
         />
       </Routes>
     </Router>

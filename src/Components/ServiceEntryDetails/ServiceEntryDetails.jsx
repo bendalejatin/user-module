@@ -6,8 +6,8 @@ import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
 import "./ServiceEntryDetails.css";
 
-// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://entrykart-admin.onrender.com";
 
 const ServiceEntryDetails = () => {
   const [entries, setEntries] = useState([]);
@@ -48,7 +48,7 @@ const ServiceEntryDetails = () => {
   if (loading) {
     return (
       <div>
-        <Navbar />
+        <Navbar title="Service Entries" />
         <div className="service-entry-container">
           <h2>Loading...</h2>
         </div>
@@ -60,9 +60,11 @@ const ServiceEntryDetails = () => {
 
   if (error) {
     return (
-      <div className="service-entry-container">
-        <Navbar />
-        <p>{error}</p>
+      <div>
+        <Navbar title="Service Entries" />
+        <div className="service-entry-container">
+          <p>{error}</p>
+        </div>
         <TabBar />
         <ToastContainer />
       </div>
@@ -70,36 +72,38 @@ const ServiceEntryDetails = () => {
   }
 
   return (
-    <div className="service-entry-container">
-      <Navbar />
-      <div className="entry-card">
-        <div className="entries-list">
-          {entries.length === 0 ? (
-            <p>No service entries found.</p>
-          ) : (
-            entries.map((entry) => (
-              <div key={entry._id} className="entry-item">
-                <div className="entry-details">
-                  <h4>{entry.name}</h4>
-                  {entry.photo && (
-                    <img
-                      src={entry.photo}
-                      alt={entry.name}
-                      className="entry-photo"
-                      style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                    />
-                  )}
-                  <p><strong>Society:</strong> {entry.societyId?.name || "N/A"}</p>
-                  <p><strong>Phone Number:</strong> {entry.phoneNumber}</p>
-                  <p><strong>Visitor Type:</strong> {entry.visitorType}</p>
-                  <p><strong>Status:</strong> {entry.status}</p>
-                  <p><strong>Check-In:</strong> {entry.checkInTime ? new Date(entry.checkInTime).toLocaleString() : "N/A"}</p>
-                  <p><strong>Check-Out:</strong> {entry.checkOutTime ? new Date(entry.checkOutTime).toLocaleString() : "N/A"}</p>
-                  <p><strong>Description:</strong> {entry.description || "N/A"}</p>
+    <div>
+      <Navbar title="Service Entries" />
+      <div className="service-entry-container">
+        <div className="entry-card">
+          <div className="entries-list">
+            {entries.length === 0 ? (
+              <p>No service entries found.</p>
+            ) : (
+              entries.map((entry) => (
+                <div key={entry._id} className="entry-item">
+                  <div className="entry-details">
+                    <h4>{entry.name}</h4>
+                    {entry.photo && (
+                      <img
+                        src={entry.photo}
+                        alt={entry.name}
+                        className="entry-photo"
+                        style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                      />
+                    )}
+                    <p><strong>Society:</strong> {entry.societyId?.name || "N/A"}</p>
+                    <p><strong>Phone Number:</strong> {entry.phoneNumber}</p>
+                    <p><strong>Visitor Type:</strong> {entry.visitorType}</p>
+                    <p><strong>Status:</strong> {entry.status}</p>
+                    <p><strong>Check-In:</strong> {entry.checkInTime ? new Date(entry.checkInTime).toLocaleString() : "N/A"}</p>
+                    <p><strong>Check-Out:</strong> {entry.checkOutTime ? new Date(entry.checkOutTime).toLocaleString() : "N/A"}</p>
+                    <p><strong>Description:</strong> {entry.description || "N/A"}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
       <TabBar />

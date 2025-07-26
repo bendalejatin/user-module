@@ -4,8 +4,8 @@ import Navbar from "../Navbar/Navbar";
 import TabBar from "../TabBar/TabBar";
 import "./NeighborDetails.css";
 
-// const BASE_URL = "http://localhost:5000"; // Adjust this to your backend URL
-const BASE_URL = "https://entrykart-admin.onrender.com" ; // deployment url
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://entrykart-admin.onrender.com";
 
 const NeighborDetails = () => {
   const [neighbors, setNeighbors] = useState([]);
@@ -97,10 +97,6 @@ const NeighborDetails = () => {
     <div className="neighbor-container">
       <Navbar />
       <div className="neighbor-content">
-        <h2>🏘️ Neighbor Details</h2>
-        <p>
-          Showing neighbors for {userProfile?.societyName}, Flat {userProfile?.flatNumber}
-        </p>
         <div className="neighbor-list">
           {neighbors.length > 0 ? (
             neighbors.map((neighbor) => (

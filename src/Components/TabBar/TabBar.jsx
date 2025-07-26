@@ -1,33 +1,49 @@
+// TabBar.jsx
 import * as React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import HomeIcon from "@mui/icons-material/Home";
 import EventIcon from "@mui/icons-material/Event";
-import EntryIcon from "@mui/icons-material/ContentPaste"; // Icon for Entry
-import PersonIcon from "@mui/icons-material/Person"; // Icon for Profile
-import PaymentIcon from "@mui/icons-material/Payment"; // Icon for Maintenance
-import { useNavigate, useLocation } from "react-router-dom";
+import PaymentIcon from "@mui/icons-material/Payment";
+import EntryIcon from "@mui/icons-material/ContentPaste";
+import PersonIcon from "@mui/icons-material/Person";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar"; // New icon
 
 export default function IconLabelTabs() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Reordered paths: home, event, maintenance, entry, profile
-  const paths = [
-    "/dashboard",
-    "/event-details",
-    "/maintenance",
-    "/entry-permission",
-    "/my-profile",
+  // Define main routes for tabs
+  const tabs = [
+    { path: "/dashboard", label: "HOME", icon: <HomeIcon fontSize="small" /> },
+    { path: "/event-details", label: "EVENT", icon: <EventIcon fontSize="small" /> },
+    { path: "/maintenance", label: "MAINTENANCE", icon: <PaymentIcon fontSize="small" /> },
+    { path: "/entry-permission", label: "VISITORS", icon: <EntryIcon fontSize="small" /> },
+    // { path: "/add-vehicle", label: "VEHICLE", icon: <DirectionsCarIcon fontSize="small" /> },
+    { path: "/my-profile", label: "PROFILE", icon: <PersonIcon fontSize="small" /> },
+    // New tab
   ];
 
-  const currentTab = paths.findIndex((path) =>
-    location.pathname.startsWith(path)
+  // Find the current tab based on the pathname
+  const currentTab = tabs.findIndex((tab) =>
+    location.pathname.startsWith(tab.path)
   );
+  
+  // Set initial value or 0 if no match found
   const [value, setValue] = React.useState(currentTab === -1 ? 0 : currentTab);
+
+  // Update tab value when location changes
+  React.useEffect(() => {
+    const newTabIndex = tabs.findIndex((tab) =>
+      location.pathname.startsWith(tab.path)
+    );
+    setValue(newTabIndex === -1 ? 0 : newTabIndex);
+  }, [location.pathname]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    navigate(tabs[newValue].path);
   };
 
   return (
@@ -35,65 +51,50 @@ export default function IconLabelTabs() {
       value={value}
       onChange={handleChange}
       variant="fullWidth"
-      aria-label="icon label tabs"
+      aria-label="navigation tabs"
       sx={{
         position: "fixed",
         bottom: 0,
-        width: "100%",
+        left: 0,
+        right: 0,
         bgcolor: "background.paper",
-        zIndex: 999,
-        boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.1)",
-        ".MuiTab-root": {
-          minWidth: 0,
-          padding: { xs: "6px 4px", sm: "6px 8px" },
-          fontSize: { xs: "0.55rem", sm: "0.6rem" },
-        },
-        ".MuiTab-wrapper": {
-          fontSize: { xs: "0.6rem", sm: "0.65rem" },
-          gap: "2px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textTransform: "uppercase",
-        },
-        ".MuiSvgIcon-root": {
-          fontSize: { xs: "1.25rem", sm: "1.5rem" },
-        },
-        ".Mui-selected": {
-          color: "#3B82F6",
-          fontWeight: 600,
-        },
-        ".MuiTabs-indicator": {
+        zIndex: 1200,
+        boxShadow: "0 -2px 5px rgba(0, 0, 0, 0.15)",
+        "& .MuiTabs-indicator": {
           backgroundColor: "#3B82F6",
           height: "3px",
         },
+        "& .MuiTab-root": {
+          minWidth: 0,
+          padding: { xs: "8px 4px", sm: "12px 8px" },
+          fontSize: { xs: "0.65rem", sm: "0.75rem" },
+          textTransform: "uppercase",
+          "&.Mui-selected": {
+            color: "#3B82F6",
+            fontWeight: 600,
+          },
+        },
+        "& .MuiSvgIcon-root": {
+          fontSize: { xs: "1.3rem", sm: "1.5rem" },
+          mb: { xs: 0.5, sm: 1 },
+        },
+        "& .MuiTab-labelIcon": {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "4px",
+        },
       }}
     >
-      <Tab
-        icon={<HomeIcon fontSize="small" />}
-        label="HOME"
-        onClick={() => navigate("/dashboard")}
-      />
-      <Tab
-        icon={<EventIcon fontSize="small" />}
-        label="EVENT"
-        onClick={() => navigate("/event-details")}
-      />
-      <Tab
-        icon={<PaymentIcon fontSize="small" />}
-        label="MAINTENANCE"
-        onClick={() => navigate("/maintenance")}
-      />
-      <Tab
-        icon={<EntryIcon fontSize="small" />}
-        label="ENTRY"
-        onClick={() => navigate("/entry-permission")}
-      />
-      <Tab
-        icon={<PersonIcon fontSize="small" />}
-        label="PROFILE"
-        onClick={() => navigate("/my-profile")}
-      />
+      {tabs.map((tab, index) => (
+        <Tab
+          key={tab.path}
+          icon={tab.icon}
+          label={tab.label}
+          id={`nav-tab-${index}`}
+          aria-controls={`nav-tabpanel-${index}`}
+        />
+      ))}
     </Tabs>
   );
 }

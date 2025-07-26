@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-
 /* General container styling */
 .neighbor-container {
-  background-color: #f9f9fb; /* Updated to match dashboard .dash-container */
-  font-family: 'Inter', sans-serif; /* Updated to match dashboard font */
+  background-color: #F9F9F9;
+  font-family: "Poppins", sans-serif;
   min-height: 100vh;
   position: relative;
-  -webkit-font-smoothing: antialiased; /* Match dashboard font smoothing */
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .neighbor-content {
@@ -19,21 +15,18 @@
 }
 
 .neighbor-content h2 {
-  font-size: 20px; /* Match dashboard .dash-profile-info h1 */
-  font-weight: 500; /* Match dashboard h1 weight */
-  color: #333; /* Match dashboard text color */
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
   margin-bottom: 10px;
-  border-bottom: 2px solid #6F72F1; /* Match dashboard accent color */
+  border-bottom: 2px solid #6F72F1;
   padding-bottom: 5px;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .neighbor-content p {
-  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
-  font-weight: 400; /* Match dashboard lighter weight */
-  color: #666; /* Match dashboard secondary text color */
+  font-size: 16px;
+  color: #666;
   margin-bottom: 20px;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .neighbor-list {
@@ -56,35 +49,28 @@
 }
 
 .neighbor-card h3 {
-  font-size: 16px; /* Match dashboard .dash-broadcast-container h3 */
-  font-weight: 500; /* Match dashboard h3 weight */
-  color: #333; /* Match dashboard text color */
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
   margin: 0 0 10px;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .neighbor-card p {
-  font-size: 14px; /* Match dashboard .dash-broadcast-container p */
-  font-weight: 400; /* Match dashboard lighter weight */
-  color: #666; /* Match dashboard secondary text color */
+  font-size: 14px;
+  color: #666;
   margin: 5px 0;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 .neighbor-card p strong {
-  color: #333; /* Match dashboard text color */
-  font-weight: 500; /* Match dashboard label weight */
-  letter-spacing: 0.2px; /* Match dashboard typography */
+  color: #333;
 }
 
 /* Error message styling */
 .neighbor-error-message {
-  color: #FF4D4F; /* Updated to match dashboard .dash-notification-badge */
-  font-size: 14px; /* Match dashboard .dash-error-message */
-  font-weight: 400; /* Match dashboard lighter weight */
+  color: #FF5D4F;
+  font-size: 14px;
   text-align: center;
   margin: 20px;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 /* Loading state */
@@ -93,11 +79,10 @@
   justify-content: center;
   align-items: center;
   height: 70vh;
-  font-size: 1.5rem; /* Retained for visibility, aligned with dashboard .dash-loading */
-  font-weight: 400; /* Match dashboard .dash-loading */
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #555;
   animation: pulse 1.5s infinite;
-  letter-spacing: 0.2px; /* Match dashboard typography */
 }
 
 @keyframes pulse {
@@ -117,45 +102,11 @@
     padding: 10px;
   }
 
-  .neighbor-content h2 {
-    font-size: 18px; /* Match dashboard mobile scaling */
-    font-weight: 500;
-    letter-spacing: 0.2px;
-  }
-
-  .neighbor-content p {
-    font-size: 12px; /* Match dashboard mobile .dash-icon p */
-    font-weight: 400;
-    letter-spacing: 0.2px;
-  }
-
   .neighbor-card h3 {
-    font-size: 15px; /* Match dashboard mobile .dash-broadcast-container h3 */
-    font-weight: 500;
-    letter-spacing: 0.2px;
+    font-size: 16px;
   }
 
   .neighbor-card p {
-    font-size: 12px; /* Match dashboard mobile .dash-icon p */
-    font-weight: 400;
-    letter-spacing: 0.2px;
-  }
-
-  .neighbor-card p strong {
-    font-size: 12px; /* Match dashboard mobile .dash-icon p */
-    font-weight: 500;
-    letter-spacing: 0.2px;
-  }
-
-  .neighbor-error-message {
-    font-size: 12px; /* Match dashboard mobile .dash-icon p */
-    font-weight: 400;
-    letter-spacing: 0.2px;
-  }
-
-  .neighbor-loading {
-    font-size: 1.2rem; /* Adjusted for mobile, aligned with dashboard .dash-loading */
-    font-weight: 400;
-    letter-spacing: 0.2px;
+    font-size: 12px;
   }
 }
