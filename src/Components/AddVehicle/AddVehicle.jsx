@@ -186,7 +186,7 @@ const AddVehicle = () => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search by flat number, owner name, vehicle name, or number plate..."
+          placeholder="Search by flat number, owner name, or vehicle name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
