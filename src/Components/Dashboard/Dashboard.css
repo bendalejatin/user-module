@@ -81,13 +81,14 @@
 .dash-icon {
   background: #fff;
   border: 1px solid #E0E0E0;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 25px;
   text-align: center;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 120px;
 }
 
 .dash-icon:hover {
@@ -100,27 +101,26 @@
 }
 
 .dash-icon-symbol {
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  min-height: 24px;
-  line-height: 24px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  line-height: 32px;
+  margin-bottom: 12px;
   display: inline-block;
   box-sizing: border-box;
 }
 
-.dash-icon:nth-child(1) .dash-icon-symbol { color: #2F6CA7; } /* Maintenance */
+.dash-icon:nth-child(1) .dash-icon-symbol { color: #2F6CA7; } /* Vehicle */
 .dash-icon:nth-child(2) .dash-icon-symbol { color: #219653; } /* Visitors */
-.dash-icon:nth-child(3) .dash-icon-symbol { color: #D97706; } /* Events */
-.dash-icon:nth-child(4) .dash-icon-symbol { color: #BE185D; } /* Broadcast */
-.dash-icon:nth-child(5) .dash-icon-symbol { color: #CA8A04; } /* My Coupons */
-.dash-icon:nth-child(6) .dash-icon-symbol { color: #6B21A8; } /* Neighbors */
-.dash-icon:nth-child(7) .dash-icon-symbol { color: #8C8C8C; } /* Service Entries */
+.dash-icon:nth-child(3) .dash-icon-symbol { color: #D97706; } /* Broadcast */
+.dash-icon:nth-child(4) .dash-icon-symbol { color: #BE185D; } /* My Coupons */
+.dash-icon:nth-child(5) .dash-icon-symbol { color: #CA8A04; } /* Neighbors */
+.dash-icon:nth-child(6) .dash-icon-symbol { color: #6B21A8; } /* Service Entries */
 
 .dash-icon p {
-  font-size: 14px;
+  font-size: 16px;
   color: #333;
   margin: 0;
   font-weight: 400;
@@ -131,12 +131,12 @@
   background-color: #FF4D4F;
   color: #fff;
   border-radius: 50%;
-  padding: 2px 8px;
-  font-size: 12px;
+  padding: 3px 10px;
+  font-size: 14px;
   font-weight: 500;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
 }
 
 /* Broadcast Messages Section */
@@ -768,15 +768,15 @@
 
   .dash-grid {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 100px);
+    grid-template-rows: repeat(2, 120px);
     gap: 10px;
   }
 
   .dash-icon {
-    padding: 10px;
-    font-size: 12px;
+    padding: 15px;
+    font-size: 14px;
     width: 100%;
-    height: 100px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -785,18 +785,18 @@
   }
 
   .dash-icon-symbol {
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
-    line-height: 24px;
-    margin-bottom: 6px;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    line-height: 28px;
+    margin-bottom: 8px;
     display: inline-block;
   }
 
   .dash-icon p {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
@@ -807,10 +807,10 @@
   }
 
   .dash-notification-badge {
-    top: 5px;
-    right: 5px;
-    font-size: 10px;
-    padding: 1px 6px;
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    padding: 2px 8px;
   }
 
   .dash-icons-section {
